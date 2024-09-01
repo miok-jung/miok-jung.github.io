@@ -4,7 +4,9 @@ node_modules
 
 # Quasar core related directories
 .quasar
-/dist
+#EXAMPLE: dist/ : 모든 디렉토리에서 dist 라는 이름의 폴더를 무시. 
+#EXAMPLE: /dist : 루트 디렉토리에 있는 폴더 무시. 다른 하위 디렉토리 dist 폴더는 무시되지 않는다.
+dist/
 
 # Cordova related directories and files
 /src-cordova/node_modules
