@@ -34,7 +34,7 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
-  // NOTE: 라우터 설정
+  // NOTE: Navigation Guard 전역 가드
   Router.beforeEach((to) => {
     document.title = `${to.meta.title}`;
   });
