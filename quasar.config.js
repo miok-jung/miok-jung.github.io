@@ -63,7 +63,8 @@ module.exports = configure(function (ctx) {
 
       // NOTE: 빌드된 파일 경로 참조
       // EXAMPLE: 사용자 정의 도메인을 사용하는 경우 PUBLICpATH를 '/'로 설정하고 그렇지 않으면 '/repository-name/'으로 설정한다.
-      publicPath: process.env.NODE_ENV === 'production' ? '/public/' : '/',
+      publicPath:
+        process.env.NODE_ENV === 'production' ? '/miok-jung.github.io/' : '/',
       // analyze: true,
       // env: {},
       // rawDefine: {}
