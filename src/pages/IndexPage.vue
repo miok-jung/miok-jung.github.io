@@ -1,6 +1,6 @@
 <template>
   <q-page :style-fn="portfolioStyle">
-    <div style="border: 1px solid red">
+    <div>
       <p>여기는 포트폴리오 메인페이지 입니다.</p>
     </div>
   </q-page>

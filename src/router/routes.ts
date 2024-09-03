@@ -12,6 +12,13 @@ const routes: RouteRecordRaw[] = [
         },
         component: () => import('pages/IndexPage.vue'),
       },
+      {
+        path: '/calculator',
+        meta: {
+          title: 'Simple Calculator',
+        },
+        component: () => import('pages/CalculatorPage.vue'),
+      },
     ],
   },
 

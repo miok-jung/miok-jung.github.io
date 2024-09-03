@@ -3,21 +3,11 @@
     <q-header elevated>
       <q-toolbar>
         <q-btn flat dense round icon="mdi-menu" aria-label="Menu" @click="toggleLeftDrawer" />
-
         <q-toolbar-title> Miok, Jung. PortFolio </q-toolbar-title>
-
-        <div>Today 로 바꾸기{{ today }}</div>
+        <div>Today: {{ today }}</div>
       </q-toolbar>
     </q-header>
-
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
-        <q-item-label header> 메인 사이드바 </q-item-label>
-
-        <Sidebar v-for="link in Sidebars" :key="link.title" v-bind="link" />
-      </q-list>
-    </q-drawer>
-
+    <Sidebar :show-left-drawer="showLeftDrawer" />
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -26,22 +16,14 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import Sidebar, { SidebarProps } from 'src/components/Sidebar.vue';
+import { date } from 'quasar';
+import Sidebar from 'src/components/Sidebar.vue';
 
-const today = new Date();
+const today = date.formatDate(Date.now(), 'YYYY. MM. DD');
 
-const Sidebars: SidebarProps[] = [
-  {
-    title: '간단한 계산기',
-    caption: 'The Simple Calculator',
-    icon: 'mdi-calculator-variant-outline',
-    link: '/calculator',
-  },
-];
-
-const leftDrawerOpen = ref(false);
-
+// NOTE: 왼쪽 사이드바
+const showLeftDrawer = ref<boolean>(true);
 function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
+  showLeftDrawer.value = !showLeftDrawer.value;
 }
 </script>
