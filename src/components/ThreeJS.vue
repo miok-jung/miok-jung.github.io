@@ -22,10 +22,17 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 
+// NOTE: 기본 정육면체 설정
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshBasicMaterial({ color: 'pink' });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
+
+// NOTE: 와이어 프레임 추가 (외곽선)
+const wireframeGeometry = new THREE.WireframeGeometry(geometry);
+const wireframeMaterial = new THREE.LineBasicMaterial({ color: 'black' });
+const wireframe = new THREE.LineSegments(wireframeGeometry, wireframeMaterial);
+scene.add(wireframe); // 와이어프레임을 장면에 추가
 
 camera.position.z = 5;
 
@@ -35,6 +42,8 @@ function animate() {
   // 모든 프레임마다 실행되면서 (1초에 60번 회전)
   cube.rotation.x += 0.01;
   cube.rotation.y += 0.01;
+  wireframe.rotation.x += 0.01;
+  wireframe.rotation.y += 0.01;
 
   renderer.render(scene, camera);
 }
