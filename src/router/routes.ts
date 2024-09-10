@@ -21,6 +21,26 @@ const routes: RouteRecordRaw[] = [
       },
     ],
   },
+  {
+    path: '/study',
+    component: () => import('layouts/StudyLayout.vue'),
+    children: [
+      {
+        path: '',
+        meta: {
+          title: 'Study Record Main',
+        },
+        component: () => import('pages/study/IndexPage.vue'),
+      },
+      {
+        path: 'threejs',
+        meta: {
+          title: 'Three Study',
+        },
+        component: () => import('pages/study/ThreeJsPage.vue'),
+      },
+    ],
+  },
 
   // Always leave this as last one,
   // but you can also remove it
