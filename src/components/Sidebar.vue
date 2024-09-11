@@ -25,13 +25,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-
-type SidebarProps = {
-  title: string;
-  caption?: string;
-  link: string;
-  icon?: string;
-};
+import { SideBar } from './type';
 
 const props = withDefaults(
   defineProps<{
@@ -42,7 +36,7 @@ const props = withDefaults(
   }
 );
 
-const Sidebars: SidebarProps[] = [
+const Sidebars: SideBar[] = [
   {
     title: 'Home',
     caption: '메인으로 돌아가기',
@@ -54,6 +48,12 @@ const Sidebars: SidebarProps[] = [
     caption: 'The Simple Calculator',
     icon: 'mdi-calculator-variant-outline',
     link: '/calculator',
+  },
+  {
+    title: '공부',
+    caption: 'My Study List',
+    icon: 'mdi-note-search-outline',
+    link: '/study',
   },
 ];
 const selectLink = ref<string>('/');
