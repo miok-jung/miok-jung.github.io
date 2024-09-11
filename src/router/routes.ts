@@ -39,6 +39,13 @@ const routes: RouteRecordRaw[] = [
         },
         component: () => import('pages/study/ThreeJsPage.vue'),
       },
+      {
+        path: 'vanillajs',
+        meta: {
+          title: 'study: VanillaJS',
+        },
+        component: () => import('pages/study/VanillaJsPage.vue'),
+      },
     ],
   },
 

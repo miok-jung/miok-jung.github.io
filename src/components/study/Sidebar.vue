@@ -55,6 +55,12 @@ const Sidebars: SideBar[] = [
     icon: 'img: ' + threeJSIcon,
     link: '/study/threejs',
   },
+  {
+    title: 'vanillaJS',
+    caption: 'Study VanillaJS',
+    icon: 'mdi-nodejs',
+    link: '/study/vanillajs',
+  },
 ];
 const selectLink = ref<string>('/');
 </script>
