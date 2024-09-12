@@ -1,0 +1,1 @@
+import{ai as e,S as a,X as r}from"./index.4f753583.js";const c={};function t(n,o){return a(),r("div",null,"\uAC04\uB2E8\uD55C \uACC4\uC0B0\uAE30 \uD398\uC774\uC9C0")}var s=e(c,[["render",t]]);export{s as default};
