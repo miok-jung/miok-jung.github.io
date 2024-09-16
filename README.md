@@ -1,10 +1,11 @@
 # Start Date / Last Update Date
 
-September 1. 2024 ~ September 12. 2024
+September 1. 2024 ~ September 16. 2024
 
 - Study Page
   - 퍼블리싱
   - Three.js 기본 정육면제 스터디 업데이트
+  - Vanilla JS만으로 TODO List 만들기
 - Main Page
   - Publishing
 - Github Actions 자동배포 완료
