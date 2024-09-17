@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUpdate, onMounted, onUnmounted, onUpdated, ref, watch } from 'vue';
+import { onMounted, onBeforeUnmount, ref } from 'vue';
 
 // EXAMPLE: Partial<Type> : 모든 속성을 선택 사항으로 설정한 유형을 구성한다. 즉, HTML 요소의 속성을 선택적으로 정의할 수 있도록 타입을 설정
 interface ElementConfig {
@@ -97,10 +97,33 @@ function onClickAddTodoList() {
   // NOTE: 전체 카운트 업데이트
   setTodoTotalCount();
 
+  // 라벨 변경 이벤트 생성
+  const checkLabel = document.querySelector(`#check${count}`);
+  if (checkLabel) checkLabel.addEventListener('change', onChangeCheckLabel);
+
   // NOTE: 제거 이벤트 생성
   const removeBtn = document.querySelector(`.remove-button.index-${count}`);
 
   removeBtn?.addEventListener('click', onClickRemoveButton);
+}
+
+// NOTE: input checkbox 변경 이벤트
+const isCheckedCount = ref<number>(0);
+function onChangeCheckLabel() {
+  // 완료된 숫자 초기화
+  let inputArray: NodeListOf<HTMLInputElement> = document.querySelectorAll("input[type='checkbox']");
+  isCheckedCount.value = 0;
+
+  // 완료된 숫자 개수 카운팅
+  inputArray.forEach((item) => {
+    if (item.checked) {
+      isCheckedCount.value = isCheckedCount.value + 1;
+    }
+  });
+
+  // 완료된 숫자 업데이트
+  let completeCount = document.querySelector('.complete-count');
+  if (completeCount) completeCount.innerHTML = isCheckedCount.value.toString();
 }
 
 // NOTE: 제거 버튼 이벤트
@@ -112,10 +135,11 @@ function onClickRemoveButton(event: Event) {
     todoWrap.childNodes[selectRemovePos - 1].remove();
   }
 
-  // NOTE: 전체 카운트
+  // Total/Complete 카운트 업데이트
   setTodoTotalCount();
+  onChangeCheckLabel();
 
-  // NOTE: input idx 재설정 업데이트
+  // input idx 재설정 업데이트
   setTodoIndex();
 }
 
@@ -393,16 +417,30 @@ onMounted(() => {
   `);
   document.adoptedStyleSheets = [stylesheet];
 
-  // 1. Add 버튼 클릭시 내용을 체크리스트 추가하기
+  // Add 버튼 클릭시 내용을 체크리스트 추가하기
   const addButton = document.querySelector('.add-button');
   if (addButton) {
     addButton.addEventListener('click', onClickAddTodoList);
   }
 });
-onUnmounted(() => {
+onBeforeUnmount(() => {
   // 이벤트 제거
-  const addButton = document.querySelector('.add-button');
-  if (addButton) addButton.removeEventListener('click', onClickAddTodoList);
+  const todoWrap = document.querySelector('#item-list');
+  if (todoWrap) {
+    for (let i = 0; i < todoWrap.childNodes.length; i++) {
+      let childNode = todoWrap.childNodes[i] as HTMLElement;
+
+      // 바꿀 자식 요소들 찾기
+      const input = childNode.querySelector('input');
+      const removeBtn = childNode.querySelector('button');
+
+      // 이벤트 제거
+      if (input && removeBtn) {
+        input.removeEventListener('change', onChangeCheckLabel);
+        removeBtn.removeEventListener('click', onClickRemoveButton);
+      }
+    }
+  }
 });
 </script>
 
