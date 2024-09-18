@@ -1,11 +1,11 @@
 # Start Date / Last Update Date
 
-September 1. 2024 ~ September 16. 2024
+September 1. 2024 ~ September 17. 2024
 
 - Study Page
   - 퍼블리싱
   - Three.js 기본 정육면제 스터디 업데이트
-  - Vanilla JS만으로 TODO List 만들기
+  - Vanilla JavaScript만으로 TODO List 만들기 (vue 확장자 파일이지만, 내부는 오직 JavaScript + Type으로만 진행)
 - Main Page
   - Publishing
 - Github Actions 자동배포 완료
@@ -29,7 +29,7 @@ September 1. 2024 ~ September 16. 2024
 - build 빌드 관련 파일 수정 / 모듈 설치 또는 삭제에 대한 커밋
 - chore 그 외 자잘한 수정에 대한 커밋
 - ci ci 관련 설정 수정에 대한 커밋
-- docs 문서 수정에 대한 커밋
+- docs: 문서 수정에 대한 커밋
 - style 코드 스타일 혹은 포맷 등에 관한 커밋
 - refactor 코드 리팩토링에 대한 커밋
 - test 테스트 코드 수정에 대한 커밋
