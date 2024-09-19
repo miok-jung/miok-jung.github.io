@@ -39,6 +39,7 @@ const $q = useQuasar();
 const { getPaletteColor } = colors;
 
 // NOTE: 왼쪽 사이드바 토글
+// NOTE: 왼쪽 사이드바 토글
 const showLeftDrawer = ref<boolean>(true);
 function toggleLeftDrawer() {
   showLeftDrawer.value = !showLeftDrawer.value;
