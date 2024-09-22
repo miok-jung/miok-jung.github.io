@@ -58,8 +58,8 @@ const themeOptions: QSelectOption[] = [
     value: 'pink',
   },
   {
-    label: 'Yellow',
-    value: 'yellow',
+    label: 'Orange',
+    value: 'orange',
   },
 ];
 const selectTheme = ref<QSelectOption>(themeOptions[0]);
