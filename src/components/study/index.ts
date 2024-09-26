@@ -21,27 +21,34 @@ export function createElement({
   parent = undefined,
   children = [],
   count = 1,
-}: ElementConfig) {
+}: ElementConfig): HTMLElement[] {
   const create = (): HTMLElement => {
     const element = document.createElement(tagName);
     Object.assign(element, properties); // 속성 할당
-    parent?.appendChild(element);
-    children?.map((child) => {
+
+    // 부모 요소에 appendChild, 부모가 배열이 아닐 때만 적용
+    if (parent && !Array.isArray(parent)) {
+      parent.appendChild(element);
+    }
+
+    // 자식 요소 처리
+    children?.forEach((child) => {
       child.parent = element;
       createElement(child);
     });
+
     return element;
   };
 
   // 반복여부 체크
   if (count > 1) {
-    const results = [];
+    const results: HTMLElement[] = [];
     for (let i = 0; i < count; ++i) {
       results.push(create());
     }
     return results;
   } else {
-    return create();
+    return [create()];
   }
 }
 // !SECTION createElement END

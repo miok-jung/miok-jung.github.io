@@ -127,7 +127,7 @@ function setTodoIndex() {
 
 // NOTE: life-cycle
 onMounted(() => {
-  const app = createElement({
+  const [app] = createElement({
     tagName: 'div',
     properties: { id: 'app' },
     parent: vanillaRef.value,
@@ -190,7 +190,7 @@ onMounted(() => {
   });
 
   // NOTE: Item List Container HTML 생성
-  const itemListContainer = createElement({
+  const [itemListContainer] = createElement({
     tagName: 'div',
     properties: { id: 'item-list-container' },
     parent: app,
