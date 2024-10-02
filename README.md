@@ -1,8 +1,12 @@
 # Start Date / Last Update Date
 
-September 1. 2024 ~ September 3. 2024
+September 1. 2024 ~ October 02. 2024
 
-- Main Layout Sidebar 레이아웃 퍼블리싱
+- Study Page
+  - Layout Publising
+  - Three.js 기본 정육면제 스터디 업데이트
+- Main Page
+  - Layout Publishing (Theme, I18N 등)
 - Github Actions 자동배포 완료
 
 # 커밋 규칙

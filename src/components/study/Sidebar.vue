@@ -1,7 +1,8 @@
 <template>
-  <q-drawer :model-value="props.showLeftDrawer" show-if-above bordered>
+  <q-drawer :model-value="props.showSidebar" bordered>
     <q-list>
-      <q-item-label header>PortFolio List</q-item-label>
+      <q-item-label header>Study Record</q-item-label>
+      <q-separator />
       <template v-for="item in Sidebars" :key="item.title">
         <q-item
           :active="selectLink === item.link && selectLink === $route.fullPath"
@@ -25,36 +26,43 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { SideBar } from './type';
+import threeJSIcon from 'assets/icons/three-js.svg';
+import { SideBar } from '../type';
 
 const props = withDefaults(
   defineProps<{
-    showLeftDrawer: boolean;
+    showSidebar: boolean;
   }>(),
-  {
-    showLeftDrawer: true,
-  }
+  { showSidebar: true }
 );
 
 const Sidebars: SideBar[] = [
   {
-    title: 'Home',
-    caption: '메인으로 돌아가기',
+    title: 'PortFolio Home',
+    caption: '포트폴리오로 돌아가기',
     icon: 'mdi-home-circle-outline',
     link: '/',
   },
   {
-    title: '간단한 계산기',
-    caption: 'The Simple Calculator',
-    icon: 'mdi-calculator-variant-outline',
-    link: '/calculator',
-  },
-  {
-    title: '공부',
+    title: 'Study Home',
     caption: 'My Study List',
     icon: 'mdi-note-search-outline',
     link: '/study',
   },
+  {
+    title: 'Three.js',
+    caption: 'Study Three.js',
+    icon: 'img: ' + threeJSIcon,
+    link: '/study/threejs',
+  },
+  {
+    title: 'vanillaJS',
+    caption: 'Study VanillaJS',
+    icon: 'mdi-nodejs',
+    link: '/study/vanillajs',
+  },
 ];
 const selectLink = ref<string>('/');
 </script>
+
+<style scoped lang="scss"></style>
