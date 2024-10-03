@@ -25,7 +25,7 @@ import Sidebar from 'src/components/study/Sidebar.vue';
 
 // NOTE: 스터디 업데이트 날짜
 // TODO: 스터디 업데이트 날짜의 경우 수동으로 업데이트가 필요
-const utcUpdateDay = date.extractDate('2024. 09. 17', 'YYYY. MM. DD');
+const utcUpdateDay = date.extractDate('2024. 10. 02', 'YYYY. MM. DD');
 const updateDay = date.formatDate(utcUpdateDay, 'YYYY. MM. DD');
 
 // NOTE: 왼쪽 사이드바
