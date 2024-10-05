@@ -46,6 +46,13 @@ const routes: RouteRecordRaw[] = [
         },
         component: () => import('pages/study/VanillaJsPage.vue'),
       },
+      {
+        path: 'shoppingmall',
+        meta: {
+          title: 'study: ShoppingMall',
+        },
+        component: () => import('pages/study/ShoppingMallPage.vue'),
+      },
     ],
   },
 

@@ -61,6 +61,12 @@ const Sidebars: SideBar[] = [
     icon: 'mdi-nodejs',
     link: '/study/vanillajs',
   },
+  {
+    title: 'shopping mall JS',
+    caption: 'Study Shopping Mall',
+    icon: 'mdi-nodejs',
+    link: '/study/shoppingmall',
+  },
 ];
 const selectLink = ref<string>('/');
 </script>
