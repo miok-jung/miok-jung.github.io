@@ -67,6 +67,12 @@ const Sidebars: SideBar[] = [
     icon: 'mdi-nodejs',
     link: '/study/shoppingmall',
   },
+  {
+    title: 'Test Lottie',
+    caption: 'Test to Lottie File',
+    icon: 'mdi-nodejs',
+    link: '/study/lottie',
+  },
 ];
 const selectLink = ref<string>('/');
 </script>

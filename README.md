@@ -1,11 +1,12 @@
 # Start Date / Last Update Date
 
-September 1. 2024 ~ October 03. 2024
+September 1. 2024 ~ October 07. 2024
 
 - Study Page
   - Layout Publising
   - Three.js 기본 정육면제 스터디 업데이트
   - Vanilla JavaScript만으로 TODO List 만들기 (vue 확장자 파일이지만, 내부는 오직 JavaScript + Type으로만 진행)
+  - Lottie 라이브러리 테스트 해보기 (회사 프로젝트 로딩파일을 위한 준비 작업을 위한 테스트)
 - Main Page
   - Layout Publishing (Theme, I18N 등)
   - 간단한 계산기 퍼블리싱

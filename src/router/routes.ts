@@ -53,6 +53,13 @@ const routes: RouteRecordRaw[] = [
         },
         component: () => import('pages/study/ShoppingMallPage.vue'),
       },
+      {
+        path: 'lottie',
+        meta: {
+          title: 'study: lottie player',
+        },
+        component: () => import('pages/study/LottiePlayerPage.vue'),
+      },
     ],
   },
 
