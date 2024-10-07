@@ -4,58 +4,9 @@
 
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref } from 'vue';
-
-// EXAMPLE: Partial<Type> : 모든 속성을 선택 사항으로 설정한 유형을 구성한다. 즉, HTML 요소의 속성을 선택적으로 정의할 수 있도록 타입을 설정
-interface ElementConfig {
-  tagName: keyof HTMLElementTagNameMap; // HTML 태그 이름
-  properties?: Partial<HTMLElement | HTMLInputElement | HTMLLabelElement>; // 태그 속성들
-  parent?: HTMLElement | HTMLElement[] | null; // 부모 요소
-  children?: Array<ElementConfig>; // 자식 요소들
-  count?: number; // 생성할 요소 수
-}
+import { createElement } from 'components/study';
 
 const vanillaRef = ref<HTMLElement | undefined>(undefined);
-function createElement({
-  tagName,
-  properties = {},
-  parent = undefined,
-  children = [],
-  count = 1,
-}: ElementConfig): HTMLElement | HTMLElement[] {
-  const createdElements: HTMLElement[] = [];
-
-  const create = (): HTMLElement => {
-    const element = document.createElement(tagName);
-    Object.assign(element, properties); // 속성 할당
-
-    // 자식 요소들을 재귀적으로 생성
-    children.forEach((child) => {
-      child.parent = element;
-      createElement(child);
-    });
-
-    return element;
-  };
-
-  // 지정된 count만큼 요소 생성
-  for (let i = 0; i < count; i++) {
-    createdElements.push(create());
-  }
-
-  // 부모에 요소를 추가할 때 배열인지 체크
-  if (parent) {
-    if (Array.isArray(parent)) {
-      // parent가 배열일 경우, 각 부모 요소에 대해 자식 요소 추가
-      parent.forEach((el) => el.appendChild(createdElements[0]));
-    } else {
-      // parent가 HTMLElement일 경우
-      parent.appendChild(createdElements[0]);
-    }
-  }
-
-  // 생성된 요소가 하나면 단일 요소 반환, 아니면 배열 반환
-  return count === 1 ? createdElements[0] : createdElements;
-}
 
 // NOTE: 추가 버튼 이벤트
 function setTodoTotalCount() {
@@ -176,7 +127,7 @@ function setTodoIndex() {
 
 // NOTE: life-cycle
 onMounted(() => {
-  const app = createElement({
+  const [app] = createElement({
     tagName: 'div',
     properties: { id: 'app' },
     parent: vanillaRef.value,
@@ -239,7 +190,7 @@ onMounted(() => {
   });
 
   // NOTE: Item List Container HTML 생성
-  const itemListContainer = createElement({
+  const [itemListContainer] = createElement({
     tagName: 'div',
     properties: { id: 'item-list-container' },
     parent: app,
