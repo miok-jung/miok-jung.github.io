@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref } from 'vue';
-import { createElement } from 'components/study';
+import { createElement } from 'src/assets/modules/createElement';
 
 const vanillaRef = ref<HTMLElement | undefined>(undefined);
 

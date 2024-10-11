@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { createElement } from 'src/components/study';
+import { createElement } from 'src/assets/modules/createElement';
 
 const carouselRef = ref<HTMLElement | undefined>(undefined);
 
