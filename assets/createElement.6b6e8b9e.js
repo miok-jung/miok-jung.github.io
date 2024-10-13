@@ -1,0 +1,1 @@
+function c({tagName:o,properties:u={},parent:r=void 0,children:s=[],count:a=1}){const n=()=>{const e=document.createElement(o);return Object.assign(e,u),r&&!Array.isArray(r)&&r.appendChild(e),s==null||s.forEach(t=>{t.parent=e,c(t)}),e};if(a>1){const e=[];for(let t=0;t<a;++t)e.push(n());return e}else return[n()]}export{c};
