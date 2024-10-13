@@ -54,11 +54,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/study/CarouselJsPage.vue'),
       },
       {
-        path: 'shoppingmall',
+        path: 'shop',
         meta: {
-          title: 'study: ShoppingMall',
+          title: 'study: Shop',
         },
-        component: () => import('pages/study/ShoppingMallPage.vue'),
+        component: () => import('pages/study/ShopPage.vue'),
       },
       {
         path: 'lottie',

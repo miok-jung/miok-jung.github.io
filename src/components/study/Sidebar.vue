@@ -68,10 +68,10 @@ const Sidebars: SideBar[] = [
     link: '/study/carouseljs',
   },
   {
-    title: 'shopping mall JS',
-    caption: 'Study Shopping Mall',
-    icon: 'mdi-nodejs',
-    link: '/study/shoppingmall',
+    title: 'shop JS',
+    caption: 'Study shop',
+    icon: 'mdi-storefront-outline',
+    link: '/study/shop',
   },
   {
     title: 'Test Lottie',
