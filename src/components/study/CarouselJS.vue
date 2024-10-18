@@ -29,7 +29,7 @@ onMounted(() => {
   // NOTE: carousel 모듈화 실행
   carousel({
     parentNode: app,
-    imageArray: [
+    itemList: [
       '/src/assets/study/images/02.jpg',
       '/src/assets/study/images/03.jpg',
       '/src/assets/study/images/04.jpg',
@@ -37,8 +37,8 @@ onMounted(() => {
       '/src/assets/study/images/06.jpg',
       '/src/assets/study/images/07.jpg',
     ],
-    visibleCount: 3,
-    slideCount: 2,
+    visibleCount: 5, // 보여질 개수
+    slideCount: 3, // 슬라이드 될 개수
     captionArray: ['One', 'Two', 'Three', 'Four', 'Five', 'Six'],
     captionPos: ['center', 'center'],
     buttonPos: 'horizontal',

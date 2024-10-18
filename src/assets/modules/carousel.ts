@@ -2,7 +2,7 @@ import { createElement } from './createElement';
 
 /**
  * @parentNode 넣을 부모 노드
- * @imageArray 이미지 경로 배열
+ * @itemList 이미지 경로 배열
  * @visibleCount 보여질 개수
  * @slideCount 슬라이드 될 개수
  * @captionArray 캡션별 텍스트 배열
@@ -12,7 +12,7 @@ import { createElement } from './createElement';
 
 type carouselConfig = {
   parentNode: HTMLElement;
-  imageArray: string[];
+  itemList: string[];
   visibleCount?: number;
   slideCount?: number;
   captionArray?: string[];
@@ -21,7 +21,7 @@ type carouselConfig = {
 };
 export function carousel({
   parentNode,
-  imageArray,
+  itemList,
   visibleCount = 1,
   slideCount = 1,
   captionArray = [],
@@ -42,150 +42,184 @@ export function carousel({
     height: 100%;
   `;
 
-  // NOTE: 2. 화살표 아이콘 버튼 생성 및 스타일 적용
-  const iconRight = `
-    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
-      <title>chevron-right</title><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-    </svg>
-  `;
-  const iconLeft = `
-    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
-      <title>chevron-left</title><path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
-    </svg>
-  `;
-  const iconDown = `
-    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
-      <title>chevron-down</title><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-    </svg>
-  `;
-  const iconUp = `
-    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
-      <title>chevron-up</title><path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" />
-    </svg>
-  `;
-  const [prevButton, nextButton] = createElement({
-    tagName: 'button',
-    parent: wrapper,
-    count: 2,
-  }) as HTMLElement[];
-  prevButton.style.cssText = `
-    z-index: 1;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    border: 0;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.3);
-    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.7));
-  `;
-  nextButton.style.cssText = prevButton.style.cssText;
-  if (buttonPos === 'horizontal') {
-    prevButton.innerHTML = iconLeft;
-    prevButton.style.cssText += `
-      top: 50%;
-      left: 10px;
-      transform: translateY(-50%);
-    `;
-
-    nextButton.innerHTML = iconRight;
-    nextButton.style.cssText += `
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-    `;
-  } else {
-    prevButton.innerHTML = iconUp;
-    prevButton.style.cssText += `
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-    `;
-
-    nextButton.innerHTML = iconDown;
-    nextButton.style.cssText += `
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-    `;
-  }
-
-  // NOTE: 3. 화살표 클릭 이벤트
-  const imgItemWidth = 700 / visibleCount;
-  const igmItemHeight = 250 / visibleCount;
-
-  nextButton.onclick = () => handleSlide('next');
-  prevButton.onclick = () => handleSlide('prev');
-  function handleSlide(type: 'prev' | 'next') {
-    itemContainer.style.transitionDuration = '0.5s';
-
-    let slideDistance = 0;
-    if (type === 'prev') {
-      slideDistance = (buttonPos === 'horizontal' ? imgItemWidth : igmItemHeight) * slideCount;
-    } else {
-      slideDistance = (buttonPos === 'horizontal' ? -imgItemWidth : -igmItemHeight) * slideCount;
-    }
-    if (type === 'prev') {
-      // NOTE: 버튼 타입이 prev 일 때
-      if (buttonPos === 'horizontal') {
-        itemContainer.style.transform = `translateX(${slideDistance}px)`;
-      } else {
-        itemContainer.style.transform = `translateY(${slideDistance}px)`;
-      }
-    } else {
-      // NOTE: 버튼 타입이 next 일 떄
-      if (buttonPos === 'horizontal') {
-        itemContainer.style.transform = `translateX(${slideDistance}px)`;
-      } else {
-        itemContainer.style.transform = `translateY(${slideDistance}px)`;
-      }
-    }
-
-    itemContainer.ontransitionend = () => {
-      // transition이 끝난 후 transition 속성 제거
-      itemContainer.style.removeProperty('transition-duration');
-
-      if (type === 'prev') {
-        for (let i = 0; i < slideCount; i++) {
-          itemContainer.prepend(itemContainer.lastChild as ChildNode);
-        }
-      } else {
-        for (let i = 0; i < slideCount; i++) {
-          itemContainer.appendChild(itemContainer.firstChild as ChildNode);
-        }
-      }
-
-      if (buttonPos === 'horizontal') {
-        itemContainer.style.transform = 'translateX(0)';
-        console.log('ontransitioned', itemContainer.style.transform);
-      } else {
-        itemContainer.style.transform = 'translateY(0)';
-      }
-    };
-  }
-
-  // NOTE: 4. 이미지 넣기
+  // NOTE: itemList가 있는 경우, 새로 아이템을 만들기
   const [itemContainer] = createElement({
     tagName: 'div',
     parent: wrapper,
   });
-  if (buttonPos === 'horizontal') {
-    itemContainer.style.cssText = `
-      display: flex;
-      align-items:center;
-      transform: translateX(0px);
-    `;
+  if (itemList) {
+    itemList.forEach((item, i) => {
+      addImageItem(itemContainer, itemList[i], captionArray[i]);
+    });
   } else {
-    itemContainer.style.cssText = `
-      display: flex;
-      flex-wrap: wrap;
-      transform: translateY(0px);
+    addImageItem(itemContainer, '/src/assets/study/images/01.jpg');
+    addImageItem(itemContainer, '/src/assets/study/images/02.jpg');
+    addImageItem(itemContainer, '/src/assets/study/images/03.jpg');
+    addImageItem(itemContainer, '/src/assets/study/images/04.jpg');
+    addImageItem(itemContainer, '/src/assets/study/images/05.jpg');
+  }
+  // NOTE: 2. 화살표 아이콘 버튼 생성 및 스타일 적용
+
+  addButtons();
+
+  // NOTE: 이미지 크기 정수로 추출
+  const imgItemWidth = Math.trunc(700 / visibleCount);
+  const imgItemHeight = Math.trunc(250 / visibleCount);
+
+  // NOTE: 3. 화살표 클릭 이벤트
+
+  function handleSlide(type: 'prev' | 'next') {
+    // 이미지가 마지막일 때 앞/뒤 복제하기
+    for (let i = 0; i < slideCount; ++i) {
+      console.log('i: ', i);
+      const index = i & itemContainer.children.length;
+      if (type === 'next') {
+        console.log(type, ': ', i, index);
+        itemContainer.appendChild(itemContainer.children[i].cloneNode(true));
+      } else {
+        console.log(type, ': ', i, index);
+        itemContainer.prepend(itemContainer.children[itemContainer.children.length - i - 1].cloneNode(true));
+      }
+    }
+    type === 'next' ||
+      (itemContainer.style.transform = `
+        translateX(${imgItemWidth}px);
+      `);
+
+    setTimeout(() => {
+      handleTransitionEnd(type);
+    }, 0);
+  }
+
+  // NOTE: 화면 이동 및 CSS 초기화
+  function handleTransitionEnd(type: 'prev' | 'next') {
+    console.log('handleTransitionEnd', type);
+    itemContainer.style.transitionDuration = '0.5s';
+    let slideDistance = 0;
+    let imgSize = 0;
+    type === 'next' ? (slideDistance = -imgSize * slideCount) : 0;
+
+    if (buttonPos === 'horizontal') {
+      itemContainer.style.cssText = `
+        display: flex;
+        align-items:center;
+        transform: translateX(0px);
+      `;
+
+      imgSize = imgItemWidth;
+      itemContainer.style.transform = `translateX(${slideDistance}px)`;
+      console.log('hori', slideDistance);
+
+      // transition이 끝난 후 transition 속성 제거
+      itemContainer.style.removeProperty('transition-duration');
+      itemContainer.style.transform = 'translateX(0)';
+    } else {
+      itemContainer.style.cssText = `
+        display: flex;
+        flex-wrap: wrap;
+        transform: translateY(0px);
+      `;
+
+      imgSize = imgItemHeight;
+      itemContainer.style.transform = `translateY(${slideDistance}px)`;
+      console.log('vert', slideDistance);
+
+      // transition이 끝난 후 transition 속성 제거
+      itemContainer.style.removeProperty('transition-duration');
+      itemContainer.style.transform = 'translateY(0)';
+    }
+
+    itemContainer.ontransitionend = () => {
+      for (let i = 0; i < slideCount; ++i) {
+        console.log(type, 'delete');
+        // 슬라이드 방향에 따라 아이템을 삭제
+        if (type === 'next') {
+          console.log(type, 'delete');
+          itemContainer.firstChild?.remove(); // 첫 번째 자식을 삭제
+        } else {
+          // FIXME: 현재 실행이 되지 않는 부분
+          console.log(type, 'delete');
+          itemContainer.lastChild?.remove(); // 마지막 자식을 삭제
+        }
+      }
+    };
+  }
+
+  // NOTE: 버튼 생성하기
+  function addButtons() {
+    const iconRight = `
+      <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
+        <title>chevron-right</title><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+      </svg>
     `;
+    const iconLeft = `
+      <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
+        <title>chevron-left</title><path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
+      </svg>
+    `;
+    const iconDown = `
+      <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
+        <title>chevron-down</title><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+      </svg>
+    `;
+    const iconUp = `
+      <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
+        <title>chevron-up</title><path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" />
+      </svg>
+    `;
+
+    const [prevButton, nextButton] = createElement({
+      tagName: 'button',
+      parent: wrapper,
+      count: 2,
+    }) as HTMLElement[];
+
+    prevButton.style.cssText = `
+      z-index: 1;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.3);
+      filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.7));
+    `;
+    nextButton.style.cssText = prevButton.style.cssText;
+    if (buttonPos === 'horizontal') {
+      prevButton.innerHTML = iconLeft;
+      prevButton.style.cssText += `
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+      `;
+      nextButton.innerHTML = iconRight;
+      nextButton.style.cssText += `
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+      `;
+    } else {
+      prevButton.innerHTML = iconUp;
+      prevButton.style.cssText += `
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+      `;
+      nextButton.innerHTML = iconDown;
+      nextButton.style.cssText += `
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+      `;
+    }
+
+    nextButton.onclick = () => handleSlide('next');
+    prevButton.onclick = () => handleSlide('prev');
   }
-  for (let i = 0; i < imageArray.length; i++) {
-    addImageItem(itemContainer, imageArray[i], captionArray[i]);
-  }
+
+  // NOTE: 이미지 생성하기
   function addImageItem(parent: HTMLElement, src: string, captionText = 'Caption text') {
     const [container] = createElement({
       tagName: 'div',
@@ -198,6 +232,7 @@ export function carousel({
       align-items: center;
       width: calc(700px / ${visibleCount});
       height: 250px;
+      background: #000;
       overflow: hidden;
     `;
 
