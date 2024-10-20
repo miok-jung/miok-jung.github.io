@@ -50,6 +50,12 @@ const Sidebars: SideBar[] = [
     link: '/calculator',
   },
   {
+    title: '정보',
+    caption: 'Organize my data',
+    icon: 'mdi-map-marker-outline',
+    link: '/data',
+  },
+  {
     title: '공부',
     caption: 'My Study List',
     icon: 'mdi-note-search-outline',

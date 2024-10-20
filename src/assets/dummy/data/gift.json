@@ -1,0 +1,54 @@
+{
+  "vietnam": {
+    "gift": [
+      {
+        "id": 0,
+        "ko_name": "아치카페 코코넛 카푸치노 240g",
+        "en_name": "Archcafe",
+        "vn": "57700",
+        "img_url": "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/1825089797/B.jpg?823000000",
+        "description": "판매처: 롯데마트<br />업데이트 날짜: 2024년 3월<br />베트남 아치카페 종류는 총 5가지(초코라떼, 카푸치노, 말차라떼, 연유커피, 바나나카푸치노 등)가 있으며, 그 중에서 카푸치노 맛이 가장 유명하다."
+      },
+      {
+        "id": 1,
+        "ko_name": "커피조이 156g",
+        "en_name": "Coffee Joy",
+        "vn": "19500",
+        "img_url": "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/7568596668/B.jpg?850000000",
+        "description": "판매처: 롯데마트<br />커피맛 과자로, 커피향이나는 과자이다."
+      },
+      {
+        "id": 2,
+        "ko_name": "게리 치즈 크래커",
+        "en_name": "Gerry Cheese Crackers",
+        "vn": "33900",
+        "img_url": "https://sitem.ssgcdn.com/29/95/49/item/1000025499529_i1_1200.jpg",
+        "description": "치즈맛 과자로 베트남에서 가장 유명"
+      },
+      {
+        "id": 3,
+        "ko_name": "게리 코코넛 크래커",
+        "en_name": "Gerry Coconut Crackers",
+        "vn": "33900",
+        "img_url": "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/2692035098/A2.jpg?675000000",
+        "description": "치즈맛 과자로 베트남에서 가장 유명"
+      },
+      {
+        "id": 4,
+        "ko_name": "패션후르츠청 500ml",
+        "en_name": "Golden Farm Passion Fruit Smoothie",
+        "vn": "62300",
+        "img_url": "https://sitem.ssgcdn.com/17/23/04/item/1000617042317_i1_1200.jpg",
+        "description": "탄산수나 물에 타먹으면 맛있는 청으로, 다양한 청으로 판다.<br />500ml로 약 12개의 에이드를 만들 수 있다."
+      },
+      {
+        "id": 5,
+        "ko_name": "아하 90g",
+        "en_name": "Ahh",
+        "vn": "23900",
+        "img_url": "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/6833085465/B.jpg?201000000",
+        "description": "판매처: 롯데마트<br />옛날의 차카니 과자와 유사하다고 한다."
+      }
+    ]
+  }
+}

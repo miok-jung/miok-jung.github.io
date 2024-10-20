@@ -19,6 +19,37 @@ const routes: RouteRecordRaw[] = [
         },
         component: () => import('pages/CalculatorPage.vue'),
       },
+      {
+        path: '/data',
+        children: [
+          {
+            path: '',
+            meta: {
+              title: 'Data',
+            },
+            component: () => import('pages/DataPage.vue'),
+          },
+          {
+            path: ':depth1',
+            children: [
+              {
+                path: '',
+                meta: {
+                  title: 'Data Depth1 Page',
+                },
+                component: () => import('pages/DataDepth1Page.vue'),
+              },
+              {
+                path: ':depth2',
+                meta: {
+                  title: 'Data Depth2 Page',
+                },
+                component: () => import('pages/DataDepth2Page.vue'),
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
   {
