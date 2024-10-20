@@ -1,0 +1,1 @@
+import{Q as e}from"./QPage.6d1d3196.js";import{_ as t}from"./Header.237ddd8d.js";import{d as a,K as o,L as r,M as s,f as p,U as _}from"./index.00b35fce.js";import"./render.fd78851c.js";import"./use-router-link.63666c91.js";const n=_("p",null,"Depth1",-1),x=a({__name:"DataDepth1Page",setup(c){return(m,i)=>(o(),r(e,null,{default:s(()=>[p(t),n]),_:1}))}});export{x as default};
