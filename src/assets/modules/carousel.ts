@@ -49,6 +49,7 @@ export function carousel({
   });
   if (itemList) {
     itemList.forEach((item, i) => {
+      console.log('list', i);
       addImageItem(itemContainer, itemList[i], captionArray[i]);
     });
   } else {
@@ -66,26 +67,20 @@ export function carousel({
   const imgItemWidth = Math.trunc(700 / visibleCount);
   const imgItemHeight = Math.trunc(250 / visibleCount);
 
-  // NOTE: 3. 화살표 클릭 이벤트
-
+  // NOTE: 화살표 클릭 이벤트
   function handleSlide(type: 'prev' | 'next') {
-    // 이미지가 마지막일 때 앞/뒤 복제하기
     for (let i = 0; i < slideCount; ++i) {
-      console.log('i: ', i);
-      const index = i & itemContainer.children.length;
+      const index = i % itemContainer.children.length; // 모듈로 연산자로 인덱스를 제한
+      console.log('type, i: ', type, i, index);
       if (type === 'next') {
-        console.log(type, ': ', i, index);
         itemContainer.appendChild(itemContainer.children[i].cloneNode(true));
       } else {
-        console.log(type, ': ', i, index);
         itemContainer.prepend(itemContainer.children[itemContainer.children.length - i - 1].cloneNode(true));
       }
     }
-    type === 'next' ||
-      (itemContainer.style.transform = `
-        translateX(${imgItemWidth}px);
-      `);
-
+    buttonPos === 'horizontal'
+      ? (itemContainer.style.transform = `translateX(${imgItemWidth}px)`)
+      : (itemContainer.style.transform = `translateY(${imgItemHeight}px)`);
     setTimeout(() => {
       handleTransitionEnd(type);
     }, 0);
@@ -93,80 +88,69 @@ export function carousel({
 
   // NOTE: 화면 이동 및 CSS 초기화
   function handleTransitionEnd(type: 'prev' | 'next') {
-    console.log('handleTransitionEnd', type);
+    console.log('handle end', type);
     itemContainer.style.transitionDuration = '0.5s';
     let slideDistance = 0;
     let imgSize = 0;
-    type === 'next' ? (slideDistance = -imgSize * slideCount) : 0;
-
     if (buttonPos === 'horizontal') {
+      imgSize = imgItemWidth;
+      slideDistance = type === 'next' ? -imgSize * slideCount : 0;
       itemContainer.style.cssText = `
         display: flex;
-        align-items:center;
+        align-items: center;
         transform: translateX(0px);
       `;
-
-      imgSize = imgItemWidth;
-      itemContainer.style.transform = `translateX(${slideDistance}px)`;
-      console.log('hori', slideDistance);
 
       // transition이 끝난 후 transition 속성 제거
       itemContainer.style.removeProperty('transition-duration');
       itemContainer.style.transform = 'translateX(0)';
     } else {
+      imgSize = imgItemHeight;
+      slideDistance = type === 'next' ? -imgSize * slideCount : 0;
       itemContainer.style.cssText = `
         display: flex;
         flex-wrap: wrap;
-        transform: translateY(0px);
+        flex-wrap: translateY(0px);
       `;
-
-      imgSize = imgItemHeight;
-      itemContainer.style.transform = `translateY(${slideDistance}px)`;
-      console.log('vert', slideDistance);
 
       // transition이 끝난 후 transition 속성 제거
       itemContainer.style.removeProperty('transition-duration');
       itemContainer.style.transform = 'translateY(0)';
     }
-
     itemContainer.ontransitionend = () => {
       for (let i = 0; i < slideCount; ++i) {
-        console.log(type, 'delete');
-        // 슬라이드 방향에 따라 아이템을 삭제
+        console.log('trans end: ', i);
+        // NOTE: 슬라이드 방향에 따라 아이템을 삭제
         if (type === 'next') {
-          console.log(type, 'delete');
           itemContainer.firstChild?.remove(); // 첫 번째 자식을 삭제
         } else {
-          // FIXME: 현재 실행이 되지 않는 부분
-          console.log(type, 'delete');
           itemContainer.lastChild?.remove(); // 마지막 자식을 삭제
         }
       }
     };
   }
-
   // NOTE: 버튼 생성하기
   function addButtons() {
     const iconRight = `
-      <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
-        <title>chevron-right</title><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-      </svg>
-    `;
+    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
+      <title>chevron-right</title><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+    </svg>
+  `;
     const iconLeft = `
-      <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
-        <title>chevron-left</title><path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
-      </svg>
-    `;
+    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
+      <title>chevron-left</title><path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
+    </svg>
+  `;
     const iconDown = `
-      <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
-        <title>chevron-down</title><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-      </svg>
-    `;
+    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
+      <title>chevron-down</title><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+    </svg>
+  `;
     const iconUp = `
-      <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
-        <title>chevron-up</title><path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" />
-      </svg>
-    `;
+    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
+      <title>chevron-up</title><path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" />
+    </svg>
+  `;
 
     const [prevButton, nextButton] = createElement({
       tagName: 'button',
@@ -175,44 +159,44 @@ export function carousel({
     }) as HTMLElement[];
 
     prevButton.style.cssText = `
-      z-index: 1;
-      position: absolute;
-      display: flex;
-      align-items: center;
-      width: 40px;
-      height: 40px;
-      border: 0;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.3);
-      filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.7));
-    `;
+    z-index: 1;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.7));
+  `;
     nextButton.style.cssText = prevButton.style.cssText;
     if (buttonPos === 'horizontal') {
       prevButton.innerHTML = iconLeft;
       prevButton.style.cssText += `
-        top: 50%;
-        left: 10px;
-        transform: translateY(-50%);
-      `;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+    `;
       nextButton.innerHTML = iconRight;
       nextButton.style.cssText += `
-        top: 50%;
-        right: 10px;
-        transform: translateY(-50%);
-      `;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+    `;
     } else {
       prevButton.innerHTML = iconUp;
       prevButton.style.cssText += `
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-      `;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    `;
       nextButton.innerHTML = iconDown;
       nextButton.style.cssText += `
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-      `;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    `;
     }
 
     nextButton.onclick = () => handleSlide('next');
@@ -228,8 +212,6 @@ export function carousel({
 
     container.style.cssText = `
       display: flex;
-      justify-content: center;
-      align-items: center;
       width: calc(700px / ${visibleCount});
       height: 250px;
       background: #000;
@@ -239,6 +221,9 @@ export function carousel({
     if (buttonPos === 'vertical') {
       container.style.width = '700px';
       container.style.height = `calc(250px / ${visibleCount})`;
+    } else {
+      container.style.justifyContent = 'center';
+      container.style.alignItems = 'center';
     }
 
     switch (captionPos[0]) {
