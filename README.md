@@ -1,9 +1,9 @@
 # Start Date / Last Update Date
 
-September 17. 2024 ~ October 07. 2024
+September 22. 2024 ~ October 07. 2024
 
 - Study Page
-  - Carousel JS 모듈화 스크립트 생성하기
+  - Carousel JS 모듈화 스크립트 생성 및 업데이트
   - Lottie 라이브러리 테스트 해보기 (회사 프로젝트 로딩파일을 위한 준비 작업을 위한 테스트)
   - Vanilla JavaScript만으로 TODO List 만들기 (vue 확장자 파일이지만, 내부는 오직 JavaScript + Type으로만 진행)
   - Three.js 기본 정육면제 스터디 업데이트

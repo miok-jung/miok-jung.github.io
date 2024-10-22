@@ -28,7 +28,7 @@ export function carousel({
   captionPos = ['center', 'center'],
   buttonPos = 'horizontal',
 }: carouselConfig) {
-  // NOTE: 1. Slide를 감쌀 Wrap을 만들어 부모에 대입 및 스타일 적용
+  // NOTE: Slide를 감쌀 Wrap을 만들어 부모에 대입 및 스타일 적용
   const [wrapper] = createElement({
     tagName: 'div',
     parent: parentNode,
@@ -47,20 +47,30 @@ export function carousel({
     tagName: 'div',
     parent: wrapper,
   });
+  if (buttonPos === 'horizontal') {
+    itemContainer.style.cssText = `
+      display: flex;
+      align-items: center;
+      transform: translateX(0px);
+    `;
+  } else {
+    itemContainer.style.cssText = `
+      display: flex;
+      flex-wrap: wrap;
+      transform: translateY(0px);
+    `;
+  }
   if (itemList) {
+    // itemList가 있는 경우, 새로 아이템을 만들기
     itemList.forEach((item, i) => {
-      console.log('list', i);
-      addImageItem(itemContainer, itemList[i], captionArray[i]);
+      addImageItem(itemContainer, item, captionArray[i]);
     });
   } else {
-    addImageItem(itemContainer, '/src/assets/study/images/01.jpg');
-    addImageItem(itemContainer, '/src/assets/study/images/02.jpg');
-    addImageItem(itemContainer, '/src/assets/study/images/03.jpg');
-    addImageItem(itemContainer, '/src/assets/study/images/04.jpg');
-    addImageItem(itemContainer, '/src/assets/study/images/05.jpg');
+    for (let i = 0; i < 5; i++) {
+      addImageItem(itemContainer, `/src/assets/study/images/0${i + 1}.jpg`, `${i}${i}`);
+    }
   }
-  // NOTE: 2. 화살표 아이콘 버튼 생성 및 스타일 적용
-
+  // NOTE: 화살표 아이콘 버튼 생성 및 스타일 적용
   addButtons();
 
   // NOTE: 이미지 크기 정수로 추출
@@ -69,18 +79,44 @@ export function carousel({
 
   // NOTE: 화살표 클릭 이벤트
   function handleSlide(type: 'prev' | 'next') {
-    for (let i = 0; i < slideCount; ++i) {
-      const index = i % itemContainer.children.length; // 모듈로 연산자로 인덱스를 제한
-      console.log('type, i: ', type, i, index);
-      if (type === 'next') {
-        itemContainer.appendChild(itemContainer.children[i].cloneNode(true));
+    let slideDistance = 0;
+    let imgSize = 0;
+    if (buttonPos === 'horizontal') {
+      imgSize = imgItemWidth;
+      if (type === 'prev') {
+        // 이전 버튼 클릭
+        for (let i = 0; i < slideCount; i++) {
+          // 앞에 마지막 노드 복사하기
+          itemContainer.prepend(itemContainer.children[itemContainer.children.length - i - 1].cloneNode(true));
+        }
       } else {
-        itemContainer.prepend(itemContainer.children[itemContainer.children.length - i - 1].cloneNode(true));
+        slideDistance = -1;
+        for (let i = 0; i < slideCount; i++) {
+          itemContainer.appendChild(itemContainer.children[i].cloneNode(true));
+        }
       }
+      slideDistance = slideDistance * imgSize * slideCount;
+      itemContainer.style.transitionDuration = '0.5s';
+      itemContainer.style.transform = `translateX(calc(${slideDistance})px)`;
+    } else {
+      imgSize = imgItemHeight;
+      if (type === 'prev') {
+        // 이전 버튼 클릭
+        for (let i = 0; i < slideCount; i++) {
+          // 앞에 마지막 노드 복사하기
+          itemContainer.prepend(itemContainer.children[itemContainer.children.length - i - 1].cloneNode(true));
+
+          slideDistance = imgSize * slideCount;
+        }
+      } else {
+        for (let i = 0; i < slideCount; i++) {
+          itemContainer.appendChild(itemContainer.children[i].cloneNode(true));
+          slideDistance = -imgSize * slideCount;
+        }
+      }
+      itemContainer.style.transform = `translateY(${slideDistance}px)`;
     }
-    buttonPos === 'horizontal'
-      ? (itemContainer.style.transform = `translateX(${imgItemWidth}px)`)
-      : (itemContainer.style.transform = `translateY(${imgItemHeight}px)`);
+
     setTimeout(() => {
       handleTransitionEnd(type);
     }, 0);
@@ -88,46 +124,35 @@ export function carousel({
 
   // NOTE: 화면 이동 및 CSS 초기화
   function handleTransitionEnd(type: 'prev' | 'next') {
-    console.log('handle end', type);
-    itemContainer.style.transitionDuration = '0.5s';
-    let slideDistance = 0;
-    let imgSize = 0;
     if (buttonPos === 'horizontal') {
-      imgSize = imgItemWidth;
-      slideDistance = type === 'next' ? -imgSize * slideCount : 0;
-      itemContainer.style.cssText = `
-        display: flex;
-        align-items: center;
-        transform: translateX(0px);
-      `;
-
-      // transition이 끝난 후 transition 속성 제거
-      itemContainer.style.removeProperty('transition-duration');
-      itemContainer.style.transform = 'translateX(0)';
-    } else {
-      imgSize = imgItemHeight;
-      slideDistance = type === 'next' ? -imgSize * slideCount : 0;
-      itemContainer.style.cssText = `
-        display: flex;
-        flex-wrap: wrap;
-        flex-wrap: translateY(0px);
-      `;
-
-      // transition이 끝난 후 transition 속성 제거
-      itemContainer.style.removeProperty('transition-duration');
-      itemContainer.style.transform = 'translateY(0)';
-    }
-    itemContainer.ontransitionend = () => {
-      for (let i = 0; i < slideCount; ++i) {
-        console.log('trans end: ', i);
-        // NOTE: 슬라이드 방향에 따라 아이템을 삭제
-        if (type === 'next') {
+      // 버튼 위치가 좌우일 때
+      if (type === 'prev') {
+        // 이전 버튼 클릭 이후 마무리 단계
+        for (let i = 0; i < slideCount; i++) {
+          itemContainer.lastChild?.remove(); // 첫 번째 자식을 삭제
+        }
+      } else {
+        // 다음 버튼 클릭 이후 마무리 단계
+        for (let i = 0; i < slideCount; i++) {
           itemContainer.firstChild?.remove(); // 첫 번째 자식을 삭제
-        } else {
-          itemContainer.lastChild?.remove(); // 마지막 자식을 삭제
         }
       }
-    };
+      itemContainer.style.transform = 'translateX(0)';
+    } else {
+      // 버튼 위치가 상하일 때
+      if (type === 'prev') {
+        // 이전 버튼 클릭 이후 마무리 단계
+        for (let i = 0; i < slideCount; i++) {
+          itemContainer.lastChild?.remove(); // 첫 번째 자식을 삭제
+        }
+      } else {
+        // 다음 버튼 클릭 이후 마무리 단계
+        for (let i = 0; i < slideCount; i++) {
+          itemContainer.firstChild?.remove(); // 첫 번째 자식을 삭제
+        }
+      }
+      itemContainer.style.transform = 'translateY(0)';
+    }
   }
   // NOTE: 버튼 생성하기
   function addButtons() {
@@ -209,23 +234,46 @@ export function carousel({
       tagName: 'div',
       parent: parent,
     });
-
     container.style.cssText = `
       display: flex;
-      width: calc(700px / ${visibleCount});
-      height: 250px;
+      justify-content: center;
+      align-items: center;
       background: #000;
       overflow: hidden;
     `;
-
-    if (buttonPos === 'vertical') {
-      container.style.width = '700px';
-      container.style.height = `calc(250px / ${visibleCount})`;
+    if (buttonPos === 'horizontal') {
+      container.style.cssText += `
+        width: calc(700px / ${visibleCount});
+        height: 250px;
+      `;
     } else {
-      container.style.justifyContent = 'center';
-      container.style.alignItems = 'center';
+      container.style.cssText += `
+        flex-direction: column;
+        width: 700px;
+        height: calc(250px / ${visibleCount});
+      `;
     }
-
+    const [image] = createElement({
+      tagName: 'img',
+      parent: container,
+      properties: { src: src },
+    });
+    image.style.cssText = `
+      height: 100%;
+      object-position: 50% 50%;
+      object-fit: cover;
+    `;
+    const [caption] = createElement({
+      tagName: 'span',
+      properties: { innerText: captionText },
+      parent: container,
+    });
+    caption.style.cssText = `
+      position: absolute;
+      color: white;
+      font-weight: bold;
+      filter: drop-shadow(3px 3px 3px rgb(0 0 0 / 0.5));
+    `;
     switch (captionPos[0]) {
       // 캡션 상하
       case 'top': {
@@ -256,33 +304,6 @@ export function carousel({
         break;
       }
     }
-
-    if (buttonPos === 'vertical') {
-      container.style.cssText += `
-        flex-direction: column;
-      `;
-    }
-    const [image] = createElement({
-      tagName: 'img',
-      parent: container,
-      properties: { src: src },
-    });
-    image.style.cssText = `
-      height: 100%;
-      object-position: 50% 50%;
-      object-fit: cover;
-    `;
-    const [caption] = createElement({
-      tagName: 'span',
-      properties: { innerText: captionText },
-      parent: container,
-    });
-    caption.style.cssText = `
-      position: absolute;
-      color: white;
-      font-weight: bold;
-      filter: drop-shadow(3px 3px 3px rgb(0 0 0 / 0.5));
-    `;
     return container;
   }
 }
