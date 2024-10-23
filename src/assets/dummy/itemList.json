@@ -1,0 +1,39 @@
+{
+  "dummy_carousel": [
+    {
+      "id": 0,
+      "imgUrl": "/src/assets/study/images/01.jpg",
+      "title": "Title One",
+      "caption": "One",
+      "captionPos": ["center", "center"]
+    },
+    {
+      "id": 1,
+      "imgUrl": "/src/assets/study/images/02.jpg",
+      "title": "Title Two",
+      "caption": "Two",
+      "captionPos": ["center", "center"]
+    },
+    {
+      "id": 2,
+      "imgUrl": "/src/assets/study/images/03.jpg",
+      "title": "Title Three",
+      "caption": "Three",
+      "captionPos": ["center", "center"]
+    },
+    {
+      "id": 3,
+      "imgUrl": "/src/assets/study/images/04.jpg",
+      "title": "Title Three",
+      "caption": "Four",
+      "captionPos": ["center", "center"]
+    },
+    {
+      "id": 4,
+      "imgUrl": "/src/assets/study/images/05.jpg",
+      "title": "Title Five",
+      "caption": "Five",
+      "captionPos": ["center", "center"]
+    }
+  ]
+}

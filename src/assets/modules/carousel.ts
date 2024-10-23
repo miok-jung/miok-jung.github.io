@@ -1,22 +1,26 @@
 import { createElement } from './createElement';
+import { dummy_carousel } from 'assets/dummy/itemList.json';
 
 /**
  * @parentNode 넣을 부모 노드
- * @itemList 이미지 경로 배열
+ * @itemList 이미지 정보
  * @visibleCount 보여질 개수
  * @slideCount 슬라이드 될 개수
- * @captionArray 캡션별 텍스트 배열
- * @captionPos 캡션 텍스트 위치 ['top' | 'center' | 'bottom', 'left' | 'center' | 'right']
  * @buttonPos 화살표 버튼 위치 vertical OR horizontal
  */
-
+type itemInformation = {
+  id: number;
+  imgUrl: string;
+  title?: string;
+  caption?: string;
+  captionPos?: string[];
+  // 캡션 텍스트 위치 ['top' | 'center' | 'bottom', 'left' | 'center' | 'right']
+};
 type carouselConfig = {
   parentNode: HTMLElement;
-  itemList: string[];
+  itemList?: itemInformation[];
   visibleCount?: number;
   slideCount?: number;
-  captionArray?: string[];
-  captionPos?: [string, string];
   buttonPos?: 'horizontal' | 'vertical';
 };
 export function carousel({
@@ -24,8 +28,6 @@ export function carousel({
   itemList,
   visibleCount = 1,
   slideCount = 1,
-  captionArray = [],
-  captionPos = ['center', 'center'],
   buttonPos = 'horizontal',
 }: carouselConfig) {
   // NOTE: Slide를 감쌀 Wrap을 만들어 부모에 대입 및 스타일 적용
@@ -62,14 +64,15 @@ export function carousel({
   }
   if (itemList) {
     // itemList가 있는 경우, 새로 아이템을 만들기
-    itemList.forEach((item, i) => {
-      addImageItem(itemContainer, item, captionArray[i]);
+    itemList.forEach((item) => {
+      addImageItem(itemContainer, item);
     });
   } else {
-    for (let i = 0; i < 5; i++) {
-      addImageItem(itemContainer, `/src/assets/study/images/0${i + 1}.jpg`, `${i}${i}`);
+    for (let i = 0; i < dummy_carousel.length; i++) {
+      addImageItem(itemContainer, dummy_carousel[i]);
     }
   }
+
   // NOTE: 화살표 아이콘 버튼 생성 및 스타일 적용
   addButtons();
 
@@ -229,7 +232,7 @@ export function carousel({
   }
 
   // NOTE: 이미지 생성하기
-  function addImageItem(parent: HTMLElement, src: string, captionText = 'Caption text') {
+  function addImageItem(parent: HTMLElement, item: itemInformation) {
     const [container] = createElement({
       tagName: 'div',
       parent: parent,
@@ -256,7 +259,7 @@ export function carousel({
     const [image] = createElement({
       tagName: 'img',
       parent: container,
-      properties: { src: src },
+      properties: { src: item.imgUrl },
     });
     image.style.cssText = `
       height: 100%;
@@ -265,7 +268,7 @@ export function carousel({
     `;
     const [caption] = createElement({
       tagName: 'span',
-      properties: { innerText: captionText },
+      properties: { innerText: item.caption },
       parent: container,
     });
     caption.style.cssText = `
@@ -274,34 +277,34 @@ export function carousel({
       font-weight: bold;
       filter: drop-shadow(3px 3px 3px rgb(0 0 0 / 0.5));
     `;
-    switch (captionPos[0]) {
-      // 캡션 상하
-      case 'top': {
-        container.style.justifyContent = 'flex-start';
-        break;
+    if (item.captionPos) {
+      switch (item.captionPos[0]) {
+        // 캡션 상하
+        case 'top': {
+          container.style.justifyContent = 'flex-start';
+          break;
+        }
+        case 'bottom': {
+          container.style.justifyContent = 'flex-end';
+          break;
+        }
+        default: {
+          container.style.justifyContent = 'center';
+        }
       }
-      case 'center': {
-        container.style.justifyContent = 'center';
-        break;
-      }
-      case 'bottom': {
-        container.style.justifyContent = 'flex-end';
-        break;
-      }
-    }
-    switch (captionPos[1]) {
-      // 캡션 좌우
-      case 'left': {
-        container.style.alignItems = 'flex-start';
-        break;
-      }
-      case 'center': {
-        container.style.alignItems = 'center';
-        break;
-      }
-      case 'right': {
-        container.style.alignItems = 'flex-end';
-        break;
+      switch (item.captionPos[1]) {
+        // 캡션 좌우
+        case 'left': {
+          container.style.alignItems = 'flex-start';
+          break;
+        }
+        case 'right': {
+          container.style.alignItems = 'flex-end';
+          break;
+        }
+        default: {
+          container.style.alignItems = 'center';
+        }
       }
     }
     return container;
