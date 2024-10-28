@@ -64,8 +64,14 @@ const Sidebars: SideBar[] = [
   {
     title: 'carouselJS',
     caption: 'Study CarouselJS',
-    icon: 'mdi-nodejs',
+    icon: 'mdi-view-carousel-outline',
     link: '/study/carouseljs',
+  },
+  {
+    title: 'GallayApp JS',
+    caption: 'Study Canvas & Vidie & Audio',
+    icon: 'mdi-artboard',
+    link: '/study/gallayjs',
   },
   {
     title: 'shop JS',
