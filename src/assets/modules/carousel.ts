@@ -84,73 +84,84 @@ export function carousel({
   function handleSlide(type: 'prev' | 'next') {
     let slideDistance = 0;
     let imgSize = 0;
-    if (buttonPos === 'horizontal') {
-      imgSize = imgItemWidth;
-      if (type === 'prev') {
-        // 이전 버튼 클릭
+    switch (buttonPos) {
+      case 'vertical': {
+        imgSize = imgItemHeight;
+        slideDistance = imgSize * slideCount;
+        // DOM에 클론 노드를 먼저 추가
         for (let i = 0; i < slideCount; i++) {
-          // 앞에 마지막 노드 복사하기
-          itemContainer.prepend(itemContainer.children[itemContainer.children.length - i - 1].cloneNode(true));
+          if (type === 'prev') {
+            // 이전 버튼 클릭
+            // 앞에 마지막 노드 복사하기
+            itemContainer.prepend(itemContainer.children[itemContainer.children.length - i - 1].cloneNode(true));
+          } else {
+            slideDistance = -slideDistance;
+            itemContainer.appendChild(itemContainer.children[i].cloneNode(true));
+          }
         }
-      } else {
-        slideDistance = -1;
-        for (let i = 0; i < slideCount; i++) {
-          itemContainer.appendChild(itemContainer.children[i].cloneNode(true));
-        }
-      }
-      slideDistance = slideDistance * imgSize * slideCount;
-      itemContainer.style.transitionDuration = '0.5s';
-      itemContainer.style.transform = `translateX(calc(${slideDistance})px)`;
-    } else {
-      imgSize = imgItemHeight;
-      if (type === 'prev') {
-        // 이전 버튼 클릭
-        for (let i = 0; i < slideCount; i++) {
-          // 앞에 마지막 노드 복사하기
-          itemContainer.prepend(itemContainer.children[itemContainer.children.length - i - 1].cloneNode(true));
+        itemContainer.style.transform = `translateY(${slideDistance}px)`;
 
-          slideDistance = imgSize * slideCount;
-        }
-      } else {
-        for (let i = 0; i < slideCount; i++) {
-          itemContainer.appendChild(itemContainer.children[i].cloneNode(true));
-          slideDistance = -imgSize * slideCount;
-        }
+        break;
       }
-      itemContainer.style.transform = `translateY(${slideDistance}px)`;
+      default: {
+        imgSize = imgItemWidth;
+        itemContainer.style.transitionDuration = '2s';
+        slideDistance = imgSize * slideCount;
+        // DOM에 클론 노드를 먼저 추가
+
+        if (type === 'prev') {
+          // 이전 버튼 클릭
+          // 앞에 마지막 노드 복사하기
+          console.log('t', itemContainer.children.length, visibleCount);
+          itemContainer.style.transform = `translateX(${slideDistance}px)`;
+          for (let i = 0; i < slideCount; i++) {
+            itemContainer.prepend(itemContainer.children[itemContainer.children.length - i - 1].cloneNode(true));
+          }
+        } else {
+          slideDistance = -slideDistance;
+          itemContainer.style.transform = `translateX(${slideDistance}px)`;
+          for (let i = 0; i < slideCount; i++) {
+            itemContainer.appendChild(itemContainer.children[i].cloneNode(true));
+          }
+        }
+
+        console.log('default', type, slideDistance);
+
+        break;
+      }
     }
 
-    setTimeout(() => {
+    itemContainer.ontransitionend = () => {
       handleTransitionEnd(type);
-    }, 0);
+    };
   }
 
   // NOTE: 화면 이동 및 CSS 초기화
   function handleTransitionEnd(type: 'prev' | 'next') {
+    itemContainer.style.removeProperty('transition-duration');
     if (buttonPos === 'horizontal') {
-      // 버튼 위치가 좌우일 때
-      if (type === 'prev') {
-        // 이전 버튼 클릭 이후 마무리 단계
-        for (let i = 0; i < slideCount; i++) {
+      for (let i = 0; i < slideCount; i++) {
+        // 버튼 위치가 좌우일 때
+        if (type === 'prev') {
+          // 이전 버튼 클릭 이후 마무리 단계
           itemContainer.lastChild?.remove(); // 첫 번째 자식을 삭제
-        }
-      } else {
-        // 다음 버튼 클릭 이후 마무리 단계
-        for (let i = 0; i < slideCount; i++) {
+        } else {
+          // 다음 버튼 클릭 이후 마무리 단계
           itemContainer.firstChild?.remove(); // 첫 번째 자식을 삭제
         }
       }
       itemContainer.style.transform = 'translateX(0)';
+      console.log('transform', itemContainer.style.transform);
     } else {
-      // 버튼 위치가 상하일 때
-      if (type === 'prev') {
-        // 이전 버튼 클릭 이후 마무리 단계
-        for (let i = 0; i < slideCount; i++) {
+      console.log(type);
+      for (let i = 0; i < slideCount; i++) {
+        // 버튼 위치가 상하일 때
+        if (type === 'prev') {
+          // 이전 버튼 클릭 이후 마무리 단계
           itemContainer.lastChild?.remove(); // 첫 번째 자식을 삭제
-        }
-      } else {
-        // 다음 버튼 클릭 이후 마무리 단계
-        for (let i = 0; i < slideCount; i++) {
+        } else {
+          console.log(type);
+          // 다음 버튼 클릭 이후 마무리 단계
           itemContainer.firstChild?.remove(); // 첫 번째 자식을 삭제
         }
       }
