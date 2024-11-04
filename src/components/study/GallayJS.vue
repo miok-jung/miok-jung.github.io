@@ -22,84 +22,67 @@ type typeBall = {
 // NOTE: life-cycle
 onMounted(() => {
   const canvas = document.createElement('canvas');
-  const size = 720;
-  canvas.width = size * window.devicePixelRatio;
-  canvas.height = size * window.devicePixelRatio;
-  canvas.style.width = size + 'px';
-  canvas.style.height = size + 'px';
+  const width = 720;
+  const height = 250;
+  canvas.width = width * window.devicePixelRatio;
+  canvas.height = height * window.devicePixelRatio;
+  canvas.style.width = width + 'px';
+  canvas.style.height = height + 'px';
   if (canvasRef.value) canvasRef.value.appendChild(canvas);
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
     ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    ctx.fillRect(0, 0, width, height);
 
-    const gravity = 0.5; // 중력 설정, 움직이기 위한 가중치 설정
-    const bounceFactor = 0.7; // 바닥에 다으면 튕길 반발력 설정
+    const audio = new Audio(); // document.createElement('audio'); 와 동일한 방식
+    audio.src = '/src/assets/study/audio/01.mp3';
+    // audio.onloadeddata = () => {
+    //   audio.play();
+    // };
 
-    const balls = ref<typeBall[]>([]);
-    const ball = ref<typeBall>();
-    let handle = 0;
-
-    // NOTE: 랜덤칼라 뽑기
-    function getRandomColor() {
-      let letters = '0123456789ABCDEF';
-      let color = '#';
-      for (let i = 0; i < 6; ++i) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
-    }
-    function getRandomSize(min: number, max: number) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    canvas.onclick = (event) => {
-      // 공모양 그리기
-      ball.value = {
-        x: 0,
-        y: 0,
-        radius: getRandomSize(20, 50),
-        color: getRandomColor(),
-        velocity: 0,
-      };
-      // 클릭한 위치에
-      ball.value.x = event.offsetX;
-      ball.value.y = event.offsetY;
-      ball.value.velocity = 0; // 속도 초기화
-      balls.value.push(ball.value); //클릭을 할 때 마다 여러 볼 추가 업데이트
-      cancelAnimationFrame(handle); // requestAnimationFrame실행 전에 실행하여 애니메이션 프레임 요청을 취소한다.
-      update();
+    canvas.onclick = () => {
+      audio.play();
+      const analyser = connectAudio();
+      draw(analyser);
     };
-    function update() {
-      handle = requestAnimationFrame(update); // 반복 작업
-      if (ctx && ball.value) {
-        ctx.clearRect(0, 0, size, size); // 이전에 그리던 중복된 이미지는 제거(마치 움직이는 것 처럼 보이도록 제거)
-      }
 
-      balls.value.forEach((ball: typeBall) => {
-        if (!ball.x && !ball.y) return; // x, y가 없을 때에는 그리지 않기
-
-        if (ctx === null) throw new Error('ctx Error Null');
-        ctx.fillStyle = ball.color;
-        ball.velocity += gravity; // 속도값은 계속 중력이 증가
-        ball.y += ball.velocity; // 그만큼 속도 값을 Y좌표에 증가 표시
-
-        // 탱탱볼 튕기기 애니메이션 효과
-        if (ball.y + ball.radius > size) {
-          ball.y = size - ball.radius;
-          ball.velocity = -ball.velocity * bounceFactor;
-        }
-
-        drawtypeBall(ball); // 실행
-      });
+    function connectAudio() {
+      // window.webkitAudioContext의 경우 구 버전 Safari까지 지원을 하는게 아니라면 굳이 필요가 없음
+      const audioContext = new window.AudioContext();
+      const audioSource = audioContext.createMediaElementSource(audio);
+      const analyser = audioContext.createAnalyser();
+      analyser.fftSize = 256;
+      audioSource.connect(analyser);
+      analyser.connect(audioContext.destination);
+      return analyser;
     }
-    function drawtypeBall(ball: typeBall) {
-      if (ctx) {
-        ctx.beginPath();
-        ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.stroke();
+
+    function draw(analyser: AnalyserNode) {
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      analyser.getByteFrequencyData(dataArray);
+
+      if (ctx === null) throw new Error('ctx New Error Audio');
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillRect(0, 0, width, height);
+
+      const barWidth = (width / bufferLength) * 2;
+      let barHeight = 0;
+      let x = 0;
+
+      ctx?.save(); // ctx.restore(); -> 기존에 있던 설정 값들을 stact에 담는다?
+      for (let i = 0; i < bufferLength; i++) {
+        barHeight = dataArray[i];
+
+        if (ctx === null) throw new Error('ctx New Error Audio');
+        ctx.fillStyle = '#55b';
+        ctx.fillRect(x, height - barHeight, barWidth, barHeight);
+        x += barWidth;
       }
+
+      ctx?.restore();
+      requestAnimationFrame(() => draw(analyser));
     }
   }
 });
