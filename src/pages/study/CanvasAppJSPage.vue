@@ -1,11 +1,11 @@
 <template>
-  <q-page :style-fn="gallayjsStyle">
-    <GallayJS />
+  <q-page :style-fn="canvasJsStyle">
+    <CanvasJS />
   </q-page>
 </template>
 
 <script setup lang="ts">
-import GallayJS from 'src/components/study/GallayJS.vue';
+import CanvasJS from 'src/components/study/CanvasJS.vue';
 
 const props = withDefaults(
   defineProps<{
@@ -16,7 +16,7 @@ const props = withDefaults(
   }
 );
 
-function gallayjsStyle(offset: number) {
+function canvasJsStyle(offset: number) {
   return {
     minHeight: offset ? `calc(100vh - ${offset}px)` : '100vh',
     width: props.openSidebar ? 'calc(100vw - 300px)' : '100vw',

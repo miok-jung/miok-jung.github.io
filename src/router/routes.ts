@@ -85,11 +85,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/study/CarouselJsPage.vue'),
       },
       {
-        path: 'gallayjs',
+        path: 'canvasjs',
         meta: {
           title: 'study: Canvas',
         },
-        component: () => import('pages/study/GallayAppJSPage.vue'),
+        component: () => import('pages/study/CanvasAppJSPage.vue'),
       },
       {
         path: 'shop',
