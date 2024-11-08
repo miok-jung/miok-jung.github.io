@@ -68,10 +68,10 @@ const Sidebars: SideBar[] = [
     link: '/study/carouseljs',
   },
   {
-    title: 'GallayApp JS',
+    title: 'Canvas JS',
     caption: 'Study Canvas & Vidie & Audio',
     icon: 'mdi-artboard',
-    link: '/study/gallayjs',
+    link: '/study/canvasjs',
   },
   {
     title: 'shop JS',
