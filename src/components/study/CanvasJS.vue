@@ -8,7 +8,7 @@
     <div ref="canvasRef" />
     <div ref="textCanvasRef" />
     <div ref="imageCanvasRef" />
-    <div ref="videoRef" />
+    <div ref="videoCanvasRef" />
   </div>
   <p class="text-h3">getContext Type: webgl</p>
   <p class="text-body1">
@@ -33,7 +33,7 @@ import dummy from 'assets/dummy/data/dummy.json';
 const canvasRef = ref<HTMLElement | undefined>(undefined);
 const textCanvasRef = ref<HTMLElement | undefined>(undefined);
 const imageCanvasRef = ref<HTMLElement | undefined>(undefined);
-const videoRef = ref<HTMLElement | undefined>(undefined);
+const videoCanvasRef = ref<HTMLElement | undefined>(undefined);
 
 type typeBall = {
   x: number;
@@ -140,13 +140,50 @@ onMounted(() => {
     ctx3.fillStyle = '#090707';
     ctx3.fillRect(0, 0, canvas3.width, canvas3.height);
     const img = document.createElement('img');
-    // if (imageCanvasRef.value) imageCanvasRef.value.appendChild(img);
+    if (imageCanvasRef.value) imageCanvasRef.value.appendChild(img);
     // canvas가 아닌 따른곳에 표기가 됨
     // NOTE: imageCanvasRef.value에 직접 추가가 되며, DOM에 별도로 표시가 된다.
-    img.src = 'https://picsum.photos/1500/1500';
+    // img.src = 'https://picsum.photos/1500/720';
     img.onload = () => {
-      ctx3.drawImage(img, 0, 0);
+      ctx3.drawImage(img, 10, 100);
     };
+  }
+  // !SECTION
+  // SECTION 네번째 연습 Video
+  const canvas4 = document.createElement('canvas');
+  canvas4.width = width * window.devicePixelRatio;
+  canvas4.height = height * window.devicePixelRatio;
+  canvas4.style.width = width + 'px';
+  canvas4.style.height = height + 'px';
+  if (videoCanvasRef.value) videoCanvasRef.value.appendChild(canvas4);
+  const ctx4 = canvas4.getContext('2d');
+  if (ctx4) {
+    ctx4.strokeStyle = '#000';
+    ctx4.lineWidth = 2;
+    ctx4.fillStyle = '#aaa';
+    ctx4.fillRect(3, 3, canvas4.width - 6, canvas4.height - 6);
+    ctx4.strokeRect(0, 0, canvas4.width, canvas4.height);
+
+    const video = document.createElement('video');
+    videoCanvasRef.value?.appendChild(video);
+
+    video.onload = () => {
+      video.src = '/src/assets/study/videos/01.mp4';
+    };
+    video.onloadeddata = () => {
+      video.autoplay = true;
+      video.playsInline = true;
+      video.loop = true;
+      video.muted = true;
+
+      videoDraw();
+    };
+    function videoDraw() {
+      setTimeout(() => {
+        ctx4?.drawImage(video, 100, 100, 200, 200);
+        videoDraw();
+      }, 1000 / 10);
+    }
   }
 
   // !SECTION
