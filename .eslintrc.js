@@ -85,5 +85,13 @@ module.exports = {
     // allow debugger during development only
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'vue/multi-word-component-names': 'off',
+
+    // NOTE: 타입 가져오기 ESLint 규칙 강제 부여 -> 가독성, 유지보수를 높일 수 있다.
+    // prefer: 'type-imports': 타입 전용으로 사용시 import type을 강제로 사용한다.
+    // 이 규칙으로 인한 장점은 아래와 같다.
+    // 1. 이로인하여 런타임 성능 최적화로 코드 크기를 줄일 수 있다.
+    // 2. 코드의 명확성으로 가독성이 향상이 된다.
+    // 3. 대형 프로젝트에서는 일관성을 유지할 수 있다.
+    '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
   },
 };
