@@ -1,29 +1,38 @@
 # Start Date / Last Update Date
 
-Norvember 07. 2024 ~ October 07. 2024
+September 01. 2024 / December 10. 2024
+
+- 그 외
+
+  - quasar, vue, node, typescript 24년 12월 10일자에 최신 버전으로 업데이트 완료
 
 - Study Page
+
   - Canvas에 대한 공부 및 정리 업데이트
   - Carousel JS 모듈화 스크립트 생성 및 업데이트
   - Lottie 라이브러리 테스트 해보기 (회사 프로젝트 로딩파일을 위한 준비 작업을 위한 테스트)
   - Vanilla JavaScript만으로 TODO List 만들기 (vue 확장자 파일이지만, 내부는 오직 JavaScript + Type으로만 진행)
   - Three.js 기본 정육면제 스터디 업데이트
   - Layout Publising
+
 - Main Page
+  - Editor 커스텀 및 개발이 목표
+    - 현재 Boot 사용 및 컴포넌트 전체 default 전체
   - Layout Publishing (Theme, I18N 등)
   - 간단한 계산기 퍼블리싱
 - Github Actions 자동배포 완료
 
 # 브랜치 규칙
 
-- 브랜치는 크게 한가지 단어로 정의한다.
-- 현재는 main, dev, study 이렇게 3가지로 나누려고 한다.
+- 브랜치는 크게 알기 쉽게 1 ~ 2개의 단어로 정의한다.
+- 현재는 main, dev, study, custom-editor 이렇게 4가지로 나뉜다.
 
 ## 각 브랜치별 정의
 
 - main: Github Actions로 현재 서비스 되고 있는 페이지다.
 - dev: 나머지 branch에서 작업한 것들을 locale에서 테스트를 한 후 업데이트를 진행한다.
 - study: 각종 영상이나 다른 매체를 통해서 스터디 혹은 테스트를 하게 되는 경우, 작업물을 기록하기 위해 남긴다.
+- custom-editor: 에디터를 직접 만들기 위해서 만든 브랜치이다.
 
 # 커밋 규칙
 
@@ -50,3 +59,8 @@ Norvember 07. 2024 ~ October 07. 2024
 - refactor: 코드 리팩토링에 대한 커밋
 - test: 테스트 코드 수정에 대한 커밋
 - perf: 성능 개선에 대한 커밋
+
+### 올리기 전 최종적으로 확인할 사항리스트
+
+- 보안취약점 테스트
+  $ npm audit
