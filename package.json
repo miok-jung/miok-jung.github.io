@@ -1,6 +1,7 @@
 {
   "name": "miok-jung-github-io",
   "version": "0.0.1",
+  "type": "module",
   "description": "A Quasar Project",
   "productName": "Quasar App",
   "author": "miok-jung <miok.dev@gmail.com>",
@@ -8,7 +9,7 @@
   "scripts": {
     "dev": "quasar dev",
     "build": "quasar build",
-    "lint": "eslint --ext .js,.ts,.vue ./",
+    "lint": "eslint -c ./eslint.config.js \"./src*/**/*.{ts,js,cjs,mjs,vue}\"",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0"
   },
@@ -16,17 +17,20 @@
     "@lottiefiles/dotlottie-vue": "^0.4.15",
     "@quasar/extras": "^1.16.15",
     "axios": "^1.2.1",
+    "esbuild": "^0.24.0",
+    "jiti": "^2.4.1",
     "pinia": "^2.0.11",
     "quasar": "^2.6.0",
     "three": "^0.169.0",
+    "tsx": "^4.19.2",
     "vue": "^3.5.13",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.0.0"
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^3.3.1",
-    "@quasar/app-vite": "^1.0.0",
-    "@types/node": "^12.20.21",
+    "@quasar/app-vite": "^2.0.0",
+    "@types/node": "^12.20.55",
     "@types/three": "^0.168.0",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
@@ -35,11 +39,14 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^9.0.0",
     "prettier": "^2.5.1",
-    "typescript": "^4.5.4"
+    "typescript": "^5.7.2"
   },
   "engines": {
-    "node": "^18 || ^16 || ^14.19",
+    "node": "^22 || ^18 || ^16 || ^14.19",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
+  },
+  "overrides": {
+    "@jridgewell/genmapping": "0.3.5"
   }
 }

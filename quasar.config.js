@@ -8,10 +8,16 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
-const { configure } = require('quasar/wrappers');
-const path = require('path');
+import { defineConfig } from '#q-app/wrappers';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
 
-module.exports = configure(function (/* ctx */) {
+// fileURLToPath는 file:// URL을 경로로 변환하는 함수입니다. 이 함수를 사용하려면 url 모듈을 제대로 import하고 사용해야 합니다.
+
+const __filename = fileURLToPath(import.meta.url); // import.meta.url로 현재 파일의 URL을 가져옵니다.
+const __dirname = dirname(__filename); // 경로를 추출합니다.
+
+export default defineConfig((ctx) => {
   return {
     eslint: {
       // fix: true,
@@ -34,22 +40,23 @@ module.exports = configure(function (/* ctx */) {
     css: ['app.scss'],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
-    extras: [
-      'mdi-v7',
-      // 'themify',
-      // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
-      'material-icons',
-      'roboto-font', // optional, you are not bound to it
-    ],
+    extras: ['mdi-v7', 'material-icons', 'roboto-font'],
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
     build: {
+      typescript: {
+        tsChecker: true, // TypeScript 타입 체크 활성화
+        typeCheck: true, // 런타임에서 타입 검사
+      },
+      alias: {
+        '@': resolve(__dirname, 'src'),
+      },
       target: {
         browser: ['es2019', 'edge88', 'firefox78', 'chrome87', 'safari13.1'],
-        node: 'node16',
+        node: 'node22',
       },
 
-      vueRouterMode: 'history', // available values: 'hash', 'history'
+      vueRouterMode: 'history',
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
@@ -72,20 +79,15 @@ module.exports = configure(function (/* ctx */) {
 
       vitePlugins: [
         [
-          '@intlify/vite-plugin-vue-i18n',
+          '@intlify/unplugin-vue-i18n/vite',
           {
-            // if you want to use Vue I18n Legacy API, you need to set `compositionOnly: false`
-            // compositionOnly: false,
-
-            // if you want to use named tokens in your Vue I18n messages, such as 'Hello {name}',
-            // you need to set `runtimeOnly: false`
-            // runtimeOnly: false,
-
-            // you need to set i18n resource including paths !
-            include: path.resolve(__dirname, './src/i18n/**'),
+            include: [fileURLToPath(new URL('./src/i18n', import.meta.url))],
+            ssr: ctx.modeName === 'ssr',
           },
         ],
       ],
+      endFolder: './',
+      endFiles: [],
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
@@ -98,8 +100,8 @@ module.exports = configure(function (/* ctx */) {
     framework: {
       config: {},
 
-      // iconSet: 'material-icons', // Quasar icon set
-      // lang: 'en-US', // Quasar language pack
+      iconSet: 'mdi-v7',
+      lang: 'ko-KR',
 
       // For special cases outside of where the auto-import strategy can have an impact
       // (like functional components as one of the examples),
