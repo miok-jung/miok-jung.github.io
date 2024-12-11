@@ -2,9 +2,14 @@
 
 September 01. 2024 / December 10. 2024
 
-- 그 외
+- Main Page
 
-  - quasar, vue, node, typescript 24년 12월 10일자에 최신 버전으로 업데이트 완료
+  - Editor 커스텀 및 개발이 목표
+    - 현재 Boot 사용 및 컴포넌트 전체 default 전체
+  - Layout Publishing (Theme, I18N 등)
+  - 간단한 계산기 퍼블리싱
+
+- Github Actions 자동배포 완료
 
 - Study Page
 
@@ -15,12 +20,10 @@ September 01. 2024 / December 10. 2024
   - Three.js 기본 정육면제 스터디 업데이트
   - Layout Publising
 
-- Main Page
-  - Editor 커스텀 및 개발이 목표
-    - 현재 Boot 사용 및 컴포넌트 전체 default 전체
-  - Layout Publishing (Theme, I18N 등)
-  - 간단한 계산기 퍼블리싱
-- Github Actions 자동배포 완료
+- 그 외 이야기
+
+  - quasar, vue, node, typescript 24년 12월 10일자에 최신 버전으로 업데이트 완료
+  - 24. 12. 10 기준으로 jridgewell/genmapping 버전 이슈로 인해서 overrides 작업으로 버전 업데이트 다소 지연되는 현상 발생 - 다행이도 빠른 대처 및 해결방안을 알려주신 분들에 의해 해결을 함 -> 그리고 바로 다운그레이 됨
 
 # 브랜치 규칙
 
