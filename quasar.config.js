@@ -11,12 +11,10 @@
 import { defineConfig } from '#q-app/wrappers';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
-
 // fileURLToPath는 file:// URL을 경로로 변환하는 함수입니다. 이 함수를 사용하려면 url 모듈을 제대로 import하고 사용해야 합니다.
 
 const __filename = fileURLToPath(import.meta.url); // import.meta.url로 현재 파일의 URL을 가져옵니다.
 const __dirname = dirname(__filename); // 경로를 추출합니다.
-
 export default defineConfig((ctx) => {
   return {
     eslint: {
@@ -47,9 +45,6 @@ export default defineConfig((ctx) => {
       typescript: {
         tsChecker: true, // TypeScript 타입 체크 활성화
         typeCheck: true, // 런타임에서 타입 검사
-      },
-      alias: {
-        '@': resolve(__dirname, 'src'),
       },
       target: {
         browser: ['es2019', 'edge88', 'firefox78', 'chrome87', 'safari13.1'],
