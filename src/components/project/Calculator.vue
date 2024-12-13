@@ -1,19 +1,10 @@
 <template>
   <q-card-section style="width: 50%">
     <div>
-      <q-input
-        class="q-mb-md text-right"
-        v-model="calculateValue"
-        :label="calculateLabel"
-        input-class="text-right"
-        borderless
-        disable
-        filled
-        readonly
-        square
-      >
-        <template #default> </template>
-      </q-input>
+      <div class="calculation-area-wrap">
+        <p class="calculation-process">{{ calculateProcess }}</p>
+        <p class="calculation-result">{{ calcurateResult }}</p>
+      </div>
 
       <div class="row q-gutter-x-sm q-mb-sm">
         <!-- NOTE: 백분율 -->
@@ -21,7 +12,7 @@
         <q-btn class="col" />
         <!-- <q-btn class="col" label="&#37;" />
         <q-btn class="col" label="CE" /> -->
-        <q-btn class="col" label="C" @keydown="onKeyDown" @click="onClicEscape">
+        <q-btn class="col" label="C" @click="onClicEscape">
           <q-tooltip>현재 계산 결과를 지우며, 단축키는 Esc이다.</q-tooltip>
         </q-btn>
         <q-btn class="col" />
@@ -70,11 +61,11 @@
         <q-btn class="col" />
         <q-btn class="col" />
         <q-btn class="col" />
-        <q-btn class="col" />
+        <q-btn class="col" label="=" @click="onClickResult" />
         <!-- <q-btn class="col" label="+/-" />
         <q-btn class="col" label="0" />
         <q-btn class="col" label="." />
-        <q-btn class="col" label="=" /> -->
+         -->
       </div>
       <q-resize-observer :debounce="300" @resize="onResizeCardSection" />
     </div>
@@ -82,25 +73,36 @@
 </template>
 
 <script setup lang="ts">
-import { Resize } from 'src/type';
-import { ref } from 'vue';
+import type { Resize } from 'src/type';
+import { onMounted, ref } from 'vue';
 
 const emit = defineEmits(['update-card-section-size']); // 이벤트 정의
 
-const calculateValue = ref<string>('');
+const calculateProcess = ref<string>('');
+const calcurateResult = ref<string>('');
 const calculateArr = ref<(string | number)[]>([]);
-const calculateLabel = ref<string>('');
 function onClickNumber(num: string) {
-  calculateValue.value = calculateValue.value + num;
+  calcurateResult.value = calcurateResult.value + num;
 }
+
+// SECTION: 클릭 이벤트
+function onClicEscape() {
+  calcurateResult.value = '';
+  calculateProcess.value = '';
+}
+function onClickResult() {
+  calculateProcess.value = calcurateResult.value + ' =';
+}
+// !SECTION 클릭 이벤트 종료
+
 function onCLickOperation(type: 'add' | 'subtract' | 'multiply' | 'divide') {
   // 더하다 | 빼다 | 곱하다 | 나누다
   switch (type) {
     case 'add': {
-      let beforeNumber = parseInt(calculateValue.value);
+      let beforeNumber = parseInt(calculateProcess.value);
       calculateArr.value.push(beforeNumber);
       calculateArr.value.push('+');
-      calculateLabel.value = calculateValue.value + ' + ';
+      calculateProcess.value = calculateProcess.value + ' + ';
       console.log('add: ', calculateArr.value);
       break;
     }
@@ -119,18 +121,6 @@ function onCLickOperation(type: 'add' | 'subtract' | 'multiply' | 'divide') {
   }
 }
 
-// NOTE: 키보드 이벤트
-// NOTE: 1. ESC 취소 이벤트
-function onClicEscape() {
-  console.log('Escape');
-}
-function onKeyDown(event: Event) {
-  if (event.key === 'Escape') {
-  }
-  console.log('key', event);
-  //   1. 숫자를 입력시 숫자가 입력이 되어야 한다.
-}
-
 // SECTION
 const cardSectionSize = ref<Resize>({ width: 0, height: 0 });
 function onResizeCardSection(size: Resize) {
@@ -138,5 +128,35 @@ function onResizeCardSection(size: Resize) {
   emit('update-card-section-size', size); // 부모로 데이터 전달
 }
 // !SECTION
+
+// NOTE: life-cycle
+onMounted(() => {
+  //
+});
 </script>
-d
+<style lang="scss" scoped>
+div.calculation-area-wrap {
+  height: 100px;
+  margin-bottom: 20px;
+  background: rgba($color: #000000, $alpha: 0.02);
+  p.calculation-process {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 0 8px;
+    height: calc(40% - 8px);
+    background: rgba($color: #000000, $alpha: 0.02);
+  }
+  p.calculation-result {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 0 8px;
+    height: calc(60% - 8px);
+    font-size: 2rem;
+    line-height: 2rem;
+    background: rgba($color: #000000, $alpha: 0.02);
+  }
+}
+</style>
