@@ -6,7 +6,14 @@ body {
     'Segoe UI Symbol', sans-serif;
 }
 body,
-ul {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+hr {
   margin: 0;
   padding: 0;
 }
@@ -19,14 +26,3 @@ p {
 img {
   width: 100%;
 }
-// SECTION: JS SCSS 기본 스타일 설정
-button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    background: #ccc;
-    color: white;
-  }
-}
-// !SECTION
