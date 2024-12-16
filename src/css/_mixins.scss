@@ -1,0 +1,12 @@
+// Horizontal Rulr
+@mixin hr($width, $style, $color) {
+  border-top: $width $style $color;
+  border-radius: calc($width / 2);
+}
+
+// Vertical Rulr
+@mixin vr($width, $style, $color) {
+  height: auto;
+  border-right: $width $style $color;
+  border-radius: calc($width / 2);
+}
