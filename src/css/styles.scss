@@ -1,0 +1,20 @@
+@import 'src/css/_mixins.scss';
+
+.hr-1px-solid-grey-5 {
+  @include hr(1px, solid, $grey-5);
+}
+.hr-1px-dashed-grey-5 {
+  @include hr(1px, dashed, $grey-5);
+}
+.hr-p1x-dotted-grey-5 {
+  @include hr(1px, dotted, $grey-5);
+}
+.vr-1px-solid-grey-5 {
+  @include vr(1px, solid, $grey-5);
+}
+.vr-1px-dashed-grey-5 {
+  @include vr(1px, dashed, $grey-5);
+}
+.vr-1px-dotted-grey-5 {
+  @include vr(1px, dotted, $grey-5);
+}
