@@ -1,6 +1,6 @@
 <template>
   <q-page :style-fn="editorWrapStyle">
-    <EditForm />
+    <EditForm type="classic" />
   </q-page>
 </template>
 

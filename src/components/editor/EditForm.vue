@@ -3,8 +3,6 @@
     <Files />
     <q-separator />
     <Toolbar />
-    <q-separator />
-    <textarea />
   </div>
 </template>
 
