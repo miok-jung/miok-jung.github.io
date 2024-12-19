@@ -20,6 +20,13 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/CalculatorPage.vue'),
       },
       {
+        path: '/editor',
+        meta: {
+          title: 'Custom Editor',
+        },
+        component: () => import('pages/EditorPage.vue'),
+      },
+      {
         path: '/data',
         children: [
           {
