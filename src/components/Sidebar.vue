@@ -4,7 +4,7 @@
       <q-item-label header>PortFolio List</q-item-label>
       <template v-for="item in Sidebars" :key="item.title">
         <q-item
-          :active="selectLink === item.link && selectLink === $route.fullPath"
+          :active="selectLink === item.link && selectLink === route.fullPath"
           @click="selectLink = item.link"
           :to="item.link"
           active-class="active-link"
@@ -26,6 +26,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { SideBar } from './type';
+import { useRoute } from 'vue-router';
 
 const props = withDefaults(
   defineProps<{
@@ -35,6 +36,7 @@ const props = withDefaults(
     showLeftDrawer: true,
   }
 );
+const route = useRoute();
 
 const Sidebars: SideBar[] = [
   {
@@ -48,6 +50,12 @@ const Sidebars: SideBar[] = [
     caption: 'The Simple Calculator',
     icon: 'mdi-calculator-variant-outline',
     link: '/calculator',
+  },
+  {
+    title: '에디터',
+    caption: 'Custom Editor',
+    icon: 'mdi-note-edit-outline',
+    link: '/editor',
   },
   {
     title: '정보',
