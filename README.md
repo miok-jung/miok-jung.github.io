@@ -1,6 +1,6 @@
 # Start Date / Last Update Date
 
-September 01. 2024 / December 10. 2024
+September 01. 2024 / December 16. 2024
 
 - Main Page
 
@@ -28,14 +28,15 @@ September 01. 2024 / December 10. 2024
 # 브랜치 규칙
 
 - 브랜치는 크게 알기 쉽게 1 ~ 2개의 단어로 정의한다.
-- 현재는 main, dev, study, custom-editor 이렇게 4가지로 나뉜다.
+- 현재는 main, dev, portfolio, study, custom-editor 이렇게 4가지로 나뉜다.
 
 ## 각 브랜치별 정의
 
-- main: Github Actions로 현재 서비스 되고 있는 페이지다.
-- dev: 나머지 branch에서 작업한 것들을 locale에서 테스트를 한 후 업데이트를 진행한다.
-- study: 각종 영상이나 다른 매체를 통해서 스터디 혹은 테스트를 하게 되는 경우, 작업물을 기록하기 위해 남긴다.
-- custom-editor: 에디터를 직접 만들기 위해서 만든 브랜치이다.
+- main: 최종 main branch로 dev의 오류가 없다면 그대로 올라갈 예정이다.
+- dev: 각 branch별로 작업한 것을 merge를 하여 locale에서 확인이 완료가 된 branch를 말한다.
+- portfolio: 필자와 관련된 내용 혹은, 전체적인 화면에 관련된 작업위주로 진행된다.
+- study: 각종 다른 공부매체를 통해서 배우게 되면 해당 내용과 비슷하거나, 더 업그레이드가 되어 작업물을 진행한다.
+- custom-editor: Editor 관련 제작을 한다.
 
 # 커밋 규칙
 
@@ -62,8 +63,37 @@ September 01. 2024 / December 10. 2024
 - refactor: 코드 리팩토링에 대한 커밋
 - test: 테스트 코드 수정에 대한 커밋
 - perf: 성능 개선에 대한 커밋
+  <br /><br />
+
+```bash
+<타입>(옵션: 범위): <커밋 메시지 제목>
+<빈 줄>
+<커밋 메시지 본문 (선택사항)>
+<빈 줄>
+<커밋 메시지 바닥글 (선택사항)>
+
+style(header): update header layout styling
+
+- Changed header background color to match new design.
+- Updated padding for better spacing.
+```
 
 ### 올리기 전 최종적으로 확인할 사항리스트
 
 - 보안취약점 테스트
   $ npm audit
+
+#### 그 외 알아두면 좋은 QUASAR TIP
+
+##### 폴더 절대경로 (Folder aliases: 폴더 별칭)
+
+| 절대경로명 | 실제경로                   |
+| ---------- | -------------------------- |
+| src        | /src                       |
+| app        | /                          |
+| components | /src/components            |
+| layouts    | /src/layouts               |
+| pages      | /src/pages                 |
+| assets     | /src/assets                |
+| boot       | /src/boot                  |
+| stores     | /src/stores (Pinia stores) |
