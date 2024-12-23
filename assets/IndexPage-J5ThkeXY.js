@@ -1,1 +1,0 @@
-import{Q as a}from"./QPage-DYN47BL_.js";import{d as r,n as o,p as s,v as p,x as i}from"./index--EMNpieo.js";import"./render-m_m1JMnt.js";const l=r({__name:"IndexPage",setup(m){function n(e){return{minHeight:e?`calc(100vh - ${e}px)`:"100vh"}}return(e,t)=>(o(),s(a,{"style-fn":n},{default:p(()=>t[0]||(t[0]=[i("스터디 관련 페이지")])),_:1}))}});export{l as default};

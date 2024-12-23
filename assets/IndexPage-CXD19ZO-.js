@@ -1,0 +1,1 @@
+import{Q as n}from"./QPage-D-FSqAll.js";import{e as o,o as r,j as s,w as p,l as i}from"./index-CfT0Nrtt.js";import"./render-_hThe7xn.js";const _=o({__name:"IndexPage",setup(m){function a(e){return{minHeight:e?`calc(100vh - ${e}px)`:"100vh"}}return(e,t)=>(r(),s(n,{"style-fn":a},{default:p(()=>t[0]||(t[0]=[i("스터디 관련 페이지")])),_:1}))}});export{_ as default};
