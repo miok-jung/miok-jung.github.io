@@ -6,6 +6,18 @@
         <q-toolbar-title> Miok, Jung. PortFolio </q-toolbar-title>
         <div class="row items-center">
           <q-select
+            v-model="language"
+            :options="languageOptions"
+            label="Quasar Language"
+            style="min-width: 150px"
+            @update:model-value="onUpdateChangeLanguage"
+            dense
+            borderless
+            emit-value
+            map-options
+            options-dense
+          />
+          <q-select
             v-model="selectTheme"
             :options="themeOptions"
             @update:model-value="onUpdateChangeTheme"
@@ -33,9 +45,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { colors, date, QSelect, QSelectOption, setCssVar, useQuasar } from 'quasar';
+import { useUserStore } from 'stores/user';
 import Sidebar from 'src/components/Sidebar.vue';
 
 const $q = useQuasar();
+const us = useUserStore();
 const { getPaletteColor } = colors;
 
 // NOTE: 왼쪽 사이드바 토글
@@ -45,6 +59,26 @@ function toggleLeftDrawer() {
 }
 
 // SECTION HEADER RIGHT
+// NOTE: Language
+const languageOptions = [
+  {
+    label: '한국어',
+    value: 'ko-KR',
+  },
+  {
+    label: 'English',
+    value: 'en-US',
+  },
+  {
+    label: '日本語',
+    value: 'ja',
+  },
+];
+const language = ref<QSelectOption>(languageOptions[0]);
+function onUpdateChangeLanguage(value: string) {
+  us.updateLocale(value);
+}
+
 // NOTE: theme primary 설정
 const today = date.formatDate(Date.now(), 'YYYY. MM. DD');
 const themeOptions: QSelectOption[] = [
