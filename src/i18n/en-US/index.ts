@@ -1,7 +1,12 @@
-// This is just an example,
-// so you can safely delete all default props below
-
 export default {
-  failed: 'Action failed',
-  success: 'Action was successful'
+  command: {
+    title: '',
+    failed: 'Failed',
+    success: 'Success',
+  },
+  editor: {
+    toolbar: {
+      header: 'Title',
+    },
+  },
 };
