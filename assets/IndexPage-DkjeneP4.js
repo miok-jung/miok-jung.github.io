@@ -1,0 +1,1 @@
+import{Q as n}from"./QPage-BxEEKaaN.js";import{e as r,o,j as s,w as i,z as p}from"./index-BfqmbkLt.js";import"./render-DbdArWqF.js";const c=r({__name:"IndexPage",setup(d){function a(e){return{padding:"1rem",minHeight:e?`calc(100vh - ${e}px)`:"100vh"}}return(e,t)=>(o(),s(n,{"style-fn":a},{default:i(()=>t[0]||(t[0]=[p("div",null,"Editor TEST",-1)])),_:1}))}});export{c as default};
