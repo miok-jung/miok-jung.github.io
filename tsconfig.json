@@ -1,10 +1,11 @@
 {
-  "extends": "./.quasar/tsconfig.json",
+  "extends": "./.quasar/tsconfig.json", // 기본 Quasar 설정을 확장
   "compilerOptions": {
-    "esModuleInterop": true,
-    "types": ["node"],
-    "baseUrl": ".",
+    "esModuleInterop": true, // CommonJS <->ㅓ ESM 호환 설정
+    "types": ["node", "quasar"], // Node.js 타입 설정
+    "baseUrl": ".", // 절대 경로 기준 설정
     "paths": {
+      // 경로 별칭 설정
       "components/*": ["src/components/*"],
       "layouts/*": ["src/layouts/*"],
       "pages/*": ["src/pages/*"],
@@ -12,5 +13,7 @@
       "boot/*": ["src/boot/*"],
       "stores/*": ["src/stores/*"]
     }
-  }
+  },
+  // quasar.config.ts가 기본적으로 포함되지 않을 수 있으므로 명시적 추가가 필요
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "quasar.config.ts"]
 }

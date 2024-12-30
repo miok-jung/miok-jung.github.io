@@ -8,14 +8,13 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
-import { defineConfig } from '#q-app/wrappers';
 import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
+import { dirname } from 'path';
 // fileURLToPath는 file:// URL을 경로로 변환하는 함수입니다. 이 함수를 사용하려면 url 모듈을 제대로 import하고 사용해야 합니다.
 
 const __filename = fileURLToPath(import.meta.url); // import.meta.url로 현재 파일의 URL을 가져옵니다.
 const __dirname = dirname(__filename); // 경로를 추출합니다.
-export default defineConfig((ctx) => {
+export default (ctx: { modeName: string }) => {
   return {
     eslint: {
       // fix: true,
@@ -32,7 +31,7 @@ export default defineConfig((ctx) => {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    boot: ['i18n', 'axios'],
+    boot: ['i18n', 'axios', 'default-qbtn'],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: ['app.scss'],
@@ -205,4 +204,4 @@ export default defineConfig((ctx) => {
       // extendBexManifestJson (json) {}
     },
   };
-});
+};
