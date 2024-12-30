@@ -26,9 +26,14 @@
           </q-item>
         </template>
       </q-select>
+      <q-separator class="q-mx-sm" vertical />
+      <q-btn icon="mdi-format-bold" />
+      <q-btn icon="mdi-format-bold" unelevated />
     </div>
     <q-separator />
-    <q-input v-model="editValue" type="textarea" @update:model-value="editUpdate" filled />
+
+    <div style="border: 1px solid red" v-html="editValue" />
+    <textarea v-model="editValue" @update:model-value="editUpdate" />
   </div>
 </template>
 
@@ -78,5 +83,12 @@ function updateHeadingValue(newValue: QSelectOption | null) {
 const editValue = ref<string>('');
 function editUpdate(value: string) {
   console.log('update', value);
+  console.log('heading value: ', headingValue.value);
+  if (headingValue.value) {
+    // 제목 선택 설정
+    editValue.value = `<h${headingValue.value.value}>` + value + `</h${headingValue.value.value}>`;
+  } else {
+    editValue.value = value;
+  }
 }
 </script>
