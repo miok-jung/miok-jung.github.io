@@ -1,0 +1,41 @@
+name: Deploy to GitHub Pages
+run-name: ${{ github.actor }}의 자동배포
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.18.1] # Update to match your local Node.js version
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
+        run: npm run build
+
+      - name: Prevent 404 on SPA Refresh
+        run: cp dist/spa/index.html dist/spa/404.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/spa # 📌 Vue 프로젝트의 빌드 결과 폴더 (dist/spa인지 확인!)
+          publish_branch: gh-pages # default: gh-pages
+          cname: jnarin.com # 📌 사용자 도메인이 맞는지 확인 후 유지 또는 제거
