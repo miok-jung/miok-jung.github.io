@@ -35,7 +35,8 @@ export default route(function (/* { store, ssrContext } */) {
 
   // NOTE: Navigation Guard 전역 가드
   Router.beforeEach((to) => {
-    document.title = `${to.meta.title}` || 'JNarin Portfolio'
+    // 런타임에서 typeof가 object가 될 수 있기 때문에 타입검사가 필요하다.
+    document.title = typeof to.meta.title === 'string' ? `${to.meta.title}` : 'JNarin Portfolio'
   })
 
   return Router
