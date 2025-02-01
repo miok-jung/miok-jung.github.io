@@ -1,7 +1,7 @@
 <template>
   <q-header class="row no-wrap items-center" style="white-space: nowrap" elevated>
     <q-toolbar>
-      <q-btn flat dense round icon="menu" aria-label="Menu" @click="ui.toggleSidebar()" />
+      <q-btn class="left-button" icon="mdi-menu" flat dense round @click="ui.toggleSidebar()" />
       <q-toolbar-title>Miok Jung's Portfolio</q-toolbar-title>
     </q-toolbar>
     <q-select
@@ -13,6 +13,7 @@
       options-dense
     />
     <q-select v-model="language" :options="languageOptions" filled dense options-dense />
+    <q-btn class="right-button" icon="mdi-menu" flat dense round @click="ui.toggleSidebar()" />
   </q-header>
 </template>
 
@@ -51,4 +52,26 @@ const languageOptions: QSelectOption[] = [
 const language = ref<QSelectOption | undefined>(languageOptions[0]);
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+@import '/src/css/mixins.scss';
+
+.q-header {
+  .q-btn.left-button {
+    @include media('sm') {
+      display: none;
+    }
+  }
+  .q-select {
+    @include media('sm') {
+      display: none;
+    }
+  }
+  .q-btn.right-button {
+    display: none;
+    @include media('sm') {
+      display: inline-flex;
+      margin-right: 12px;
+    }
+  }
+}
+</style>

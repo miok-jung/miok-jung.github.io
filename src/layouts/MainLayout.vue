@@ -1,9 +1,16 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <Header />
-    <q-drawer v-model="ui.isSidebarShow" show-if-above bordered>
+    <q-drawer
+      class="relative-position"
+      v-model="ui.isSidebarShow"
+      :width="$q.screen.width <= 768 ? $q.screen.width : 300"
+      show-if-above
+      bordered
+    >
       <q-list>
-        <q-item-label header>Mini Project List</q-item-label>
+        <q-item-label style="height: 50px" header>Mini Project List</q-item-label>
+        <q-btn class="close" icon="mdi-close" @click="ui.$state.isSidebarShow = false" flat round />
         <MainSidebar v-for="link in linksList" :key="link.title" v-bind="link" />
       </q-list>
     </q-drawer>
@@ -17,7 +24,9 @@
 import { useUiStore } from 'src/stores/ui';
 import MainSidebar, { type MainSidebarProps } from 'components/MainSidebar.vue';
 import Header from 'src/components/portfolio/Header.vue';
+import { useQuasar } from 'quasar';
 
+const $q = useQuasar();
 const ui = useUiStore();
 
 const linksList: MainSidebarProps[] = [
@@ -29,3 +38,16 @@ const linksList: MainSidebarProps[] = [
   },
 ];
 </script>
+<style scoped lang="scss">
+@import '/src/css/mixins.scss';
+
+.q-btn.close {
+  display: none;
+  @include media('sm') {
+    display: block;
+    position: absolute;
+    top: 4px;
+    right: 8px;
+  }
+}
+</style>
