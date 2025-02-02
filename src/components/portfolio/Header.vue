@@ -4,52 +4,18 @@
       <q-btn class="left-button" icon="mdi-menu" flat dense round @click="ui.toggleSidebar()" />
       <q-toolbar-title>Miok Jung's Portfolio</q-toolbar-title>
     </q-toolbar>
-    <q-select
-      v-model="themeValue"
-      :options="themeOptions"
-      @update:model-value="changeUpdateTheme"
-      filled
-      dense
-      options-dense
-    />
-    <q-select v-model="language" :options="languageOptions" filled dense options-dense />
+    <MainRightHeader v-if="$q.screen.width > 768" />
     <q-btn class="right-button" icon="mdi-menu" flat dense round @click="ui.toggleSidebar()" />
   </q-header>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useQuasar, type QSelect, type QSelectOption } from 'quasar';
+import { useQuasar } from 'quasar';
 import { useUiStore } from 'src/stores/ui';
+import MainRightHeader from '../MainRightHeader.vue';
 
 const $q = useQuasar();
 const ui = useUiStore();
-
-// NOTE: 우측 헤더
-const themeOptions: QSelectOption[] = [
-  {
-    label: 'Light',
-    value: 'light',
-  },
-  {
-    label: 'Dark',
-    value: 'dark',
-  },
-];
-const themeValue = ref<QSelectOption | undefined>(themeOptions[0]);
-function changeUpdateTheme(evt: QSelectOption | undefined) {
-  const isDark = themeValue.value?.value === 'dark' ? true : false;
-  if (evt?.value === themeValue.value?.value) {
-    $q.dark.set(isDark);
-  } else throw new Error('Theme Error');
-}
-const languageOptions: QSelectOption[] = [
-  {
-    label: '한국어',
-    value: 'ko-KR',
-  },
-];
-const language = ref<QSelectOption | undefined>(languageOptions[0]);
 </script>
 
 <style scoped lang="scss">
@@ -57,11 +23,6 @@ const language = ref<QSelectOption | undefined>(languageOptions[0]);
 
 .q-header {
   .q-btn.left-button {
-    @include media('sm') {
-      display: none;
-    }
-  }
-  .q-select {
     @include media('sm') {
       display: none;
     }

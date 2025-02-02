@@ -12,6 +12,7 @@
         <q-item-label style="height: 50px" header>Mini Project List</q-item-label>
         <q-btn class="close" icon="mdi-close" @click="ui.$state.isSidebarShow = false" flat round />
         <MainSidebar v-for="link in linksList" :key="link.title" v-bind="link" />
+        <MainRightHeader :class="'columns full-width'" v-if="$q.screen.width <= 768" />
       </q-list>
     </q-drawer>
     <q-page-container>
@@ -25,6 +26,7 @@ import { useUiStore } from 'src/stores/ui';
 import MainSidebar, { type MainSidebarProps } from 'components/MainSidebar.vue';
 import Header from 'src/components/portfolio/Header.vue';
 import { useQuasar } from 'quasar';
+import MainRightHeader from 'src/components/MainRightHeader.vue';
 
 const $q = useQuasar();
 const ui = useUiStore();
