@@ -1,13 +1,13 @@
 <template>
   <q-scroll-area :style="props.style" :thumb-style="thumbStyle" :bar-style="barStyle">
-    <slot></slot>
+    <slot />
   </q-scroll-area>
 </template>
 
 <script setup lang="ts">
 import { colors } from 'quasar';
 import type { CSSProperties } from 'vue';
-import { onMounted, onUpdated, reactive, ref, watch } from 'vue';
+import { reactive, ref, watch } from 'vue';
 
 const props = withDefaults(
   defineProps<{
@@ -47,14 +47,4 @@ const barStyle = reactive({
 watch(primaryColor, (newColor) => {
   thumbStyle.backgroundColor = newColor; // thumbStyle에 반영
 });
-
-// NOTE: life-cycle
-onMounted(() => {
-  console.log('onMounted');
-});
-onUpdated(() => {
-  console.log('update');
-});
 </script>
-
-<style scoped></style>
