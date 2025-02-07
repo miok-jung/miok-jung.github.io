@@ -1,1 +1,0 @@
-function r(e){if(Object(e.$parent)===e.$parent)return e.$parent;let{parent:t}=e.$;for(;Object(t)===t;){if(Object(t.proxy)===t.proxy)return t.proxy;t=t.parent}}function n(e){return e.appContext.config.globalProperties.$router!==void 0}function a(e){return e.isUnmounted===!0||e.isDeactivated===!0}export{a,r as g,n as v};
