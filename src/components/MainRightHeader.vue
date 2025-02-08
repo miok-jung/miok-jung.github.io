@@ -30,7 +30,7 @@ const props = withDefaults(
     class?: string;
   }>(),
   {
-    class: 'row no-wrap',
+    class: 'row no-wrap text-white',
   },
 );
 const $q = useQuasar();
@@ -69,6 +69,12 @@ const language = ref<QSelectOption | undefined>(languageOptions[0]);
     &:last-child {
       margin-bottom: 0;
     }
+  }
+  ::v-deep(.q-field__native) {
+    color: white;
+  }
+  ::v-deep(.q-icon) {
+    color: white;
   }
 }
 </style>
