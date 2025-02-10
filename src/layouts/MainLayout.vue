@@ -14,6 +14,7 @@
         <MainSidebar v-for="link in linksList" :key="link.title" v-bind="link" />
         <MainRightHeader :class="'columns full-width'" v-if="$q.screen.width <= 768" />
       </q-list>
+      <KakaoAdfit300x250 />
     </q-drawer>
     <q-page-container>
       <router-view />
@@ -27,6 +28,7 @@ import MainSidebar, { type MainSidebarProps } from 'components/MainSidebar.vue';
 import Header from 'src/components/portfolio/Header.vue';
 import { useQuasar } from 'quasar';
 import MainRightHeader from 'src/components/MainRightHeader.vue';
+import KakaoAdfit300x250 from 'src/components/AD/KakaoAdfit300x250.vue';
 
 const $q = useQuasar();
 const ui = useUiStore();
