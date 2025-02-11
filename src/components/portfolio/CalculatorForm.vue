@@ -17,33 +17,39 @@
         </div>
         <div class="q-gutter-y-sm">
           <div class="row no-wrap q-gutter-x-sm">
-            <q-btn class="col" style="" outline />
-            <q-btn class="col" style="" outline />
-            <q-btn class="col" style="" outline />
-            <q-btn class="col" label="X" outline @click="onClickValue(' * ')" />
+            <q-btn class="col" outline />
+            <q-btn class="col" outline />
+            <q-btn class="col" outline />
+            <q-btn
+              class="col"
+              icon="mdi-backspace-outline"
+              size="sm"
+              outline
+              @click="onClickValue(' * ')"
+            />
           </div>
           <div class="row no-wrap q-gutter-x-sm">
-            <q-btn class="col" label="7" outline @click="onClickValue('7')" />
-            <q-btn class="col" label="8" outline @click="onClickValue('8')" />
-            <q-btn class="col" label="9" outline @click="onClickValue('9')" />
-            <q-btn class="col" label="X" outline @click="onClickValue(' * ')" />
+            <q-btn class="col" label="7" outline data-value="7" />
+            <q-btn class="col" label="8" outline data-value="8" />
+            <q-btn class="col" label="9" outline data-value="9" />
+            <q-btn class="col" label="X" outline data-value=" * " />
           </div>
           <div class="row no-wrap q-gutter-x-sm">
-            <q-btn class="col" label="4" outline @click="onClickValue('4')" />
-            <q-btn class="col" label="5" outline @click="onClickValue('5')" />
-            <q-btn class="col" label="6" outline @click="onClickValue('6')" />
-            <q-btn class="col" label="-" outline @click="onClickValue(' - ')" />
+            <q-btn class="col" label="4" outline data-value="4" />
+            <q-btn class="col" label="5" outline data-value="5" />
+            <q-btn class="col" label="6" outline data-value="6" />
+            <q-btn class="col" label="-" outline data-value=" - " />
           </div>
           <div class="row no-wrap q-gutter-x-sm">
-            <q-btn class="col" label="1" outline @click="onClickValue('1')" />
-            <q-btn class="col" label="2" outline @click="onClickValue('2')" />
-            <q-btn class="col" label="3" outline @click="onClickValue('3')" />
-            <q-btn class="col" label="+" outline @click="onClickValue(' + ')" />
+            <q-btn class="col" label="1" outline data-value="1" />
+            <q-btn class="col" label="2" outline data-value="2" />
+            <q-btn class="col" label="3" outline data-value="3" />
+            <q-btn class="col" label="+" outline data-value=" + " />
           </div>
           <div class="row no-wrap q-gutter-x-sm">
-            <q-btn class="col" label="+/-" outline @click="onClickValue('+/-')" />
-            <q-btn class="col" label="0" outline @click="onClickValue('0')" />
-            <q-btn class="col" label="." outline @click="onClickValue('.')" />
+            <q-btn class="col" label="+/-" outline data-value="+" />
+            <q-btn class="col" label="0" outline data-value="0" />
+            <q-btn class="col" label="." outline data-value="." />
             <q-btn class="col" label="=" outline />
           </div>
         </div>
