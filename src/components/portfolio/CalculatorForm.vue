@@ -1,13 +1,4 @@
 <template>
-  <!-- TODO: 1. 버튼을 클릭 혹은 숫자를 클릭하면 해당 숫자 혹은 연산자가 입력이 된다. -->
-  <!-- TODO: 2. 엔터 혹은 =버튼을 클릭시 계산이 된다. -->
-  <!-- TODO: 큰 숫자를 입력시 콤마가 자동으로 적용이 되도록 수정을 한다 -->
-  <!-- TODO: 숫자를 잘 못입력을 할 경우 지우기 버튼 혹은 backspace 키보드 버튼으로 클릭시 한개씩 지울 수 있다 -->
-  <!-- TODO: 소수점 계산은 4자리로 제한한다 -->
-  <!-- TODO: *, /먼저 연산자 계산을 한다 -->
-  <!-- TODO: 이후 +, -는 나중에 계산을 한다 -->
-  <!-- TODO: 괄호가 있다면 최우선적으로 계산을 한다 -->
-  <!-- TODO: 괄호 키보드 입력을 인식한다 -->
   <div class="calculator-wrap">
     <q-card class="row no-shadow" bordered>
       <q-card-section class="col left-wrap">
@@ -62,7 +53,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { isNumber } from 'src/assets/script/regex';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 const input = ref<string>('');
 
@@ -73,9 +65,19 @@ function onClickButton(value: string) {
   input.value += value;
 }
 
+function handleKeydown(evt: KeyboardEvent) {
+  console.log('e: ', evt.key);
+  // 키값이 숫자면 숫자 입력
+  if (isNumber(evt.key)) input.value += evt.key;
+  else return;
+}
+
 // NOTE: life-cycle
 onMounted(() => {
-  console.log('onMounted CalculatorForm');
+  window.addEventListener('keydown', handleKeydown);
+});
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown);
 });
 </script>
 
@@ -91,3 +93,8 @@ onMounted(() => {
   }
 }
 </style>
+<!-- TODO: 가계부 TODO List
+2. 키보드로 숫자를 입력한다.
+3. 숫자를 클릭하거나 입력시, 콤마가 실시간으로 활성화가 된다.
+4. 
+-->
