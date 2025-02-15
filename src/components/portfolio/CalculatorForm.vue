@@ -23,25 +23,25 @@
             <q-btn class="col" label="7" outline @click="onClickButton('7')" />
             <q-btn class="col" label="8" outline @click="onClickButton('8')" />
             <q-btn class="col" label="9" outline @click="onClickButton('9')" />
-            <q-btn class="col" label="X" outline @click="onClickButton(' * ')" />
+            <q-btn class="col" label="X" outline @click="onClickButton('*')" />
           </div>
           <div class="row no-wrap q-gutter-x-sm">
             <q-btn class="col" label="4" outline @click="onClickButton('4')" />
             <q-btn class="col" label="5" outline @click="onClickButton('5')" />
             <q-btn class="col" label="6" outline @click="onClickButton('6')" />
-            <q-btn class="col" label="-" outline @click="onClickButton(' - ')" />
+            <q-btn class="col" label="-" outline @click="onClickButton('-')" />
           </div>
           <div class="row no-wrap q-gutter-x-sm">
             <q-btn class="col" label="1" outline @click="onClickButton('1')" />
             <q-btn class="col" label="2" outline @click="onClickButton('2')" />
             <q-btn class="col" label="3" outline @click="onClickButton('3')" />
-            <q-btn class="col" label="+" outline @click="onClickButton(' + ')" />
+            <q-btn class="col" label="+" outline @click="onClickButton('+')" />
           </div>
           <div class="row no-wrap q-gutter-x-sm">
-            <q-btn class="col" label="+/-" outline @click="onClickButton('+')" />
+            <q-btn class="col" label="+/-" outline />
             <q-btn class="col" label="0" outline @click="onClickButton('0')" />
             <q-btn class="col" label="." outline @click="onClickButton('.')" />
-            <q-btn class="col" label="=" outline />
+            <q-btn class="col" label="=" outline @click="calcSum" />
           </div>
         </div>
       </q-card-section>
@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { isNumber } from 'src/assets/script/regex';
+import { isNumber, tokenizeExpression } from 'src/assets/script/regex';
 import { onMounted, onUnmounted, ref } from 'vue';
 
 const input = ref<string>('');
@@ -61,16 +61,19 @@ const input = ref<string>('');
 const result = ref<string>('');
 
 // NOTE: 버튼 클릭
-function onClickButton(value: string) {
+const onClickButton = (value: string) => {
   input.value += value;
-}
+};
 
-function handleKeydown(evt: KeyboardEvent) {
-  console.log('e: ', evt.key);
-  // 키값이 숫자면 숫자 입력
+const handleKeydown = (evt: KeyboardEvent) => {
+  // 숫자 검증
   if (isNumber(evt.key)) input.value += evt.key;
-  else return;
-}
+};
+
+const calcSum = () => {
+  // 계산전 배열 구하기
+  const temp = new Array(tokenizeExpression(input.value));
+};
 
 // NOTE: life-cycle
 onMounted(() => {
