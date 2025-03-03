@@ -2,7 +2,6 @@
   <div class="kakao-ad-container">
     <ins
       class="kakao_ad_area"
-      style="display: none"
       :data-ad-unit="adUnit"
       data-ad-width="300"
       data-ad-height="250"
@@ -28,6 +27,8 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: 250px;
   margin: 10px 0;
+  border: 1px solid red;
 }
 </style>

@@ -3,7 +3,7 @@ export const isNumber = (str: string) => {
   return /^\d+$/.test(str);
 };
 
-// NOTE: 연산자 중복 검증
+// NOTE: 연산자 검증
 export const isOperatorChar = (char: string): boolean => {
   return /^[+\-*/]$/.test(char);
 };

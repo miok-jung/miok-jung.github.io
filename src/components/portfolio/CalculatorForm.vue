@@ -53,26 +53,98 @@
 </template>
 
 <script setup lang="ts">
-import { isNumber, tokenizeExpression } from 'src/assets/script/regex';
+import { useQuasar } from 'quasar';
+import { isNumber, isOperatorChar, tokenizeExpression } from 'src/assets/script/regex';
 import { onMounted, onUnmounted, ref } from 'vue';
 
+const $q = useQuasar();
 const input = ref<string>('');
-
 const result = ref<string>('');
 
 // NOTE: 버튼 클릭
 const onClickButton = (value: string) => {
-  input.value += value;
+  if (input.value.length === 0 && !isNumber(value)) {
+    console.log('첫번째로 연산자 클릭 에러');
+    return;
+  } else {
+    input.value += value;
+  }
 };
 
 const handleKeydown = (evt: KeyboardEvent) => {
-  // 숫자 검증
   if (isNumber(evt.key)) input.value += evt.key;
 };
 
+const parseInputToArrayays = ref<(string | number)[]>([]);
+const operatorFilter = ref<string[]>([]);
+const numbers = ref<number[]>([]);
+
 const calcSum = () => {
-  // 계산전 배열 구하기
-  const temp = new Array(tokenizeExpression(input.value));
+  if (isOperatorChar(input.value.slice(-1))) {
+    $q.notify({
+      message: '숫자를 마지막으로 입력해야 계산이 됩니다.',
+      color: 'negative',
+      icon: 'mdi-message-alert-outline',
+    });
+    return;
+  }
+
+  parseInputToArrayays.value = tokenizeExpression(input.value);
+  operatorFilter.value = parseInputToArrayays.value
+    .filter((_item, index) => index % 2 !== 0)
+    .map(String);
+  numbers.value = parseInputToArrayays.value.filter((_item, index) => index % 2 === 0).map(Number);
+
+  while (operatorFilter.value.length !== 0) {
+    for (let i = 0; i < operatorFilter.value.length; i++) {
+      switch (operatorFilter.value[i]) {
+        case '*': {
+          updateExpression(i, '*');
+          break;
+        }
+        case '/': {
+          updateExpression(i, '/');
+          break;
+        }
+        case '+': {
+          updateExpression(i, '+');
+          break;
+        }
+        case '-': {
+          updateExpression(i, '-');
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    }
+  }
+  result.value = sampleResult.value.toString();
+};
+
+// NOTE: 수식 배열 업데이트
+const sampleResult = ref<number>(0);
+const updateExpression = (index: number, operator: string) => {
+  if (operator === '*') {
+    sampleResult.value = Math.trunc(
+      Number(numbers.value[index]) * Number(numbers.value[index + 1]),
+    );
+  } else if (operator === '/') {
+    sampleResult.value = Math.trunc(
+      Number(numbers.value[index]) / Number(numbers.value[index + 1]),
+    );
+  } else if (operator === '+') {
+    sampleResult.value = Math.trunc(
+      Number(numbers.value[index]) + Number(numbers.value[index + 1]),
+    );
+  } else if (operator === '-') {
+    sampleResult.value = Math.trunc(
+      Number(numbers.value[index]) - Number(numbers.value[index + 1]),
+    );
+  }
+  numbers.value.splice(index, 2, sampleResult.value);
+  operatorFilter.value.splice(index, 1);
 };
 
 // NOTE: life-cycle
