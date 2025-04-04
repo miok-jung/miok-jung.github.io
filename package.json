@@ -1,7 +1,7 @@
 {
-  "name": "quasar-project",
+  "name": "portfolio",
   "version": "0.0.1",
-  "description": "A Quasar Project",
+  "description": "MiOk, Jung Quasar Portfolio",
   "productName": "Quasar App",
   "author": "miok-jung <miok-jung@gmail.com>",
   "type": "module",
