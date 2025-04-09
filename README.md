@@ -1,40 +1,15 @@
-# Quasar App (quasar-project)
+# 04 / 01 / 2025 - ing
 
-A Quasar Project
+# Branch
 
-## Install the dependencies
-```bash
-yarn
-# or
-npm install
-```
+- main: 전체적인 세팅 및 혹은 간단한 수정과 나머지 브랜치를 합쳐 최종적으로 확인을 한 후 문제가 없다면 배포를 하는 용도
+- side-project/apple: <b style="color: #00C471">인프런</b>에서 유료로 구매한 <b style="color: #A2AAAD">애플 웹사이트 인터랙션 클론!</b>의 강의를 듣고 제작된 프로젝트이며 일부는 vue3와 quasar3에 맞추어 조금 변형이 되어 제작이 되었다.
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
+## Branch title
 
+브랜치 commit을 할 때 작은 타이틀에 대한 규칙을 정의한다.
 
-### Lint the files
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-
-### Format the files
-```bash
-yarn format
-# or
-npm run format
-```
-
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+- feat: 새로운 기능을 추가할 때
+- setting: 전체적으로 적용이되어 업데이트가 되는 경우 세팅으로 한다.
+  - 이후에는 set으로 좀 더 간단하게 수정하기로 함.
+- docs: README.md를 수정하거나 주석을 수정하는 등 어느 특정 문서를 수정을 할 때 사용한다.
