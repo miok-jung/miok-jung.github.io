@@ -5,7 +5,7 @@
 - main: 전체적인 세팅 및 혹은 간단한 수정과 나머지 브랜치를 합쳐 최종적으로 확인을 한 후 문제가 없다면 배포를 하는 용도
 - side-project/apple: <b style="color: #00C471">인프런</b>에서 유료로 구매한 <b style="color: #A2AAAD">애플 웹사이트 인터랙션 클론!</b>의 강의를 듣고 제작된 프로젝트이며 일부는 vue3와 quasar3에 맞추어 조금 변형이 되어 제작이 되었다.
 
-## Branch title
+## Commit title
 
 브랜치 commit을 할 때 작은 타이틀에 대한 규칙을 정의한다.
 
