@@ -33,7 +33,7 @@
         </div>
       </section>
       <section id="scroll-section-1" class="scroll-section">
-        <p>
+        <p class="description">
           <strong>보통 스크롤 영역</strong>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, exercitationem nisi?
           Quibusdam dicta corrupti obcaecati, ut numquam eum modi voluptates, quae animi inventore,
