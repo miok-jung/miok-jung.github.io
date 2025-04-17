@@ -76,7 +76,7 @@
         </div>
       </section>
       <section id="scroll-section-3" class="scroll-section">
-        <p class="mdi-message">
+        <p class="mid-message">
           <strong>Retina 머그</strong><br />
           아이디어를 광활하게 펼칠<br />
           아름답고 부드러운 음료 공간.
