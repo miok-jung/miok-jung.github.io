@@ -25,10 +25,10 @@ import MainSidebar, { type MainSidebarProps } from 'components/MainSidebar.vue';
 
 const linksList: MainSidebarProps[] = [
   {
-    title: 'Focs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev',
+    title: 'apple clone',
+    caption: 'clone the apple project',
+    icon: 'mdi-apple',
+    link: '/side/apple',
   },
 ];
 
