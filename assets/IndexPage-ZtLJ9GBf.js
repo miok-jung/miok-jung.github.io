@@ -1,0 +1,1 @@
+import{Q as o}from"./QPage-BYA8plu6.js";import{_ as t}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{V as r,X as s,a0 as a,W as c,f as n}from"./index-DBoThxNN.js";const _={};function f(i,m){const e=a("router-view");return c(),r(o,{class:"row items-center justify-evenly"},{default:s(()=>[n(e)]),_:1})}const d=t(_,[["render",f]]);export{d as default};
