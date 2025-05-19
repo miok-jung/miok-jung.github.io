@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;900&display=swap");
 
 html {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 14px;
 }
 
@@ -125,6 +125,19 @@ a {
   height: 7rem;
   color: white;
   background: darkorange;
+}
+.sticky-elem {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+#show-scene-0 #scroll-seciton-0 .sticky-elem,
+#show-scene-1 #scroll-seciton-1 .sticky-elem,
+#show-scene-2 #scroll-seciton-2 .sticky-elem,
+#show-scene-3 #scroll-seciton-3 .sticky-elem {
+  display: block;
 }
 
 @media (min-width: 1024px) {
