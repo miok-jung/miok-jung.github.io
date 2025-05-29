@@ -104,12 +104,14 @@
       </section>
       <footer class="footer">2025, JNarin(Miok, Jung)</footer>
     </div>
+    <q-resize-observer :debounce="300" @resize="onResizePage" />
   </q-page>
 </template>
 
 <script setup lang="ts">
 import { useQuasar } from "quasar";
-import { onMounted, ref } from "vue";
+import type { Resize } from "src/types";
+import { onMounted, ref, watch } from "vue";
 
 type scrollInformation = {
   id: number;
@@ -120,6 +122,15 @@ type scrollInformation = {
     container: HTMLElement | null;
   };
 };
+
+const props = withDefaults(
+  defineProps<{
+    scrollPos: number;
+  }>(),
+  {
+    scrollPos: 0,
+  },
+);
 const $q = useQuasar();
 
 const section0 = ref<HTMLElement | null>(null);
@@ -127,7 +138,7 @@ const section1 = ref<HTMLElement | null>(null);
 const section2 = ref<HTMLElement | null>(null);
 const section3 = ref<HTMLElement | null>(null);
 const sections = ref<HTMLElement[] | null[]>([null, null, null, null]);
-const screenInfo = ref<scrollInformation[]>([
+const sceneInfo = ref<scrollInformation[]>([
   {
     id: 0,
     type: "sticky",
@@ -166,9 +177,40 @@ const screenInfo = ref<scrollInformation[]>([
   },
 ]);
 
-// NOTE: LIFE-CYCLE
+// const scrolllPos = props.scrollPos;
+const resizeHeight = ref<Resize>({ width: 0, height: 0 });
+function onResizePage(size: Resize) {
+  resizeHeight.value = size;
+}
+
+// const yOffset = ref<number>(props.scrollPos);
+const prevScrollHeight = ref<number>(0); // 련제 스크롤 이전 높이값
+// const currentScene = ref<number>(0); // 현재 활성화된 씬
+function scrollLoop() {
+  console.log("scrollLoop");
+  prevScrollHeight.value = 0;
+  for (let i = 0; i < sceneInfo.value.length; i++) {
+    const item = sceneInfo.value[i];
+    if (item !== undefined) {
+      prevScrollHeight.value += item.scrollHeight;
+    }
+  }
+}
+
+// NOTE: watch
+watch(
+  () => props.scrollPos,
+  (newValue) => {
+    console.log("newValue: ", newValue);
+    if (newValue) {
+      console.log("watch: ", props.scrollPos);
+      scrollLoop();
+    }
+  },
+);
+// NOTE: life-cycle
 onMounted(() => {
-  screenInfo.value.forEach((info, i) => {
+  sceneInfo.value.forEach((info, i) => {
     if (info === null) throw new Error(`scroll-section-${i} 에러발생`);
     info.scrollHeight = info.heightNum * $q.screen.height;
 
@@ -181,6 +223,8 @@ onMounted(() => {
       sections.value[i].style.height = `${info.scrollHeight}px`;
     }
   });
+
+  console.log("test: ", props.scrollPos, window.pageYOffset);
 });
 </script>
 <style lang="scss">
