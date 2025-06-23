@@ -1,0 +1,1 @@
+import{b as r,a}from"./QLayout-CSIR3L1u.js";import{_ as n}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{X as s,Z as e,f as o,a2 as c,Y as _}from"./index-BEdV7yBN.js";const f={};function i(l,u){const t=c("router-view");return _(),s(a,{view:"lHh Lpr lFf"},{default:e(()=>[o(r,null,{default:e(()=>[o(t)]),_:1})]),_:1})}const x=n(f,[["render",i]]);export{x as default};
