@@ -89,7 +89,7 @@
         아이디어를 광활하게 펼칠<br />
         아름답고 부드러운 음료 공간.
       </p>
-      <canvas class="image-blend-canvas" width="1920" height="1080"></canvas>
+      <!-- <canvas class="image-blend-canvas" width="1920" height="1080"></canvas> -->
       <p class="canvas-caption">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet at fuga quae perspiciatis
         veniam impedit et, ratione est optio porro. Incidunt aperiam nemo voluptas odit quisquam
@@ -109,310 +109,70 @@
 
 <script setup lang="ts"></script>
 
-<style scoped>
-@import url("../../css/side/appleDefault.scss");
-@import "https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap";
-
-html {
-  font-family: "Noto Sans KR", sans-serif;
+<style scoped lang="scss">
+// SECTION: COMMON
+$apple-primary: #1d1d1f;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+.container {
+  font-family: 'Noto Sans', sans-serif;
   font-size: 14px;
-}
-body {
+  line-height: 1.2;
+  word-wrap: break-word;
   overflow-x: hidden;
-  color: rgb(29, 29, 31);
+  color: $apple-primary;
   letter-spacing: -0.05em;
   background: white;
+  -webkit-font-smoothing: antialiased;
 }
 p {
   line-height: 1.6;
 }
 a {
-  color: rgb(29, 29, 31);
+  color: $apple-primary;
   text-decoration: none;
 }
-
-body.before-load {
-  overflow: hidden;
-}
+// !SECTION  COMMON END
 .container {
-  /* iPhone 가로 스크롤 방지 */
-  overflow-x: hidden;
-}
-.global-nav {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  width: 100%;
-  height: 44px;
-  padding: 0 1rem;
-}
-.local-nav {
-  position: absolute;
-  top: 45px;
-  left: 0;
-  z-index: 11;
-  width: 100%;
-  height: 52px;
-  padding: 0 1rem;
-  border-bottom: 1px solid #ddd;
-}
-.local-nav-sticky .local-nav {
-  position: fixed;
-  top: 0;
-  background: rgba(255, 255, 255, 0.1);
-  /* for iPhone */
-  -webkit-backdrop-filter: saturate(180%) blur(15px);
-  -moz-backdrop-filter: saturate(180%) blur(15px);
-  -o-backdrop-filter: saturate(180%) blur(15px);
-  backdrop-filter: saturate(180%) blur(15px);
-}
-.global-nav-links,
-.local-nav-links {
-  display: flex;
-  align-items: center;
-  max-width: 1000px;
-  height: 100%;
-  margin: 0 auto;
-}
-.global-nav-links {
-  justify-content: space-between;
-}
-.local-nav-links .product-name {
-  margin-right: auto;
-  font-size: 1.4rem;
-  font-weight: bold;
-}
-.local-nav-links a {
-  font-size: 0.8rem;
-}
-.local-nav-links a:not(.product-name) {
-  margin-left: 2em;
-}
-.scroll-section {
-  position: relative;
-  padding-top: 50vh;
-}
-#scroll-section-0 h1 {
-  position: relative;
-  top: -10vh;
-  z-index: 5;
-  font-size: 4rem;
-  text-align: center;
-}
-.main-message {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  top: 35vh;
-  margin: 5px 0;
-  height: 3em;
-  font-size: 2.5rem;
-  opacity: 0;
-}
-.main-message p {
-  font-weight: bold;
-  text-align: center;
-  line-height: 1.2;
-}
-.main-message small {
-  display: block;
-  margin-bottom: 0.5em;
-  font-size: 1.2rem;
-}
-#scroll-section-2 .main-message {
-  font-size: 3.5rem;
-}
-.description {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  font-size: 1.2rem;
-  color: #888;
-}
-.description strong {
-  float: left;
-  margin-right: 0.2em;
-  font-size: 3rem;
-  color: rgb(29, 29, 31);
-}
-.sticky-elem.desc-message {
-  width: 45%;
-  font-weight: bold;
-  opacity: 0;
-}
-.pin {
-  width: 1px;
-  height: 100px;
-  background: rgb(29, 29, 31);
-}
-#scroll-section-2 .b {
-  top: 10%;
-  left: 40%;
-}
-#scroll-section-2 .c {
-  top: 15%;
-  left: 45%;
-}
-.mid-message {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  font-size: 2rem;
-  color: #888;
-}
-.mid-message strong {
-  color: rgb(29, 29, 31);
-}
-.canvas-caption {
-  max-width: 1000px;
-  margin: -24rem auto 0;
-  padding: 0 1rem;
-  font-size: 1.2rem;
-  color: #888;
-}
-.footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 7rem;
-  color: white;
-  background: darkorange;
-}
-.sticky-elem {
-  display: none;
-  position: fixed;
-  left: 0;
-  width: 100%;
-}
-#show-scene-0 #scroll-section-0 .sticky-elem,
-#show-scene-1 #scroll-section-1 .sticky-elem,
-#show-scene-2 #scroll-section-2 .sticky-elem,
-#show-scene-3 #scroll-section-3 .sticky-elem {
-  display: block;
-  will-change: transform, opacity;
-}
-.scroll-effect-end .sticky-elem {
-  /* 스크롤 효과가 모두 끝나고, 아래 일반 콘텐츠 영역에서는 sticky-elem들을 모두 안보이도록 */
-  display: none !important;
-}
-.sticky-elem-canvas {
-  top: 0;
-  height: 100%;
-}
-.sticky-elem-canvas canvas {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-}
-#scroll-section-3 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.image-blend-canvas.sticky {
-  position: fixed;
-  top: 0;
-  z-index: 10;
-}
-.loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
-  background: white;
-  opacity: 0;
-  transition: 0.5s;
-}
-.before-load .container {
-  display: none;
-}
-.before-load .loading {
-  opacity: 1;
-}
-@keyframes loading-spin {
-  100% {
-    transform: rotate(360deg);
+  nav {
+    &.global-nav {
+      height: 44px;
+      .global-nav-links {
+        justify-content: space-between;
+      }
+    }
+    &.local-nav {
+      height: 52px;
+      border-bottom: 1px solid #ddd;
+      .local-nav-links {
+        a {
+          font-size: 0.8rem;
+          &.product-name {
+            margin-right: auto;
+            font-size: 1.4rem;
+            font-weight: bold;
+          }
+          &:not(.product-name) {
+            margin-left: 2em;
+          }
+        }
+      }
+    }
+    .global-nav-links,
+    .local-nav-links {
+      display: flex;
+      align-items: center;
+      margin: 0 auto;
+      max-width: 1000px;
+      height: 100%;
+    }
   }
-}
-@keyframes loading-circle-ani {
-  0% {
-    stroke-dashoffset: 157;
+  section {
+    &.scroll-section {
+      // border: 1px solid yellowgreen;
+    }
   }
-  75% {
-    stroke-dashoffset: -147;
-  }
-  100% {
-    stroke-dashoffset: -157;
-  }
-}
-.loading-circle {
-  width: 54px;
-  height: 54px;
-  animation: loading-spin 3s infinite;
-}
-.loading-circle circle {
-  stroke: black;
-  stroke-width: 4;
-  /* getTotalLength()로 stroke의 길이를 얻어올 수 있음 */
-  stroke-dasharray: 157, 157;
-  stroke-dashoffset: 0;
-  fill: transparent;
-  animation: loading-circle-ani 1s infinite;
-  /* transition: 1s; */
-}
-/* .loading-circle:hover circle {
-	stroke-dashoffset: -157;
-} */
-
-.normal-content {
-  margin-bottom: 10rem;
-}
-
-@media (min-width: 1024px) {
-  #scroll-section-0 h1 {
-    font-size: 9vw;
-  }
-  .main-message {
-    font-size: 4vw;
-  }
-  .description {
-    padding: 0;
-    font-size: 2rem;
-  }
-  .description strong {
-    font-size: 6rem;
-  }
-  #scroll-section-2 .main-message {
-    font-size: 6vw;
-  }
-  .main-message small {
-    font-size: 1.5vw;
-  }
-  .sticky-elem.desc-message {
-    width: 20%;
-  }
-  #scroll-section-2 .b {
-    top: 20%;
-    left: 53%;
-  }
-  #scroll-section-2 .c {
-    left: 55%;
-  }
-  .mid-message {
-    width: 1000px;
-    padding: 0;
-    font-size: 4vw;
-  }
-  .canvas-caption {
-    margin-top: -8rem;
-    padding: 0;
-    font-size: 2rem;
+  footer {
+    // border: 1px solid green;
   }
 }
 </style>
