@@ -40,7 +40,6 @@ import avatar from 'assets/images/avatar.png';
       width: calc(100% - 166px);
     }
     .description-list {
-      margin-bottom: 0.5rem;
       &:last-child {
         margin-bottom: 0;
       }
