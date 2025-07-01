@@ -8,5 +8,5 @@
 
 <script setup lang="ts">
 import BaseScrollArea from 'src/components/common/BaseScrollArea.vue';
-import Profile from 'src/components/Profile.vue';
+import Profile from 'src/components/main/Profile.vue';
 </script>
