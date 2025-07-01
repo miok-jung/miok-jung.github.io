@@ -1,11 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
-        <q-toolbar-title> Miok, Jung's Portfolio </q-toolbar-title>
-      </q-toolbar>
-    </q-header>
+    <Header :sidebar="leftDrawerOpen" @change-sidebar="(value) => (leftDrawerOpen = value)" />
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
         <q-item-label header>Portfolio List</q-item-label>
@@ -21,7 +16,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import MainSidebar, { type MainSidebarProps } from 'components/MainSidebar.vue';
+import Header from 'src/components/main/Header.vue';
+import MainSidebar, { type MainSidebarProps } from 'src/components/main/MainSidebar.vue';
 
 const linksList: MainSidebarProps[] = [
   {
@@ -32,9 +28,5 @@ const linksList: MainSidebarProps[] = [
   },
 ];
 
-const leftDrawerOpen = ref(false);
-
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
-}
+const leftDrawerOpen = ref<boolean>(false);
 </script>
