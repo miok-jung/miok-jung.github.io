@@ -1,7 +1,7 @@
 export default {
   main: {
     portfolio: {
-      title: `Miok, Jung's Portfolio`,
+      title: `정미옥 포트폴리오`,
     },
   },
 };
