@@ -1,7 +1,10 @@
 export default {
   main: {
     portfolio: {
-      title: `Miok, Jung's Portfolio`,
+      title: `Jung Miok Portfolio`,
     },
+  },
+  tooltip: {
+    changeMode: 'Click to change mode',
   },
 };

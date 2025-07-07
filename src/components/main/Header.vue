@@ -20,7 +20,7 @@
           keep-color
           @update:model-value="changeDarkMode"
         >
-          <q-tooltip>Change {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}</q-tooltip>
+          <q-tooltip style="white-space: nowrap">{{ t('tooltip.changeMode') }}</q-tooltip>
         </q-toggle>
       </div>
     </q-toolbar>
@@ -30,6 +30,7 @@
 import { useQuasar } from 'quasar';
 import enUS from 'quasar/lang/en-US.js';
 import koKR from 'quasar/lang/ko-KR';
+import ja from 'quasar/lang/ja';
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -59,6 +60,7 @@ const changeDarkMode = () => {
 const langOptions = [
   { label: '한국어', value: 'ko-KR' },
   { label: 'English', value: 'en-US' },
+  { label: '日本語', value: 'ja' },
 ] as const;
 
 type LangCode = (typeof langOptions)[number]['value'];
@@ -66,6 +68,7 @@ const selectedLang = ref<LangCode>('ko-KR');
 const quasarLangMap = {
   'ko-KR': koKR,
   'en-US': enUS,
+  ja: ja,
 } as const;
 
 // NOTE: WATCH
