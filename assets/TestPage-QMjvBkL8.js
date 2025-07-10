@@ -1,1 +1,0 @@
-import{Q as t}from"./QPage-BlpQR9cU.js";import{ai as s,aj as n,al as r,an as o,ak as l}from"./index-Cuavt_VU.js";const i=s({__name:"TestPage",setup(p){const a=()=>({padding:"1rem"});return(_,e)=>(l(),n(t,{"style-fn":a},{default:r(()=>e[0]||(e[0]=[o("h5",null,"Test PAGE",-1)])),_:1,__:[0]}))}});export{i as default};
