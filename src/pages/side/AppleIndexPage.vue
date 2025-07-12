@@ -107,7 +107,70 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useQuasar } from 'quasar';
+import { onMounted, ref } from 'vue';
+
+const { screen } = useQuasar();
+
+const scenInfo = ref([
+  {
+    // 0
+    type: 'sticky',
+    heightNum: 5,
+    scrollHeight: 0,
+    objs: {
+      container: document.querySelector('#scroll-section-0'),
+    },
+  },
+  {
+    // 1
+    type: 'normal',
+    heightNum: 5,
+    scrollHeight: 0,
+    objs: {
+      container: document.querySelector('#scroll-section-1'),
+    },
+  },
+  {
+    // 2
+    type: 'sticky',
+    heightNum: 5,
+    scrollHeight: 0,
+    objs: {
+      container: document.querySelector('#scroll-section-2'),
+    },
+  },
+  {
+    // 3
+    type: 'sticky',
+    heightNum: 5,
+    scrollHeight: 0,
+    objs: {
+      container: document.querySelector('#scroll-section-3'),
+    },
+  },
+]);
+function setLayout() {
+  // 각 스크롤 섹션의 높이 세팅
+  for (let i = 0; i < scenInfo.value.length; i++) {
+    const infoStep = scenInfo.value[i];
+    if (infoStep) {
+      infoStep.scrollHeight = infoStep.heightNum * screen.height;
+      infoStep.objs.container = document.querySelector(`#scroll-section-${i}`);
+      if (infoStep.objs.container) {
+        infoStep.objs.container.style.height = `${scenInfo.value[i]?.scrollHeight}px`;
+      }
+    }
+  }
+  console.log('test', scenInfo.value);
+}
+
+// NOTE:  life-cycle
+onMounted(() => {
+  setLayout();
+});
+</script>
 
 <style scoped lang="scss">
 // SECTION: COMMON
