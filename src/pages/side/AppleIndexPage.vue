@@ -120,7 +120,7 @@ const scenInfo = ref([
     heightNum: 5,
     scrollHeight: 0,
     objs: {
-      container: document.querySelector('#scroll-section-0'),
+      container: document.querySelector('#scroll-section-0') as HTMLElement,
     },
   },
   {
@@ -129,7 +129,7 @@ const scenInfo = ref([
     heightNum: 5,
     scrollHeight: 0,
     objs: {
-      container: document.querySelector('#scroll-section-1'),
+      container: document.querySelector('#scroll-section-1') as HTMLElement,
     },
   },
   {
@@ -138,7 +138,7 @@ const scenInfo = ref([
     heightNum: 5,
     scrollHeight: 0,
     objs: {
-      container: document.querySelector('#scroll-section-2'),
+      container: document.querySelector('#scroll-section-2') as HTMLElement,
     },
   },
   {
@@ -147,7 +147,7 @@ const scenInfo = ref([
     heightNum: 5,
     scrollHeight: 0,
     objs: {
-      container: document.querySelector('#scroll-section-3'),
+      container: document.querySelector('#scroll-section-3') as HTMLElement,
     },
   },
 ]);
@@ -157,7 +157,7 @@ function setLayout() {
     const infoStep = scenInfo.value[i];
     if (infoStep) {
       infoStep.scrollHeight = infoStep.heightNum * screen.height;
-      infoStep.objs.container = document.querySelector(`#scroll-section-${i}`);
+      infoStep.objs.container = document.querySelector(`#scroll-section-${i}`) as HTMLElement;
       if (infoStep.objs.container) {
         infoStep.objs.container.style.height = `${scenInfo.value[i]?.scrollHeight}px`;
       }
