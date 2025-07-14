@@ -4,4 +4,6 @@
 
 <script setup lang="ts"></script>
 
-<style scoped></style>
+<style lang="scss">
+@use '../../../css/side/default.scss';
+</style>

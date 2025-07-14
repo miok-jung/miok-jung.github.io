@@ -1,5 +1,7 @@
 <template>
-  <div>side Index page</div>
+  <q-page>
+    <div>Side Index Page</div>
+  </q-page>
 </template>
 
 <script setup lang="ts"></script>

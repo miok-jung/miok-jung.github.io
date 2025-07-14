@@ -12,7 +12,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         component: () => import('layouts/side/IndexLayout.vue'),
-        children: [{ path: 'apple', component: () => import('pages/side/AppleIndexPage.vue') }],
+        children: [{ path: 'apple', component: () => import('pages/side/apple/IndexPage.vue') }],
       },
     ],
   },
