@@ -1,1 +1,0 @@
-import{_ as e}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{P as r,B as c}from"./index-DvKfbd1r.js";const n={};function o(t,a){return c(),r("div",null,"Apple TEST")}const f=e(n,[["render",o]]);export{f as default};
