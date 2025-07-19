@@ -17,7 +17,6 @@
           <a href="#">구입하기</a>
         </div>
       </nav>
-      <!-- SECTION: CONTAINER -->
       <!-- SECTION: CONTAINER1 -->
       <section id="scroll-section-0" class="scroll-section">
         <h1>AirMug Pro</h1>
@@ -37,7 +36,7 @@
       <!-- !SECTION -->
       <!-- SECTION: CONTAINER2 -->
       <section id="scroll-section-1" class="scroll-section">
-        <p>
+        <p class="description">
           <strong>보통 스크롤 영역</strong>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sint laborum deleniti
           magnam minus quaerat vel dolor autem ducimus perspiciatis nesciunt sapiente esse quae
@@ -103,7 +102,6 @@
       </section>
       <!-- !SECTION -->
       <footer class="footer">2025, Jung Miok</footer>
-      <!-- !SECTION -->
     </div>
   </q-page>
 </template>
@@ -136,6 +134,7 @@ a {
 
 .container {
   nav.global-nav {
+    padding: 0;
     height: 44px;
     .global-nav-links {
       display: flex;
@@ -168,5 +167,42 @@ a {
       }
     }
   }
+
+  // SECTION: CONTAINER
+  .scroll-section {
+    padding-top: 50vh;
+    .main-message {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 5px 0;
+      height: 3em;
+      font-size: 2.5rem;
+      p {
+        font-weight: bold;
+        text-align: center;
+        line-height: 1.2;
+      }
+    }
+    .description {
+      padding: 0 1rem;
+      font-size: 1.2rem;
+      color: #888;
+      strong {
+        float: left;
+        margin-right: 0.2em;
+        font-size: 3rem;
+        color: $apple-primary;
+      }
+    }
+  }
+
+  #scroll-section-0 {
+    h1 {
+      font-size: 4rem;
+      text-align: center;
+    }
+  }
+  // !SECTION
 }
 </style>
