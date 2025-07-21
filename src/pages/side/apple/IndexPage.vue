@@ -202,6 +202,13 @@ a {
         color: $apple-primary;
       }
     }
+    .sticky-elem {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
   }
 
   #scroll-section-0 {
@@ -255,6 +262,15 @@ a {
     background: darkorange;
   }
 }
+
+#show-scene-0 #scroll-section-0 .sticky-elem,
+#show-scene-1 #scroll-section-1 .sticky-elem,
+#show-scene-2 #scroll-section-2 .sticky-elem,
+#show-scene-3 #scroll-section-3 .sticky-elem {
+  display: block !important;
+}
+
+// SECTION: MEDA QUERY
 @media (min-width: 1024px) {
   .container {
     // SECTION: PC CONTAINER
@@ -302,4 +318,5 @@ a {
     // !SECTION
   }
 }
+// !SECTION
 </style>
