@@ -183,9 +183,16 @@ a {
         text-align: center;
         line-height: 1.2;
       }
+      small {
+        display: block;
+        margin-bottom: 0.5em;
+        font-size: 1.2rem;
+      }
     }
     .description {
+      margin: 0 auto;
       padding: 0 1rem;
+      max-width: 1000px;
       font-size: 1.2rem;
       color: #888;
       strong {
@@ -203,6 +210,96 @@ a {
       text-align: center;
     }
   }
+  #scroll-section-2 {
+    .main-message {
+      font-size: 3.5rem;
+    }
+    .desc-message {
+      width: 50%;
+      font-weight: bold;
+      .pin {
+        width: 1px;
+        height: 100px;
+        background: $apple-primary;
+      }
+    }
+  }
+  #scroll-section-3 {
+    p {
+      &.mid-message {
+        margin: 0 auto;
+        padding: 0 1rem;
+        max-width: 1000px;
+        font-size: 2rem;
+        color: #888;
+        strong {
+          color: $apple-primary;
+        }
+      }
+      &.canvas-caption {
+        margin: 0 auto;
+        padding: 0 1rem;
+        max-width: 1000px;
+        font-size: 1.2rem;
+        color: #888;
+      }
+    }
+  }
   // !SECTION
+  footer.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 7rem;
+    color: white;
+    background: darkorange;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    // SECTION: PC CONTAINER
+    .scroll-section {
+      .main-message {
+        font-size: 4vw;
+        small {
+          font-size: 1.5rem;
+        }
+      }
+      .description {
+        font-size: 2rem;
+        strong {
+          font-size: 6rem;
+        }
+      }
+    }
+    #scroll-section-0 {
+      h1 {
+        font-size: 9vw;
+      }
+    }
+    #scroll-section-2 {
+      .main-message {
+        font-size: 6vw;
+      }
+      .desc-message {
+        width: 20%;
+        .pin {
+        }
+      }
+    }
+    #scroll-section-3 {
+      p {
+        &.mid-message {
+          font-size: 4vw;
+          strong {
+          }
+        }
+        &.canvas-caption {
+          font-size: 2rem;
+        }
+      }
+    }
+    // !SECTION
+  }
 }
 </style>
