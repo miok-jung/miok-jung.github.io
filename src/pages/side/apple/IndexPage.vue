@@ -18,7 +18,12 @@
         </div>
       </nav>
       <!-- SECTION: CONTAINER1 -->
-      <section id="scroll-section-0" class="scroll-section">
+      <section
+        ref="scene1"
+        id="scroll-section-0"
+        class="scroll-section"
+        :style="{ height: sceneInfo[0]?.scrollHeight + 'px' }"
+      >
         <h1>AirMug Pro</h1>
         <div class="sticky-elem main-message">
           <p>온전히 빠져들게 하는<br />최고급 세라믹</p>
@@ -35,7 +40,12 @@
       </section>
       <!-- !SECTION -->
       <!-- SECTION: CONTAINER2 -->
-      <section id="scroll-section-1" class="scroll-section">
+      <section
+        ref="scene2"
+        id="scroll-section-1"
+        class="scroll-section"
+        :style="{ height: sceneInfo[1]?.scrollHeight + 'px' }"
+      >
         <p class="description">
           <strong>보통 스크롤 영역</strong>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sint laborum deleniti
@@ -60,7 +70,12 @@
       </section>
       <!-- !SECTION -->
       <!-- SECTION: CONTAINER3 -->
-      <section id="scroll-section-2" class="scroll-section">
+      <section
+        ref="scene3"
+        id="scroll-section-2"
+        class="scroll-section"
+        :style="{ height: sceneInfo[2]?.scrollHeight + 'px' }"
+      >
         <div class="sticky-elem main-message">
           <p>
             <small>편안한 촉감</small>
@@ -82,7 +97,12 @@
       </section>
       <!-- !SECTION -->
       <!-- SECTION: CONTAINER4 -->
-      <section id="scroll-section-3" class="scroll-section">
+      <section
+        ref="scene4"
+        id="scroll-section-3"
+        class="scroll-section"
+        :style="{ height: sceneInfo[3]?.scrollHeight + 'px' }"
+      >
         <p class="mid-message">
           <strong>Retina 머그</strong><br />
           아이디어를 광활하게 펼칠<br />
@@ -107,6 +127,11 @@
 </template>
 
 <script setup lang="ts">
+import { useQuasar } from 'quasar';
+import { onMounted, ref, watch } from 'vue';
+
+const { screen } = useQuasar();
+
 const pageStyles = () => {
   return {
     fontFamily: '"Noto Sans KR", sans-serif',
@@ -117,6 +142,69 @@ const pageStyles = () => {
     background: 'white',
   };
 };
+
+// NOTE: Scene 정보
+type Scene = {
+  type: 'sticky' | 'normal';
+  heightNum: number; // 스크롤 높이의 배수값
+  scrollHeight: number; // 스크롤 높이
+  objs: HTMLElement | undefined;
+};
+const scene1 = ref<HTMLElement | undefined>(undefined);
+const scene2 = ref<HTMLElement | undefined>(undefined);
+const scene3 = ref<HTMLElement | undefined>(undefined);
+const scene4 = ref<HTMLElement | undefined>(undefined);
+
+const sceneInfo = ref<Scene[]>([
+  {
+    type: 'sticky',
+    heightNum: 5,
+    scrollHeight: 0,
+    objs: undefined,
+  },
+  {
+    type: 'normal',
+    heightNum: 5,
+    scrollHeight: 0,
+    objs: undefined,
+  },
+  {
+    type: 'sticky',
+    heightNum: 5,
+    scrollHeight: 0,
+    objs: undefined,
+  },
+  {
+    type: 'sticky',
+    heightNum: 5,
+    scrollHeight: 0,
+    objs: undefined,
+  },
+]);
+function setLayout() {
+  // 각 스크롤 섹션의 높이 세팅
+  const sceneObjs = [scene1.value, scene2.value, scene3.value, scene4.value];
+  for (let i = 0; i < sceneInfo.value.length; i++) {
+    const scene = sceneInfo.value[i];
+    if (scene) {
+      scene.scrollHeight = scene.heightNum * screen.height;
+      scene.objs = sceneObjs[i];
+    }
+  }
+}
+
+// NOTE: watch
+watch(
+  () => screen.height,
+  () => {
+    setLayout();
+  },
+);
+
+// NOTE: life-cycle
+onMounted(() => {
+  setLayout();
+});
 </script>
 
 <style scoped lang="scss">
@@ -183,9 +271,16 @@ a {
         text-align: center;
         line-height: 1.2;
       }
+      small {
+        display: block;
+        margin-bottom: 0.5em;
+        font-size: 1.2rem;
+      }
     }
     .description {
+      margin: 0 auto;
       padding: 0 1rem;
+      max-width: 1000px;
       font-size: 1.2rem;
       color: #888;
       strong {
@@ -195,6 +290,13 @@ a {
         color: $apple-primary;
       }
     }
+    .sticky-elem {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
   }
 
   #scroll-section-0 {
@@ -203,6 +305,106 @@ a {
       text-align: center;
     }
   }
+  #scroll-section-2 {
+    .main-message {
+      font-size: 3.5rem;
+    }
+    .desc-message {
+      width: 50%;
+      font-weight: bold;
+      .pin {
+        width: 1px;
+        height: 100px;
+        background: $apple-primary;
+      }
+    }
+  }
+  #scroll-section-3 {
+    p {
+      &.mid-message {
+        margin: 0 auto;
+        padding: 0 1rem;
+        max-width: 1000px;
+        font-size: 2rem;
+        color: #888;
+        strong {
+          color: $apple-primary;
+        }
+      }
+      &.canvas-caption {
+        margin: 0 auto;
+        padding: 0 1rem;
+        max-width: 1000px;
+        font-size: 1.2rem;
+        color: #888;
+      }
+    }
+  }
   // !SECTION
+  footer.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 7rem;
+    color: white;
+    background: darkorange;
+  }
 }
+
+#show-scene-0 #scroll-section-0 .sticky-elem,
+#show-scene-1 #scroll-section-1 .sticky-elem,
+#show-scene-2 #scroll-section-2 .sticky-elem,
+#show-scene-3 #scroll-section-3 .sticky-elem {
+  display: block !important;
+}
+
+// SECTION: MEDA QUERY
+@media (min-width: 1024px) {
+  .container {
+    // SECTION: PC CONTAINER
+    .scroll-section {
+      .main-message {
+        font-size: 4vw;
+        small {
+          font-size: 1.5rem;
+        }
+      }
+      .description {
+        font-size: 2rem;
+        strong {
+          font-size: 6rem;
+        }
+      }
+    }
+    #scroll-section-0 {
+      h1 {
+        font-size: 9vw;
+      }
+    }
+    #scroll-section-2 {
+      .main-message {
+        font-size: 6vw;
+      }
+      .desc-message {
+        width: 20%;
+        .pin {
+        }
+      }
+    }
+    #scroll-section-3 {
+      p {
+        &.mid-message {
+          font-size: 4vw;
+          strong {
+          }
+        }
+        &.canvas-caption {
+          font-size: 2rem;
+        }
+      }
+    }
+    // !SECTION
+  }
+}
+// !SECTION
 </style>
