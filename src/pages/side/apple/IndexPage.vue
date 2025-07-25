@@ -191,6 +191,18 @@ function setLayout() {
       scene.objs = sceneObjs[i];
     }
   }
+  let totalScrollHeight = 0;
+  for (let i = 0; i < sceneInfo.value.length; i++) {
+    const scene = sceneInfo.value[i];
+    if (scene) {
+      totalScrollHeight += scene.scrollHeight;
+      if (totalScrollHeight >= yOffset.value) {
+        currentScene.value = i;
+        break;
+      }
+    }
+  }
+  document.body.setAttribute('id', `show-scene-${currentScene.value}`);
 }
 const yOffset = ref<number>(0); // window.pageYOffset 대신 쓸 변수
 const prevScrollHeight = ref<number>(0); // 현재 스크롤 위치(yOffset) 보다 이전에 위치한 스크롤 섹션들의 스크롤 높이값의 합
@@ -213,12 +225,13 @@ const scrollLoop = () => {
   if (currentSceneInfo === undefined) return;
   if (yOffset.value > prevScrollHeight.value + currentSceneInfo?.scrollHeight) {
     currentScene.value++;
+    document.body.setAttribute('id', `show-scene-${currentScene.value}`);
   }
   if (yOffset.value < prevScrollHeight.value) {
     if (currentScene.value === 0) return;
     currentScene.value--;
+    document.body.setAttribute('id', `show-scene-${currentScene.value}`);
   }
-  console.log('current: ', currentScene.value);
 };
 
 // NOTE: watch
