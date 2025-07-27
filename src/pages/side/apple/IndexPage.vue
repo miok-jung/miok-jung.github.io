@@ -1,6 +1,6 @@
 <template>
   <q-page :style-fn="pageStyles">
-    <div class="container">
+    <div class="container" v-scroll="onScroll">
       <nav class="global-nav">
         <div class="global-nav-links">
           <a href="#" class="global-nav-item">Rooms</a>
@@ -25,16 +25,16 @@
         :style="{ height: sceneInfo[0]?.scrollHeight + 'px' }"
       >
         <h1>AirMug Pro</h1>
-        <div class="sticky-elem main-message">
+        <div ref="mainMessageA" class="sticky-elem main-message">
           <p>온전히 빠져들게 하는<br />최고급 세라믹</p>
         </div>
-        <div class="sticky-elem main-message">
+        <div ref="mainMessageB" class="sticky-elem main-message">
           <p>주변 맛을 느끼게 해주는<br />주변 맛 허용 모드</p>
         </div>
-        <div class="sticky-elem main-message">
+        <div ref="mainMessageC" class="sticky-elem main-message">
           <p>온종일 편안한<br />맞춤형 손잡이</p>
         </div>
-        <div class="sticky-elem main-message">
+        <div ref="mainMessageD" class="sticky-elem main-message">
           <p>새롭게 입가를<br />찾아온 매혹</p>
         </div>
       </section>
@@ -143,42 +143,66 @@ const pageStyles = () => {
   };
 };
 
-// NOTE: Scene 정보
+// NOTE: Scene 정보 업데이트 및 세팅
 type Scene = {
   type: 'sticky' | 'normal';
   heightNum: number; // 스크롤 높이의 배수값
   scrollHeight: number; // 스크롤 높이
-  objs: HTMLElement | undefined;
+  objs: {
+    container: HTMLElement | undefined;
+    mainMessageA?: HTMLElement | undefined;
+    mainMessageB?: HTMLElement | undefined;
+    mainMessageC?: HTMLElement | undefined;
+    mainMessageD?: HTMLElement | undefined;
+  };
+  values?: {
+    messageA_opacity: [number, number];
+  };
 };
 const scene1 = ref<HTMLElement | undefined>(undefined);
+const mainMessageA = ref<HTMLElement | undefined>(undefined);
+const mainMessageB = ref<HTMLElement | undefined>(undefined);
+const mainMessageC = ref<HTMLElement | undefined>(undefined);
+const mainMessageD = ref<HTMLElement | undefined>(undefined);
 const scene2 = ref<HTMLElement | undefined>(undefined);
 const scene3 = ref<HTMLElement | undefined>(undefined);
 const scene4 = ref<HTMLElement | undefined>(undefined);
-
 const sceneInfo = ref<Scene[]>([
   {
     type: 'sticky',
     heightNum: 5,
     scrollHeight: 0,
-    objs: undefined,
+    objs: {
+      container: undefined,
+      mainMessageA: undefined,
+      mainMessageB: undefined,
+      mainMessageC: undefined,
+      mainMessageD: undefined,
+    },
   },
   {
     type: 'normal',
     heightNum: 5,
     scrollHeight: 0,
-    objs: undefined,
+    objs: {
+      container: undefined,
+    },
   },
   {
     type: 'sticky',
     heightNum: 5,
     scrollHeight: 0,
-    objs: undefined,
+    objs: {
+      container: undefined,
+    },
   },
   {
     type: 'sticky',
     heightNum: 5,
     scrollHeight: 0,
-    objs: undefined,
+    objs: {
+      container: undefined,
+    },
   },
 ]);
 function setLayout() {
@@ -188,10 +212,86 @@ function setLayout() {
     const scene = sceneInfo.value[i];
     if (scene) {
       scene.scrollHeight = scene.heightNum * screen.height;
-      scene.objs = sceneObjs[i];
+      scene.objs.container = sceneObjs[i];
+    }
+  }
+  let totalScrollHeight = 0;
+  for (let i = 0; i < sceneInfo.value.length; i++) {
+    const scene = sceneInfo.value[i];
+    if (scene) {
+      totalScrollHeight += scene.scrollHeight;
+      if (totalScrollHeight >= yOffset.value) {
+        currentScene.value = i;
+        break;
+      }
+    }
+  }
+  document.body.setAttribute('id', `show-scene-${currentScene.value}`);
+}
+
+// NOTE: 스크롤 정보 업데이트
+const yOffset = ref<number>(0); // window.pageYOffset 대신 쓸 변수
+const prevScrollHeight = ref<number>(0); // 현재 스크롤 위치(yOffset) 보다 이전에 위치한 스크롤 섹션들의 스크롤 높이값의 합
+const currentScene = ref<number>(0);
+const onScroll = (pos: number) => {
+  yOffset.value = pos;
+  scrollLoop();
+};
+
+// function calcValue(values: number[], currentYOffset: number) {}
+function playAnimation() {
+  const scene = sceneInfo.value[currentScene.value];
+  if (scene === undefined) return;
+
+  // const objs = scene.objs;
+  const values = scene.values;
+  if (values === undefined) return;
+  switch (currentScene.value) {
+    case 0: {
+      const messageA_opacity_0 = values.messageA_opacity[0];
+      const messageA_opacity_1 = values.messageA_opacity[1];
+
+      console.log('play 0', messageA_opacity_0, messageA_opacity_1);
+      break;
+    }
+    case 1: {
+      console.log('play 1');
+      break;
+    }
+    case 2: {
+      console.log('play 2');
+      break;
+    }
+    case 3: {
+      console.log('play 3');
+      break;
     }
   }
 }
+const scrollLoop = () => {
+  prevScrollHeight.value = 0;
+
+  for (let i = 0; i < currentScene.value; i++) {
+    const sceneInformation = sceneInfo.value[i];
+    if (sceneInformation) {
+      prevScrollHeight.value += sceneInformation.scrollHeight;
+    }
+  }
+
+  const currentSceneInfo = sceneInfo.value[currentScene.value];
+  if (currentSceneInfo === undefined) return;
+  if (yOffset.value > prevScrollHeight.value + currentSceneInfo?.scrollHeight) {
+    currentScene.value++;
+    document.body.setAttribute('id', `show-scene-${currentScene.value}`);
+  }
+  if (yOffset.value < prevScrollHeight.value) {
+    if (currentScene.value === 0) return;
+    currentScene.value--;
+    document.body.setAttribute('id', `show-scene-${currentScene.value}`);
+  }
+  // mainMessage 애니메이션 실행
+  playAnimation();
+};
 
 // NOTE: watch
 watch(
@@ -222,7 +322,11 @@ a {
 
 .container {
   nav.global-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
     padding: 0;
+    width: 100%;
     height: 44px;
     .global-nav-links {
       display: flex;
@@ -234,6 +338,10 @@ a {
     }
   }
   .local-nav {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    width: 100%;
     height: 52px;
     border-bottom: 1px solid #ddd;
     .local-nav-links {
