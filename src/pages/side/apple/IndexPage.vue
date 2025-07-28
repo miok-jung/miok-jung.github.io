@@ -179,6 +179,9 @@ const sceneInfo = ref<Scene[]>([
       mainMessageC: undefined,
       mainMessageD: undefined,
     },
+    values: {
+      messageA_opacity: [0, 1],
+    },
   },
   {
     type: 'normal',
@@ -240,18 +243,21 @@ const onScroll = (pos: number) => {
 
 // function calcValue(values: number[], currentYOffset: number) {}
 function playAnimation() {
+  const currentYOffset = yOffset.value - prevScrollHeight.value;
+  console.log('current: ', currentScene.value, currentYOffset);
   const scene = sceneInfo.value[currentScene.value];
   if (scene === undefined) return;
 
-  // const objs = scene.objs;
   const values = scene.values;
   if (values === undefined) return;
+
   switch (currentScene.value) {
     case 0: {
-      const messageA_opacity_0 = values.messageA_opacity[0];
-      const messageA_opacity_1 = values.messageA_opacity[1];
+      // const messageA_opacity_0 = values.messageA_opacity[0];
+      // const messageA_opacity_1 = values.messageA_opacity[1];
 
-      console.log('play 0', messageA_opacity_0, messageA_opacity_1);
+      // console.log('play 0', calcValue(values, currentYOffset));
+
       break;
     }
     case 1: {
@@ -270,7 +276,6 @@ function playAnimation() {
 }
 const scrollLoop = () => {
   prevScrollHeight.value = 0;
-
   for (let i = 0; i < currentScene.value; i++) {
     const sceneInformation = sceneInfo.value[i];
     if (sceneInformation) {
@@ -280,16 +285,17 @@ const scrollLoop = () => {
 
   const currentSceneInfo = sceneInfo.value[currentScene.value];
   if (currentSceneInfo === undefined) return;
-  if (yOffset.value > prevScrollHeight.value + currentSceneInfo?.scrollHeight) {
+  if (yOffset.value > prevScrollHeight.value + currentSceneInfo.scrollHeight) {
     currentScene.value++;
     document.body.setAttribute('id', `show-scene-${currentScene.value}`);
+  } else if (yOffset.value < prevScrollHeight.value) {
+    if (currentScene.value === 0) {
+      // 현재 씬이 0이어도 playAnimation은 실행되어야 함
+    } else {
+      currentScene.value--;
+      document.body.setAttribute('id', `show-scene-${currentScene.value}`);
+    }
   }
-  if (yOffset.value < prevScrollHeight.value) {
-    if (currentScene.value === 0) return;
-    currentScene.value--;
-    document.body.setAttribute('id', `show-scene-${currentScene.value}`);
-  }
-  // mainMessage 애니메이션 실행
   playAnimation();
 };
 
@@ -303,7 +309,9 @@ watch(
 
 // NOTE: life-cycle
 onMounted(() => {
+  yOffset.value = window.pageYOffset;
   setLayout();
+  scrollLoop();
 });
 </script>
 
