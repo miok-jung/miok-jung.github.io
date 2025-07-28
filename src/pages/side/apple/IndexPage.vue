@@ -241,22 +241,33 @@ const onScroll = (pos: number) => {
   scrollLoop();
 };
 
-// function calcValue(values: number[], currentYOffset: number) {}
+function calcValue(values: [number, number], currentYOffset: number) {
+  let rv = 0;
+  // 현재 씬에서 스크롤된 범위를 비율로 구하기
+  const sceneInformation = sceneInfo.value[currentScene.value];
+  if (sceneInformation === undefined) return;
+  const scrollRatio: number = currentYOffset / sceneInformation.scrollHeight;
+  rv = scrollRatio * (values[1] - values[0]) + values[0];
+  console.log('rv', rv);
+  return rv;
+}
 function playAnimation() {
   const currentYOffset = yOffset.value - prevScrollHeight.value;
-  console.log('current: ', currentScene.value, currentYOffset);
   const scene = sceneInfo.value[currentScene.value];
   if (scene === undefined) return;
 
   const values = scene.values;
   if (values === undefined) return;
 
+  console.log('play');
   switch (currentScene.value) {
     case 0: {
-      // const messageA_opacity_0 = values.messageA_opacity[0];
-      // const messageA_opacity_1 = values.messageA_opacity[1];
+      const messageA_opacity_in = calcValue(values.messageA_opacity, currentYOffset);
 
-      // console.log('play 0', calcValue(values, currentYOffset));
+      if (mainMessageA.value) {
+        mainMessageA.value.style.opacity = String(messageA_opacity_in);
+        console.log('messageA_opacity_in', messageA_opacity_in);
+      }
 
       break;
     }
@@ -382,6 +393,7 @@ a {
       margin: 5px 0;
       height: 3em;
       font-size: 2.5rem;
+      opacity: 0;
       p {
         font-weight: bold;
         text-align: center;
