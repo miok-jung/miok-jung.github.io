@@ -127,10 +127,10 @@
 </template>
 
 <script setup lang="ts">
-import { useQuasar } from 'quasar'
-import { onMounted, ref, watch } from 'vue'
+import { useQuasar } from 'quasar';
+import { onMounted, ref, watch } from 'vue';
 
-const { screen } = useQuasar()
+const { screen } = useQuasar();
 
 const pageStyles = () => {
   return {
@@ -140,43 +140,43 @@ const pageStyles = () => {
     color: 'rgb(29, 29, 31)',
     letterSpacing: '0.05em',
     background: 'white',
-  }
-}
+  };
+};
 
 // NOTE: Scene 정보 업데이트 및 세팅
 type StartAndEnd = {
-  start: number
-  end: number
-}
+  start: number;
+  end: number;
+};
 type Scene = {
-  type: 'sticky' | 'normal'
-  heightNum: number // 스크롤 높이의 배수값
-  scrollHeight: number // 스크롤 높이
+  type: 'sticky' | 'normal';
+  heightNum: number; // 스크롤 높이의 배수값
+  scrollHeight: number; // 스크롤 높이
   objs: {
-    container: HTMLElement | undefined
-    mainMessageA?: HTMLElement | undefined
-    mainMessageB?: HTMLElement | undefined
-    mainMessageC?: HTMLElement | undefined
-    mainMessageD?: HTMLElement | undefined
-  }
+    container: HTMLElement | undefined;
+    mainMessageA?: HTMLElement | undefined;
+    mainMessageB?: HTMLElement | undefined;
+    mainMessageC?: HTMLElement | undefined;
+    mainMessageD?: HTMLElement | undefined;
+  };
   values?: {
-    messageA_opacity_in: [number, number, StartAndEnd]
-    messageA_translateY_in: [number, number, StartAndEnd]
-    messageA_opacity_out: [number, number, StartAndEnd]
-    messageA_translateY_out: [number, number, StartAndEnd]
+    messageA_opacity_in: [number, number, StartAndEnd];
+    messageA_translateY_in: [number, number, StartAndEnd];
+    messageA_opacity_out: [number, number, StartAndEnd];
+    messageA_translateY_out: [number, number, StartAndEnd];
     // messageB_opacity_in: [number, number, StartAndEnd]
     // messageC_opacity_in: [number, number, StartAndEnd]
     // messageD_opacity_in: [number, number, StartAndEnd]
-  }
-}
-const scene1 = ref<HTMLElement | undefined>(undefined)
-const mainMessageA = ref<HTMLElement | undefined>(undefined)
-const mainMessageB = ref<HTMLElement | undefined>(undefined)
-const mainMessageC = ref<HTMLElement | undefined>(undefined)
-const mainMessageD = ref<HTMLElement | undefined>(undefined)
-const scene2 = ref<HTMLElement | undefined>(undefined)
-const scene3 = ref<HTMLElement | undefined>(undefined)
-const scene4 = ref<HTMLElement | undefined>(undefined)
+  };
+};
+const scene1 = ref<HTMLElement | undefined>(undefined);
+const mainMessageA = ref<HTMLElement | undefined>(undefined);
+const mainMessageB = ref<HTMLElement | undefined>(undefined);
+const mainMessageC = ref<HTMLElement | undefined>(undefined);
+const mainMessageD = ref<HTMLElement | undefined>(undefined);
+const scene2 = ref<HTMLElement | undefined>(undefined);
+const scene3 = ref<HTMLElement | undefined>(undefined);
+const scene4 = ref<HTMLElement | undefined>(undefined);
 const sceneInfo = ref<Scene[]>([
   {
     type: 'sticky',
@@ -223,164 +223,173 @@ const sceneInfo = ref<Scene[]>([
       container: undefined,
     },
   },
-])
+]);
+
 function setLayout() {
   // 각 스크롤 섹션의 높이 세팅
-  const sceneObjs = [scene1.value, scene2.value, scene3.value, scene4.value]
+  const sceneObjs = [scene1.value, scene2.value, scene3.value, scene4.value];
   for (let i = 0; i < sceneInfo.value.length; i++) {
-    const scene = sceneInfo.value[i]
+    const scene = sceneInfo.value[i];
     if (scene) {
-      scene.scrollHeight = scene.heightNum * screen.height
-      scene.objs.container = sceneObjs[i]
-    }
-  }
-  let totalScrollHeight = 0
-  for (let i = 0; i < sceneInfo.value.length; i++) {
-    const scene = sceneInfo.value[i]
-    if (scene) {
-      totalScrollHeight += scene.scrollHeight
-      if (totalScrollHeight >= yOffset.value) {
-        currentScene.value = i
-        break
+      scene.objs.container = sceneObjs[i];
+      if (scene.type === 'sticky') {
+        scene.scrollHeight = scene.heightNum * screen.height;
+        console.log('scene container', scene.objs.container);
+      } else if (scene.type === 'normal') {
+        // scene.objs.container가 존재하고 렌더링이 완료된 후에만 offsetHeight을 접근한다.
+        if (scene.objs.container instanceof HTMLElement) {
+          // = scene.objs.container.offsetHeight;
+        }
       }
     }
   }
-  document.body.setAttribute('id', `show-scene-${currentScene.value}`)
+  let totalScrollHeight = 0;
+  for (let i = 0; i < sceneInfo.value.length; i++) {
+    const scene = sceneInfo.value[i];
+    if (scene) {
+      totalScrollHeight += scene.scrollHeight;
+      if (totalScrollHeight >= yOffset.value) {
+        currentScene.value = i;
+        break;
+      }
+    }
+  }
+  document.body.setAttribute('id', `show-scene-${currentScene.value}`);
 }
 
 // NOTE: 스크롤 정보 업데이트
-const yOffset = ref<number>(0) // window.pageYOffset 대신 쓸 변수
-const prevScrollHeight = ref<number>(0) // 현재 스크롤 위치(yOffset) 보다 이전에 위치한 스크롤 섹션들의 스크롤 높이값의 합
-const currentScene = ref<number>(0) // 현재 활성화된(눈 앞에 보고 있는) 씬
-const enterNewScene = ref<boolean>(false) // 새로운 scene이 시작된 순간을 true
+const yOffset = ref<number>(0); // window.pageYOffset 대신 쓸 변수
+const prevScrollHeight = ref<number>(0); // 현재 스크롤 위치(yOffset) 보다 이전에 위치한 스크롤 섹션들의 스크롤 높이값의 합
+const currentScene = ref<number>(0); // 현재 활성화된(눈 앞에 보고 있는) 씬
+const enterNewScene = ref<boolean>(false); // 새로운 scene이 시작된 순간을 true
 const onScroll = (pos: number) => {
-  yOffset.value = pos
-  scrollLoop()
-}
+  yOffset.value = pos;
+  scrollLoop();
+};
 
 function calcValue(values: [number, number, StartAndEnd], currentYOffset: number) {
-  let rv = 0
+  let rv = 0;
   // 현재 씬에서 스크롤된 범위를 비율로 구하기
-  const sceneInformation = sceneInfo.value[currentScene.value]
-  if (sceneInformation === undefined) return
+  const sceneInformation = sceneInfo.value[currentScene.value];
+  if (sceneInformation === undefined) return;
 
-  const scrollHeight = sceneInformation.scrollHeight
-  const scrollRatio: number = currentYOffset / sceneInformation.scrollHeight
+  const scrollHeight = sceneInformation.scrollHeight;
+  const scrollRatio: number = currentYOffset / sceneInformation.scrollHeight;
 
   if (values.length === 3) {
     // start ~ end 사이에 애니메이션 실행
-    const partScrollStart = values[2].start * scrollHeight
-    const partScrollEnd = values[2].end * scrollHeight
-    const partScrollHeight = partScrollEnd - partScrollStart
+    const partScrollStart = values[2].start * scrollHeight;
+    const partScrollEnd = values[2].end * scrollHeight;
+    const partScrollHeight = partScrollEnd - partScrollStart;
 
     if (currentYOffset >= partScrollStart && currentYOffset <= partScrollEnd) {
       rv =
         ((currentYOffset - partScrollStart) / partScrollHeight) * (values[1] - values[0]) +
-        values[0]
+        values[0];
     } else if (currentYOffset < partScrollStart) {
-      rv = values[0]
+      rv = values[0];
     } else if (currentYOffset < partScrollEnd) {
-      rv = values[1]
+      rv = values[1];
     }
   } else {
-    rv = scrollRatio * (values[1] - values[0]) + values[0]
+    rv = scrollRatio * (values[1] - values[0]) + values[0];
   }
 
   // console.log('rv', rv);
-  return rv
+  return rv;
 }
 function playAnimation() {
-  const scene = sceneInfo.value[currentScene.value]
-  if (scene === undefined) return
+  const scene = sceneInfo.value[currentScene.value];
+  if (scene === undefined) return;
 
-  const values = scene.values
-  if (values === undefined) return
+  const values = scene.values;
+  if (values === undefined) return;
 
-  const currentYOffset = yOffset.value - prevScrollHeight.value
-  const scrollHeight = scene.scrollHeight
-  const scrollRatio = (yOffset.value - prevScrollHeight.value) / scrollHeight
+  const currentYOffset = yOffset.value - prevScrollHeight.value;
+  const scrollHeight = scene.scrollHeight;
+  const scrollRatio = (yOffset.value - prevScrollHeight.value) / scrollHeight;
   switch (currentScene.value) {
     case 0: {
-      const messageA_opacity_in = calcValue(values.messageA_opacity_in, currentYOffset)
-      const messageA_translateY_in = calcValue(values.messageA_translateY_in, currentYOffset)
-      const messageA_opacity_out = calcValue(values.messageA_opacity_out, currentYOffset)
-      const messageA_translateY_out = calcValue(values.messageA_translateY_out, currentYOffset)
+      const messageA_opacity_in = calcValue(values.messageA_opacity_in, currentYOffset);
+      const messageA_translateY_in = calcValue(values.messageA_translateY_in, currentYOffset);
+      const messageA_opacity_out = calcValue(values.messageA_opacity_out, currentYOffset);
+      const messageA_translateY_out = calcValue(values.messageA_translateY_out, currentYOffset);
 
       if (mainMessageA.value) {
         if (scrollRatio <= 0.22) {
           // in
-          mainMessageA.value.style.opacity = String(messageA_opacity_in)
-          mainMessageA.value.style.transform = `translateY(${messageA_translateY_in}%)`
+          mainMessageA.value.style.opacity = String(messageA_opacity_in);
+          mainMessageA.value.style.transform = `translateY(${messageA_translateY_in}%)`;
         } else {
           // out
-          mainMessageA.value.style.opacity = String(messageA_opacity_out)
-          mainMessageA.value.style.transform = `translateY(${messageA_translateY_out}%)`
+          mainMessageA.value.style.opacity = String(messageA_opacity_out);
+          mainMessageA.value.style.transform = `translateY(${messageA_translateY_out}%)`;
         }
 
-        console.log('messageA_opacity_in', messageA_opacity_in)
+        console.log('messageA_opacity_in', messageA_opacity_in);
       }
 
-      break
+      break;
     }
     case 1: {
-      console.log('play 1')
+      console.log('play 1');
 
-      break
+      break;
     }
     case 2: {
-      console.log('play 2')
-      break
+      console.log('play 2');
+      break;
     }
     case 3: {
-      console.log('play 3')
-      break
+      console.log('play 3');
+      break;
     }
   }
 }
 const scrollLoop = () => {
-  enterNewScene.value = false
-  prevScrollHeight.value = 0
+  enterNewScene.value = false;
+  prevScrollHeight.value = 0;
   for (let i = 0; i < currentScene.value; i++) {
-    const sceneInformation = sceneInfo.value[i]
+    const sceneInformation = sceneInfo.value[i];
     if (sceneInformation) {
-      prevScrollHeight.value += sceneInformation.scrollHeight
+      prevScrollHeight.value += sceneInformation.scrollHeight;
     }
   }
 
-  const currentSceneInfo = sceneInfo.value[currentScene.value]
-  if (currentSceneInfo === undefined) return
+  const currentSceneInfo = sceneInfo.value[currentScene.value];
+  if (currentSceneInfo === undefined) return;
   if (yOffset.value > prevScrollHeight.value + currentSceneInfo.scrollHeight) {
-    enterNewScene.value = true
-    currentScene.value++
-    document.body.setAttribute('id', `show-scene-${currentScene.value}`)
+    enterNewScene.value = true;
+    currentScene.value++;
+    document.body.setAttribute('id', `show-scene-${currentScene.value}`);
   } else if (yOffset.value < prevScrollHeight.value) {
     if (currentScene.value === 0) {
       // 현재 씬이 0이어도 playAnimation은 실행되어야 함
     } else {
-      enterNewScene.value = true
-      currentScene.value--
-      document.body.setAttribute('id', `show-scene-${currentScene.value}`)
+      enterNewScene.value = true;
+      currentScene.value--;
+      document.body.setAttribute('id', `show-scene-${currentScene.value}`);
     }
   }
 
-  if (enterNewScene.value) return
-  playAnimation()
-}
+  if (enterNewScene.value) return;
+  playAnimation();
+};
 
 // NOTE: watch
 watch(
   () => screen.height,
   () => {
-    setLayout()
+    setLayout();
   },
-)
+);
 
 // NOTE: life-cycle
 onMounted(() => {
-  yOffset.value = window.pageYOffset
-  setLayout()
-  scrollLoop()
-})
+  yOffset.value = window.pageYOffset;
+  setLayout();
+  scrollLoop();
+});
 </script>
 
 <style scoped lang="scss">
@@ -485,12 +494,19 @@ a {
   }
 
   #scroll-section-0 {
+    border: 2px dashed red;
     h1 {
       font-size: 4rem;
       text-align: center;
     }
   }
+  #scroll-section-1 {
+    border: 2px dashed green;
+    // 임시로 강제로 넣음;
+    height: inherit !important;
+  }
   #scroll-section-2 {
+    border: 2px dashed peachpuff;
     .main-message {
       font-size: 3.5rem;
     }
@@ -505,6 +521,7 @@ a {
     }
   }
   #scroll-section-3 {
+    border: 2px dashed aqua;
     p {
       &.mid-message {
         margin: 0 auto;
