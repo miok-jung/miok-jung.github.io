@@ -76,13 +76,13 @@
         class="scroll-section"
         :style="{ height: sceneInfo[2]?.scrollHeight + 'px' }"
       >
-        <div class="sticky-elem main-message">
+        <div class="sticky-elem main-message a">
           <p>
             <small>편안한 촉감</small>
             입과 하나 되다
           </p>
         </div>
-        <div class="sticky-elem desc-message">
+        <div class="sticky-elem desc-message b">
           <p>
             편안한 목넘김을 완성하는 디테일한 여러 구성 요소를, 우리는 이를 하나하나 새롭게 살피고
             재구성하는 과정을 거쳐 새로운 수준의 머그, AirMug Pro를 만들었습니다. 입에 뭔가 댔다는
@@ -90,7 +90,7 @@
           </p>
           <div class="pin"></div>
         </div>
-        <div class="sticky-elem desc-message">
+        <div class="sticky-elem desc-message c">
           <p>디자인 앤 퀄리티 오브 스웨덴,<br />메이드 인 차이나</p>
           <div class="pin"></div>
         </div>
@@ -307,26 +307,23 @@ function playAnimation() {
 
   const currentYOffset = yOffset.value - prevScrollHeight.value;
   const scrollHeight = scene.scrollHeight;
-  const scrollRatio = (yOffset.value - prevScrollHeight.value) / scrollHeight;
+  const scrollRatio = currentYOffset / scrollHeight;
   switch (currentScene.value) {
     case 0: {
-      const messageA_opacity_in = calcValue(values.messageA_opacity_in, currentYOffset);
-      const messageA_translateY_in = calcValue(values.messageA_translateY_in, currentYOffset);
-      const messageA_opacity_out = calcValue(values.messageA_opacity_out, currentYOffset);
-      const messageA_translateY_out = calcValue(values.messageA_translateY_out, currentYOffset);
-
       if (mainMessageA.value) {
         if (scrollRatio <= 0.22) {
           // in
-          mainMessageA.value.style.opacity = String(messageA_opacity_in);
-          mainMessageA.value.style.transform = `translateY(${messageA_translateY_in}%)`;
+          mainMessageA.value.style.opacity = String(
+            calcValue(values.messageA_opacity_in, currentYOffset),
+          );
+          mainMessageA.value.style.transform = `translateY(${calcValue(values.messageA_translateY_in, currentYOffset)}%)`;
         } else {
           // out
-          mainMessageA.value.style.opacity = String(messageA_opacity_out);
-          mainMessageA.value.style.transform = `translateY(${messageA_translateY_out}%)`;
+          mainMessageA.value.style.opacity = String(
+            calcValue(values.messageA_opacity_out, currentYOffset),
+          );
+          mainMessageA.value.style.transform = `translateY(${calcValue(values.messageA_translateY_out, currentYOffset)}%)`;
         }
-
-        console.log('messageA_opacity_in', messageA_opacity_in);
       }
 
       break;
@@ -507,6 +504,14 @@ a {
   }
   #scroll-section-2 {
     border: 2px dashed peachpuff;
+    .b {
+      top: 10%;
+      left: 40%;
+    }
+    .c {
+      top: 15%;
+      left: 45%;
+    }
     .main-message {
       font-size: 3.5rem;
     }
@@ -584,6 +589,13 @@ a {
       }
     }
     #scroll-section-2 {
+      .b {
+        top: 20%;
+        left: 53%;
+      }
+      .c {
+        left: 55%;
+      }
       .main-message {
         font-size: 6vw;
       }
