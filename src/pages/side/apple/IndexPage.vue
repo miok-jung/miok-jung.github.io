@@ -76,23 +76,23 @@
         class="scroll-section"
         :style="{ height: sceneInfo[2]?.scrollHeight + 'px' }"
       >
-        <div class="sticky-elem main-message a">
+        <div ref="scene3MessageA" class="sticky-elem main-message a">
           <p>
             <small>편안한 촉감</small>
             입과 하나 되다
           </p>
         </div>
-        <div class="sticky-elem desc-message b">
+        <div ref="scene3MessageB" class="sticky-elem desc-message b">
           <p>
             편안한 목넘김을 완성하는 디테일한 여러 구성 요소를, 우리는 이를 하나하나 새롭게 살피고
             재구성하는 과정을 거쳐 새로운 수준의 머그, AirMug Pro를 만들었습니다. 입에 뭔가 댔다는
             감각은 어느새 사라지고 오롯이 당신과 음료만 남게 되죠.
           </p>
-          <div class="pin"></div>
+          <div ref="scenePinB" class="pin"></div>
         </div>
-        <div class="sticky-elem desc-message c">
+        <div ref="scene3MessageC" class="sticky-elem desc-message c">
           <p>디자인 앤 퀄리티 오브 스웨덴,<br />메이드 인 차이나</p>
-          <div class="pin"></div>
+          <div ref="scenePinC" class="pin"></div>
         </div>
       </section>
       <!-- !SECTION -->
@@ -108,7 +108,7 @@
           아이디어를 광활하게 펼칠<br />
           아름답고 부드러운 음료 공간.
         </p>
-        <p class="canvas-caption">
+        <p ref="canvasCaption" class="canvas-caption">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel, corporis. Aliquid
           voluptatem assumenda ullam ut expedita, officia possimus, deleniti praesentium voluptas
           hic nulla tempore nemo blanditiis velit aperiam neque. Repellat quia vitae expedita
@@ -150,7 +150,7 @@ type StartAndEnd = {
 };
 type Scene = {
   type: 'sticky' | 'normal';
-  heightNum: number; // 스크롤 높이의 배수값
+  heightNum?: number; // 스크롤 높이의 배수값
   scrollHeight: number; // 스크롤 높이
   objs: {
     container: HTMLElement | undefined;
@@ -161,12 +161,27 @@ type Scene = {
   };
   values?: {
     messageA_opacity_in: [number, number, StartAndEnd];
+    messageB_opacity_in: [number, number, StartAndEnd];
+    messageC_opacity_in: [number, number, StartAndEnd];
+    messageD_opacity_in?: [number, number, StartAndEnd];
     messageA_translateY_in: [number, number, StartAndEnd];
+    messageB_translateY_in: [number, number, StartAndEnd];
+    messageC_translateY_in: [number, number, StartAndEnd];
+    messageD_translateY_in?: [number, number, StartAndEnd];
     messageA_opacity_out: [number, number, StartAndEnd];
+    messageB_opacity_out: [number, number, StartAndEnd];
+    messageC_opacity_out: [number, number, StartAndEnd];
+    messageD_opacity_out?: [number, number, StartAndEnd];
     messageA_translateY_out: [number, number, StartAndEnd];
-    // messageB_opacity_in: [number, number, StartAndEnd]
-    // messageC_opacity_in: [number, number, StartAndEnd]
-    // messageD_opacity_in: [number, number, StartAndEnd]
+    messageB_translateY_out: [number, number, StartAndEnd];
+    messageC_translateY_out: [number, number, StartAndEnd];
+    messageD_translateY_out?: [number, number, StartAndEnd];
+    pinB_scaleY?: [number, number, StartAndEnd];
+    pinC_scaleY?: [number, number, StartAndEnd];
+    pinB_opacity_in?: [number, number, StartAndEnd];
+    pinC_opacity_in?: [number, number, StartAndEnd];
+    pinB_opacity_out?: [number, number, StartAndEnd];
+    pinC_opacity_out?: [number, number, StartAndEnd];
   };
 };
 const scene1 = ref<HTMLElement | undefined>(undefined);
@@ -174,9 +189,18 @@ const mainMessageA = ref<HTMLElement | undefined>(undefined);
 const mainMessageB = ref<HTMLElement | undefined>(undefined);
 const mainMessageC = ref<HTMLElement | undefined>(undefined);
 const mainMessageD = ref<HTMLElement | undefined>(undefined);
+
 const scene2 = ref<HTMLElement | undefined>(undefined);
+
 const scene3 = ref<HTMLElement | undefined>(undefined);
+const scene3MessageA = ref<HTMLElement | undefined>(undefined);
+const scene3MessageB = ref<HTMLElement | undefined>(undefined);
+const scene3MessageC = ref<HTMLElement | undefined>(undefined);
+const scenePinB = ref<HTMLElement | undefined>(undefined);
+const scenePinC = ref<HTMLElement | undefined>(undefined);
+
 const scene4 = ref<HTMLElement | undefined>(undefined);
+const canvasCaption = ref<HTMLElement | undefined>(undefined);
 const sceneInfo = ref<Scene[]>([
   {
     type: 'sticky',
@@ -191,17 +215,25 @@ const sceneInfo = ref<Scene[]>([
     },
     values: {
       messageA_opacity_in: [0, 1, { start: 0.1, end: 0.2 }],
+      messageB_opacity_in: [0, 1, { start: 0.3, end: 0.4 }],
+      messageC_opacity_in: [0, 1, { start: 0.5, end: 0.6 }],
+      messageD_opacity_in: [0, 1, { start: 0.7, end: 0.8 }],
       messageA_translateY_in: [20, 0, { start: 0.1, end: 0.2 }],
-      messageA_opacity_out: [0, 1, { start: 0.25, end: 0.3 }],
+      messageB_translateY_in: [20, 0, { start: 0.3, end: 0.4 }],
+      messageC_translateY_in: [20, 0, { start: 0.5, end: 0.6 }],
+      messageD_translateY_in: [20, 0, { start: 0.7, end: 0.8 }],
+      messageA_opacity_out: [1, 0, { start: 0.25, end: 0.3 }],
+      messageB_opacity_out: [1, 0, { start: 0.45, end: 0.5 }],
+      messageC_opacity_out: [1, 0, { start: 0.65, end: 0.7 }],
+      messageD_opacity_out: [1, 0, { start: 0.85, end: 0.9 }],
       messageA_translateY_out: [0, -20, { start: 0.25, end: 0.3 }],
-      // messageB_opacity_in: [0, 1, { start: 0.3, end: 0.4 }],
-      // messageC_opacity_in: [0, 1, { start: 0.5, end: 0.6 }],
-      // messageD_opacity_in: [0, 1, { start: 0.7, end: 0.8 }],
+      messageB_translateY_out: [0, -20, { start: 0.45, end: 0.5 }],
+      messageC_translateY_out: [0, -20, { start: 0.65, end: 0.7 }],
+      messageD_translateY_out: [0, -20, { start: 0.85, end: 0.9 }],
     },
   },
   {
     type: 'normal',
-    heightNum: 5,
     scrollHeight: 0,
     objs: {
       container: undefined,
@@ -213,6 +245,26 @@ const sceneInfo = ref<Scene[]>([
     scrollHeight: 0,
     objs: {
       container: undefined,
+    },
+    values: {
+      messageA_translateY_in: [20, 0, { start: 0.15, end: 0.2 }],
+      messageB_translateY_in: [30, 0, { start: 0.5, end: 0.55 }],
+      messageC_translateY_in: [30, 0, { start: 0.72, end: 0.77 }],
+      messageA_opacity_in: [0, 1, { start: 0.15, end: 0.2 }],
+      messageB_opacity_in: [0, 1, { start: 0.5, end: 0.55 }],
+      messageC_opacity_in: [0, 1, { start: 0.72, end: 0.77 }],
+      messageA_translateY_out: [0, -20, { start: 0.3, end: 0.35 }],
+      messageB_translateY_out: [0, -20, { start: 0.58, end: 0.63 }],
+      messageC_translateY_out: [0, -20, { start: 0.85, end: 0.9 }],
+      messageA_opacity_out: [1, 0, { start: 0.3, end: 0.35 }],
+      messageB_opacity_out: [1, 0, { start: 0.58, end: 0.63 }],
+      messageC_opacity_out: [1, 0, { start: 0.85, end: 0.9 }],
+      pinB_scaleY: [0.5, 1, { start: 0.5, end: 0.55 }],
+      pinC_scaleY: [0.5, 1, { start: 0.72, end: 0.77 }],
+      pinB_opacity_in: [0, 1, { start: 0.5, end: 0.55 }],
+      pinC_opacity_in: [0, 1, { start: 0.72, end: 0.77 }],
+      pinB_opacity_out: [1, 0, { start: 0.58, end: 0.63 }],
+      pinC_opacity_out: [1, 0, { start: 0.85, end: 0.9 }],
     },
   },
   {
@@ -233,7 +285,7 @@ function setLayout() {
     if (scene) {
       scene.objs.container = sceneObjs[i];
       if (scene.type === 'sticky') {
-        scene.scrollHeight = scene.heightNum * screen.height;
+        scene.scrollHeight = (scene.heightNum as number) * screen.height;
         console.log('scene container', scene.objs.container);
       } else if (scene.type === 'normal') {
         // scene.objs.container가 존재하고 렌더링이 완료된 후에만 offsetHeight을 접근한다.
@@ -310,22 +362,82 @@ function playAnimation() {
   const scrollRatio = currentYOffset / scrollHeight;
   switch (currentScene.value) {
     case 0: {
+      // 첫 번째 애니메이션
       if (mainMessageA.value) {
         if (scrollRatio <= 0.22) {
           // in
           mainMessageA.value.style.opacity = String(
             calcValue(values.messageA_opacity_in, currentYOffset),
           );
-          mainMessageA.value.style.transform = `translateY(${calcValue(values.messageA_translateY_in, currentYOffset)}%)`;
+          mainMessageA.value.style.transform = `translate3d(0, ${calcValue(values.messageA_translateY_in, currentYOffset)}%, 0)`;
         } else {
           // out
           mainMessageA.value.style.opacity = String(
             calcValue(values.messageA_opacity_out, currentYOffset),
           );
-          mainMessageA.value.style.transform = `translateY(${calcValue(values.messageA_translateY_out, currentYOffset)}%)`;
+          mainMessageA.value.style.transform = `translate3d(0, ${calcValue(values.messageA_translateY_out, currentYOffset)}%, 0)`;
         }
       }
 
+      // 두 번째 애니메이션
+      if (mainMessageB.value) {
+        if (scrollRatio <= 0.42) {
+          // in
+          mainMessageB.value.style.opacity = String(
+            calcValue(values.messageB_opacity_in, currentYOffset),
+          );
+          mainMessageB.value.style.transform = `translate3d(0, ${calcValue(values.messageB_translateY_in, currentYOffset)}%, 0)`;
+        } else {
+          // out
+          mainMessageB.value.style.opacity = String(
+            calcValue(values.messageB_opacity_out, currentYOffset),
+          );
+          mainMessageB.value.style.transform = `translate3d(0, ${calcValue(values.messageB_translateY_out, currentYOffset)}%, 0)`;
+        }
+      }
+
+      // 세 번째 애니메이션
+      if (mainMessageC.value) {
+        if (scrollRatio <= 0.62) {
+          // in
+          mainMessageC.value.style.opacity = String(
+            calcValue(values.messageC_opacity_in, currentYOffset),
+          );
+          mainMessageC.value.style.transform = `translate3d(0, ${calcValue(values.messageC_translateY_in, currentYOffset)}%, 0)`;
+        } else {
+          // out
+          mainMessageC.value.style.opacity = String(
+            calcValue(values.messageC_opacity_out, currentYOffset),
+          );
+          mainMessageC.value.style.transform = `translate3d(0, ${calcValue(values.messageC_translateY_out, currentYOffset)}%, 0)`;
+        }
+      }
+
+      // 네 번째 애니메이션
+      if (mainMessageD.value) {
+        if (scrollRatio <= 0.82) {
+          // in
+          if (values.messageD_opacity_in) {
+            mainMessageD.value.style.opacity = String(
+              calcValue(values.messageD_opacity_in, currentYOffset),
+            );
+          }
+
+          if (values.messageD_translateY_in) {
+            mainMessageD.value.style.transform = `translate3d(0, ${calcValue(values.messageD_translateY_in, currentYOffset)}%, 0)`;
+          }
+        } else {
+          // out
+          if (values.messageD_opacity_out) {
+            mainMessageD.value.style.opacity = String(
+              calcValue(values.messageD_opacity_out, currentYOffset),
+            );
+          }
+          if (values.messageD_translateY_out) {
+            mainMessageD.value.style.transform = `translate3d(0, ${calcValue(values.messageD_translateY_out, currentYOffset)}%, 0)`;
+          }
+        }
+      }
       break;
     }
     case 1: {
