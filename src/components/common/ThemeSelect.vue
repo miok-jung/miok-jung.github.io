@@ -5,19 +5,19 @@ import type { ThemeName } from 'src/boot/theme'
 import { themes, applyTheme } from 'src/boot/theme'
 import { COOKIE_KEYS } from 'src/constants/cookieKeys'
 
-const { cookies } = useQuasar()
+const $q = useQuasar()
 
 const options = Object.keys(themes).map((t) => ({
   label: t.charAt(0).toUpperCase() + t.slice(1),
   value: t,
 }))
 
-const selected = ref<ThemeName>(cookies.get(COOKIE_KEYS.THEME_COLOR) || 'blue')
+const selected = ref<ThemeName>($q.cookies.get(COOKIE_KEYS.THEME_COLOR) || 'blue')
 
 function onChange(val: ThemeName) {
   selected.value = val
   applyTheme(themes[val])
-  cookies.set(COOKIE_KEYS.THEME_COLOR, val)
+  $q.cookies.set(COOKIE_KEYS.THEME_COLOR, val)
 }
 </script>
 

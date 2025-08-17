@@ -40,7 +40,7 @@ import { COOKIE_KEYS } from 'src/constants/cookieKeys'
 interface Props {
   sidebar: boolean
 }
-const { cookies, dark, lang } = useQuasar()
+const $q = useQuasar()
 const { locale, t } = useI18n()
 
 const props = withDefaults(defineProps<Props>(), {
@@ -56,9 +56,9 @@ function toggleLeftDrawer() {
 // NOTE: THEME
 const isDarkMode = ref<boolean>(false)
 const changeDarkMode = () => {
-  dark.set(isDarkMode.value)
+  $q.dark.set(isDarkMode.value)
   const darkMode = isDarkMode.value ? 'DARK' : 'LIGHT'
-  cookies.set(COOKIE_KEYS.DARK_MODE, darkMode)
+  $q.cookies.set(COOKIE_KEYS.DARK_MODE, darkMode)
 }
 
 // NOTE: LANGUAGE
@@ -79,19 +79,19 @@ const quasarLangMap = {
 // NOTE: WATCH
 watch(selectedLang, (val: LangCode) => {
   // 언어 변경 감지
-  lang.set(quasarLangMap[val])
+  $q.lang.set(quasarLangMap[val])
   locale.value = val
 })
 
 // NOTE: life-cycle
 onMounted(() => {
-  const darkModeCookie = cookies.get(COOKIE_KEYS.DARK_MODE)
+  const darkModeCookie = $q.cookies.get(COOKIE_KEYS.DARK_MODE)
   if (darkModeCookie === 'dark') {
     isDarkMode.value = true
-    dark.set(isDarkMode.value)
+    $q.dark.set(isDarkMode.value)
   } else {
     isDarkMode.value = false
-    dark.set(isDarkMode.value)
+    $q.dark.set(isDarkMode.value)
   }
 })
 </script>
