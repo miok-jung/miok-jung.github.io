@@ -1,0 +1,7 @@
+export const COOKIE_KEYS = {
+  // SECTION: 메인
+  THEME_COLOR: 'PF_COLOR',
+  DARK_MODE: 'PF_DARK_MODE',
+  LANGUAGE: 'PF_LANGUAGE',
+  // !SECTION
+}
