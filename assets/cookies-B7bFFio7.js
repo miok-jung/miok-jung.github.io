@@ -1,1 +1,0 @@
-import{P as r}from"./index-BnQjWJYk.js";import{C as s}from"./cookieKeys-Ck0NzRSL.js";const n=t=>{const o=r.get(s.DARK_MODE),e=o&&/^(true|1|dark)$/i.test(o)?"dark":"light";t.app.config.globalProperties.$theme=e};export{n as default};
