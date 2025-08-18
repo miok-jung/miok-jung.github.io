@@ -17,7 +17,11 @@ const selected = ref<ThemeName>($q.cookies.get(COOKIE_KEYS.THEME_COLOR) || 'blue
 function onChange(val: ThemeName) {
   selected.value = val
   applyTheme(themes[val])
-  $q.cookies.set(COOKIE_KEYS.THEME_COLOR, val)
+  $q.cookies.set(COOKIE_KEYS.THEME_COLOR, val, {
+    path: '/',
+    sameSite: 'Strict',
+    expires: 60 * 60 * 24 * 365,
+  })
 }
 </script>
 

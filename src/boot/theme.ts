@@ -1,5 +1,6 @@
 import { defineBoot } from '#q-app/wrappers'
-import { setCssVar } from 'quasar'
+import { Cookies, setCssVar } from 'quasar'
+import { COOKIE_KEYS } from 'src/constants/cookieKeys'
 
 export type ThemeName =
   | 'grey'
@@ -123,6 +124,7 @@ export function applyTheme(palette: Record<string, string>) {
 }
 
 export default defineBoot(() => {
-  const saved = (localStorage.getItem('theme') as ThemeName) || 'blue'
-  applyTheme(themes[saved])
+  const raw = Cookies.get(COOKIE_KEYS.THEME_COLOR) || 'blue'
+  const name = raw in themes ? (raw as ThemeName) : 'blue'
+  applyTheme(themes[name])
 })
