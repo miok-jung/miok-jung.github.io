@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useQuasar } from 'quasar'
+import { onMounted, ref } from 'vue'
+import { Cookies, useQuasar } from 'quasar'
 import type { ThemeName } from 'src/boot/theme'
 import { themes, applyTheme } from 'src/boot/theme'
 import { COOKIE_KEYS } from 'src/constants/cookieKeys'
@@ -23,6 +23,11 @@ function onChange(val: ThemeName) {
     expires: 60 * 60 * 24 * 365,
   })
 }
+
+// NOTE: life-cycle
+onMounted(() => {
+  selected.value = Cookies.get(COOKIE_KEYS.THEME_COLOR) || 'blue'
+})
 </script>
 
 <template>
