@@ -1,6 +1,14 @@
 <template>
-  <q-item clickable tag="a" :target="target" :href="link">
-    <q-item-section v-if="icon" avatar>
+  <q-item
+    clickable
+    tag="a"
+    target="_blank"
+    :href="link"
+  >
+    <q-item-section
+      v-if="icon"
+      avatar
+    >
       <q-icon :name="icon" />
     </q-item-section>
 
@@ -12,17 +20,16 @@
 </template>
 
 <script setup lang="ts">
-export interface MainSidebarProps {
-  title: string
-  caption?: string
-  link?: string
-  icon?: string
-  target?: '_blank' | '_self' | '_parent' | '_top'
-}
+export interface EssentialLinkProps {
+  title: string;
+  caption?: string;
+  link?: string;
+  icon?: string;
+};
 
-withDefaults(defineProps<MainSidebarProps>(), {
+withDefaults(defineProps<EssentialLinkProps>(), {
   caption: '',
   link: '#',
   icon: '',
-})
+});
 </script>

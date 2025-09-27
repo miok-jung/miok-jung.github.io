@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.18.1] # Update to match your local Node.js version
+        node-version: [22.x] # Update to match your local Node.js version
 
     steps:
       - name: Checkout the code

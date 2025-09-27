@@ -7,26 +7,28 @@ import {
 } from 'vue-router';
 import routes from './routes';
 
-export default defineRouter(function () {
+/*
+ * If not building with SSR mode, you can
+ * directly export the Router instantiation;
+ *
+ * The function below can be async too; either use
+ * async/await or return a Promise which resolves
+ * with the Router instance.
+ */
+
+export default defineRouter(function (/* { store, ssrContext } */) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
-    : process.env.VUE_ROUTER_MODE === 'history'
-      ? createWebHistory
-      : createWebHashHistory;
-
-  // 복원 적용할 라우터 경로
-  const scrollSavedPaths = ['/side/apple'];
+    : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory);
 
   const Router = createRouter({
-    history: createHistory(process.env.VUE_ROUTER_BASE),
+    scrollBehavior: () => ({ left: 0, top: 0 }),
     routes,
 
-    scrollBehavior(to, from, savedPosition) {
-      if (scrollSavedPaths.includes(to.path) && savedPosition) {
-        return savedPosition; // 이전 스크롤 위치로 복원
-      }
-      return { left: 0, top: 0 }; // 기본: 항상 맨 위로 이동
-    },
+    // Leave this as is and make changes in quasar.conf.js instead!
+    // quasar.conf.js -> build -> vueRouterMode
+    // quasar.conf.js -> build -> publicPath
+    history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
   return Router;

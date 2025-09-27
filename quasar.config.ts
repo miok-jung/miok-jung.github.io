@@ -12,10 +12,10 @@ export default defineConfig((ctx) => {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    boot: ['axios', 'cookies', 'i18n', 'notify', 'theme'],
+    boot: ['i18n', 'axios'],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
-    css: ['custom-classes.scss', 'app.scss'],
+    css: ['app.scss'],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: ['mdi-v7', 'material-icons', 'roboto-font'],
@@ -40,7 +40,7 @@ export default defineConfig((ctx) => {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      publicPath: '/',
+      // publicPath: '/',
       // analyze: true,
       // env: {},
       // rawDefine: {}
@@ -104,7 +104,7 @@ export default defineConfig((ctx) => {
       // directives: [],
 
       // Quasar plugins
-      plugins: ['Cookies', 'Dialog', 'Notify'],
+      plugins: [],
     },
 
     // animations: 'all', // --- includes all animations
@@ -200,7 +200,7 @@ export default defineConfig((ctx) => {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'portfolio',
+        appId: 'miok-jung',
       },
     },
 

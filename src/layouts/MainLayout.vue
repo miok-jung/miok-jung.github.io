@@ -1,10 +1,41 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <Header :sidebar="leftDrawerOpen" @change-sidebar="(value) => (leftDrawerOpen = value)" />
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+    <q-header elevated>
+      <q-toolbar>
+        <q-btn
+          flat
+          dense
+          round
+          icon="menu"
+          aria-label="Menu"
+          @click="toggleLeftDrawer"
+        />
+
+        <q-toolbar-title>
+          Quasar App
+        </q-toolbar-title>
+
+        <div>Quasar v{{ $q.version }}</div>
+      </q-toolbar>
+    </q-header>
+
+    <q-drawer
+      v-model="leftDrawerOpen"
+      show-if-above
+      bordered
+    >
       <q-list>
-        <q-item-label header>Portfolio List</q-item-label>
-        <MainSidebar v-for="link in linksList" :key="link.title" v-bind="link" />
+        <q-item-label
+          header
+        >
+          Essential Links
+        </q-item-label>
+
+        <EssentialLink
+          v-for="link in linksList"
+          :key="link.title"
+          v-bind="link"
+        />
       </q-list>
     </q-drawer>
 
@@ -15,28 +46,57 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import Header from 'src/components/main/Header.vue'
-import MainSidebar, { type MainSidebarProps } from 'src/components/main/MainSidebar.vue'
+import { ref } from 'vue';
+import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink.vue';
 
-const linksList: MainSidebarProps[] = [
+const linksList: EssentialLinkProps[] = [
   {
-    title: 'apple clone',
-    // A clone project replicating the design and functionality of Apple’s official website
-    caption: '애플 공식 웹사이트 디자인과 기능을 참고하여 만든 클론 프로젝트',
-    icon: 'mdi-apple',
-    link: '/side/apple',
-    target: '_blank',
+    title: 'Docs',
+    caption: 'quasar.dev',
+    icon: 'school',
+    link: 'https://quasar.dev'
   },
   {
-    title: 'Quasar Test Page ',
-    // A short description summarizing the purpose or function of the component test page
-    caption: '컴포넌트의 용도나 해당 테스트 페이지의 목적을 간략하게 설명하는 짧은 문구',
-    icon: 'mdi-apple',
-    link: '/test',
-    target: '_blank',
+    title: 'Github',
+    caption: 'github.com/quasarframework',
+    icon: 'code',
+    link: 'https://github.com/quasarframework'
   },
-]
+  {
+    title: 'Discord Chat Channel',
+    caption: 'chat.quasar.dev',
+    icon: 'chat',
+    link: 'https://chat.quasar.dev'
+  },
+  {
+    title: 'Forum',
+    caption: 'forum.quasar.dev',
+    icon: 'record_voice_over',
+    link: 'https://forum.quasar.dev'
+  },
+  {
+    title: 'Twitter',
+    caption: '@quasarframework',
+    icon: 'rss_feed',
+    link: 'https://twitter.quasar.dev'
+  },
+  {
+    title: 'Facebook',
+    caption: '@QuasarFramework',
+    icon: 'public',
+    link: 'https://facebook.quasar.dev'
+  },
+  {
+    title: 'Quasar Awesome',
+    caption: 'Community Quasar projects',
+    icon: 'favorite',
+    link: 'https://awesome.quasar.dev'
+  }
+];
 
-const leftDrawerOpen = ref<boolean>(false)
+const leftDrawerOpen = ref(false);
+
+function toggleLeftDrawer () {
+  leftDrawerOpen.value = !leftDrawerOpen.value;
+}
 </script>
