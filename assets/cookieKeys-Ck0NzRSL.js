@@ -1,1 +1,0 @@
-const O={THEME_COLOR:"PF_COLOR",DARK_MODE:"PF_DARK_MODE"};export{O as C};
