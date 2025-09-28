@@ -15,10 +15,10 @@ export default defineConfig((ctx) => {
     boot: ['i18n', 'axios'],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
-    css: ['app.scss'],
+    css: ['app.scss', 'font.scss'],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
-    extras: ['mdi-v7', 'material-icons', 'roboto-font'],
+    extras: ['mdi-v7', 'material-icons'],
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#build
     build: {
