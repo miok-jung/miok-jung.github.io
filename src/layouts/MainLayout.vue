@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink.vue'
 import { useI18n } from 'vue-i18n'
+import Header from 'src/components/main/Header.vue'
 
 const { t } = useI18n()
 
@@ -14,26 +15,14 @@ const linksList: EssentialLinkProps[] = [
   },
 ]
 
-const leftDrawerOpen = ref(false)
-
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value
-}
+const showLeftDrawer = ref(false)
+const showLeftDrawerMini = ref(false)
 </script>
 
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
-
-        <q-toolbar-title> Quasar App </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
-
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+    <Header v-model:is-toggle="showLeftDrawerMini"></Header>
+    <q-drawer v-model="showLeftDrawer" :mini="showLeftDrawerMini" show-if-above bordered>
       <q-list>
         <!-- <q-item-label header> Essential Links </q-item-label> -->
         <q-item-label header>{{ t('button.confirm') }}</q-item-label>
