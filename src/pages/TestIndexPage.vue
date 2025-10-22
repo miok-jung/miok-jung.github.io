@@ -1,6 +1,8 @@
 <script setup lang="ts"></script>
 <template>
-  <div>Test Page</div>
+  <q-page>
+    <div>Test Index Page</div>
+  </q-page>
 </template>
 
 <style scoped></style>
