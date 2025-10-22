@@ -1,0 +1,1 @@
+import{_ as t,Q as r}from"./_plugin-vue_export-helper-CnV34ibp.js";import{E as s,G as a,F as o,K as n}from"./index-CyQyYspe.js";import"./render-DAx8hcVT.js";const c={};function f(i,e){return o(),s(r,{class:"row items-center justify-evenly"},{default:a(()=>[...e[0]||(e[0]=[n(" Page ",-1)])]),_:1})}const l=t(c,[["render",f]]);export{l as default};
