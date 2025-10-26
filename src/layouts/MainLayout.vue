@@ -14,7 +14,7 @@
       <q-list>
         <q-item-label header> Essential Links </q-item-label>
 
-        <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" />
+        <Sidebar v-for="link in linksList" :key="link.title" v-bind="link" />
       </q-list>
     </q-drawer>
 
@@ -26,9 +26,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink.vue'
+import Sidebar, { type SidebarProps } from 'components/main/Sidebar.vue'
 
-const linksList: EssentialLinkProps[] = [
+const linksList: SidebarProps[] = [
   {
     title: 'Quasar Components',
     caption: 'Quasar Component를 테스트를 하기 위한 페이지 입니다.',

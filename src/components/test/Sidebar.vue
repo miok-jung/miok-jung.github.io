@@ -12,6 +12,24 @@ const props = withDefaults(defineProps<Props>(), {
 const $q = useQuasar()
 
 const drawer = ref(true)
+
+type Sidebar = {
+  label: string
+  icon: string
+  link: string
+}
+const sidebar: Sidebar[] = [
+  {
+    label: 'Main Home',
+    icon: 'mdi-home-switch-outline',
+    link: '/',
+  },
+  {
+    label: 'Test Home',
+    icon: 'mdi-home',
+    link: '/test',
+  },
+]
 </script>
 <template>
   <div>
@@ -22,12 +40,14 @@ const drawer = ref(true)
     >
       <q-scroll-area style="height: 500px">
         <q-list>
-          <q-item>
-            <q-item-section avatar>
-              <q-icon name="mdi-home-outline"></q-icon>
-            </q-item-section>
-            <q-item-section>Home</q-item-section>
-          </q-item>
+          <template v-for="item in sidebar" :key="item">
+            <q-item :to="item.link" clickable>
+              <q-item-section avatar>
+                <q-icon :name="item.icon"></q-icon>
+              </q-item-section>
+              <q-item-section>{{ item.label }}</q-item-section>
+            </q-item>
+          </template>
         </q-list>
       </q-scroll-area>
     </q-drawer>
