@@ -1,0 +1,13 @@
+button {
+  background: white;
+  border: 1px solid $separator-color;
+  padding: 4px 12px;
+  border-radius: 4px;
+  line-height: 1.8;
+  font-weight: bold;
+  cursor: pointer;
+  body.body--dark & {
+    background: $dark;
+    border: 1px solid $separator-dark-color;
+  }
+}

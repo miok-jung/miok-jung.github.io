@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import List from 'src/components/test/List.vue'
+</script>
 <template>
   <q-page>
-    <div>Test Index Page</div>
+    <List />
   </q-page>
 </template>
 
