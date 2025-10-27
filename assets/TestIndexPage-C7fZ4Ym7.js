@@ -1,1 +1,0 @@
-import{_ as t,Q as a}from"./_plugin-vue_export-helper-Wqg0yQT9.js";import{e as o,w as r,o as s,k as n}from"./index-B8vUybD0.js";import"./render-CnMiP8Ut.js";const c={};function d(f,e){return s(),o(a,null,{default:r(()=>[...e[0]||(e[0]=[n("div",null,"Test Index Page",-1)])]),_:1})}const m=t(c,[["render",d]]);export{m as default};
