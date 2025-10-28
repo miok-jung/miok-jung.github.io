@@ -16,7 +16,7 @@ const openList = () => {
       <q-btn
         >Quasar Btn Click
         <q-menu>
-          <q-list>
+          <q-list dense>
             <template v-for="n in 5" :key="n">
               <q-item clickable> Item {{ n }} </q-item>
             </template>
@@ -56,13 +56,12 @@ $menu-py: 20;
       width: 100%;
       overflow: hidden;
       li {
-        padding: 0 0 0 8px;
+        padding: 0 12px;
         height: 32px;
         line-height: 32px;
         border-radius: 16px;
         overflow: hidden;
         box-shadow: $shadow-6;
-        // TODO: 애니메이션 속도 및 그림자 짤림 현상 발생
         $colors: red, orange, green, lightblue, violet;
         @for $i from 1 through length($colors) {
           &:nth-of-type(#{$i}) {
