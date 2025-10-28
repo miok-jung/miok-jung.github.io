@@ -1,0 +1,1 @@
+import{d as s}from"./index-DRqQ4oJO.js";import{c as e}from"./vue-i18n.runtime-CsyXt-Cs.js";const a={test:{title:"Quasar 테스트 페이지"}},n={ko:a},i=s(({app:o})=>{const t=e({locale:"ko",messages:n});o.use(t)});export{i as default};
