@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Button from 'src/components/test/Button.vue'
+import Buttons from 'src/components/test/Buttons.vue'
 import List from 'src/components/test/List.vue'
 </script>
 <template>
   <q-page>
-    <Button />
+    <Buttons />
     <List />
   </q-page>
 </template>
