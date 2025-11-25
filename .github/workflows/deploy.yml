@@ -33,7 +33,7 @@ jobs:
         run: npm run build
 
       - name: Prevent 404 on SPA Refresh
-        run: cp dist/spa/index.html dist/spa/404.html
+        run: cp dist/index.html dist/404.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
