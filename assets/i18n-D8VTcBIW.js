@@ -1,1 +1,0 @@
-import{d as s}from"./index-l_34CU-f.js";import{c as e}from"./vue-i18n.runtime-DygjLf2i.js";const a={test:{title:"Quasar 테스트 페이지"}},n={ko:a},i=s(({app:o})=>{const t=e({locale:"ko",messages:n});o.use(t)});export{i as default};
