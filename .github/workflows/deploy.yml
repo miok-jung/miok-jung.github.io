@@ -39,6 +39,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/spa # 📌 Vue 프로젝트의 빌드 결과 폴더 (dist/spa인지 확인!)
+          publish_dir: ./dist # 📌 Vue 프로젝트의 빌드 결과 폴더 (dist/spa인지 확인!)
           publish_branch: gh-pages # default: gh-pages
           cname: jnarin.com # 📌 사용자 도메인이 맞는지 확인 후 유지 또는 제거
