@@ -5,7 +5,7 @@ import { Icon } from '@iconify/vue'
   <header>
     <div class="header left">
       <Icon icon="solar:home-bold" width="24" height="24" />
-      <p>Portfolio</p>
+      <h1>Portfolio</h1>
     </div>
     <div class="header right">Side</div>
   </header>
@@ -17,13 +17,13 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 16px;
   top: 0;
-  border: 1px solid red;
   background: white;
   .header {
-    border: 1px solid blue;
+    display: flex;
+    align-items: center;
     &.left {
-      border: 1px solid lime;
       display: flex;
       flex-direction: row;
     }
