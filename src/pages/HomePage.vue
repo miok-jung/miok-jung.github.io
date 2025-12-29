@@ -23,18 +23,29 @@ onMounted(() => {
           const key = target.dataset.section
           if (!key) return
 
+          updateBodyClass(key)
           console.log('현재 섹션:', key)
         }
       })
     },
     {
       root: null,
-      threshold: [0.1, 0.5, 0.9],
+      threshold: 0.5,
     }
   )
 
   targets.forEach((el) => io!.observe(el))
 })
+
+const updateBodyClass = (key: string) => {
+  const body = document.body
+
+  body.classList.forEach((cls) => {
+    if (cls.startsWith('section-')) body.classList.remove(cls)
+  })
+
+  body.classList.add(`section-${key}`)
+}
 
 onUnmounted(() => {
   io?.disconnect()
