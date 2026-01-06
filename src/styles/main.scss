@@ -17,5 +17,20 @@ h6 {
 }
 a {
   text-decoration: none;
-  color: black;
+  color: var(--grey-10);
+}
+button {
+  margin: 0;
+  padding: 4px 8px;
+  min-width: 30px;
+  min-height: 30px;
+  background: var(--grey-2);
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 4px;
+  border-color: transparent;
+  border-style: hidden;
+  &:hover {
+    background: var(--grey-3);
+  }
 }
