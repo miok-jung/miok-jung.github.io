@@ -7,7 +7,11 @@ import { Icon } from '@iconify/vue'
       <Icon icon="solar:home-bold" width="24" height="24" />
       <h1>Portfolio</h1>
     </div>
-    <div class="header right">Side</div>
+    <nav class="header right">
+      <a>Home</a>
+      <a>About</a>
+      <a>Contact</a>
+    </nav>
   </header>
 </template>
 
@@ -26,6 +30,23 @@ header {
     &.left {
       display: flex;
       flex-direction: row;
+      gap: 8px;
+    }
+    &.right {
+      display: flex;
+      gap: 8px;
+      a {
+        padding: 4px 8px;
+        cursor: pointer;
+        &:hover {
+          background: var(--grey-3);
+          color: var(--grey-7);
+        }
+        &:active {
+          background: var(--grey-5);
+          color: white;
+        }
+      }
     }
   }
 }
