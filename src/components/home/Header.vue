@@ -1,12 +1,22 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
 import { Icon } from '@iconify/vue'
+
+const { t } = useI18n()
 </script>
 <template>
   <header>
     <div class="header left">
       <Icon icon="solar:home-bold" width="24" height="24" />
-      <h1>Portfolio</h1>
+      <h1>Mi Ok, Jung</h1>
     </div>
+    <nav class="header right">
+      <a>Home</a>
+      <a>About</a>
+      <a>Contact</a>
+      <a>{{ t('button.yes') }}</a>
+    </nav>
     <nav class="header right">
       <a>Home</a>
       <a>About</a>
