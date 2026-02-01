@@ -31,7 +31,7 @@ onMounted(() => {
     {
       root: null,
       threshold: 0.5,
-    }
+    },
   )
 
   targets.forEach((el) => io!.observe(el))
@@ -53,7 +53,6 @@ onUnmounted(() => {
 </script>
 <template>
   <div class="out-wrap">
-    <JLoading />
     <Home class="wrap" data-section="home" />
     <About class="wrap" data-section="about" />
     <Contact class="wrap" data-section="contact" />
