@@ -1,5 +1,25 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted, ref } from 'vue'
 import { Icon } from '@iconify/vue'
+
+const scrollY = ref<number>(0)
+
+const onScroll = () => {
+  scrollY.value = window.scrollY
+}
+
+const scrollToSection = (id: string) => {
+  const el = document.getElementById(id)
+  if (!el) return
+  el.scrollIntoView({ behavior: 'smooth' })
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', onScroll)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', onScroll)
+})
 </script>
 <template>
   <header>
@@ -8,9 +28,9 @@ import { Icon } from '@iconify/vue'
       <h1>Mi Ok, Jung</h1>
     </div>
     <nav class="header right">
-      <a>Home</a>
-      <a>About</a>
-      <a>Contact</a>
+      <a @click.prevent="scrollToSection('home')">Home</a>
+      <a @click.prevent="scrollToSection('about')">About</a>
+      <a @click.prevent="scrollToSection('contact')">Contact</a>
     </nav>
   </header>
 </template>
