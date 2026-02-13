@@ -1,33 +1,77 @@
-# 💼 Portfolio (miok-jung)
+# 💼 Portfolio — Miok Jung
 
-Date: 2025.11.25 -
+> Vue 3 + TypeScript 기반으로 설계한 개인 포트폴리오 프로젝트  
+> 확장성과 유지보수성을 고려한 구조 설계와 일관된 개발 규칙을 중심으로 구현
 
-## Rule
+---
 
-### I18N 규칙
+## 📅 Project Information
 
-아래 규칙은 i18n 키의 가독성, 일관성, 유지보수성을 유지하기 위해 정의합니다.
+- **Project Period**: 2025.11.25 – Present
+- **Type**: Personal Portfolio
+- **Architecture Focus**: Maintainability / Scalability / Clear Layer Separation
 
-- **줄임말을 사용하지 않는다**
-  - description (O)
-  - desc (X)
+---
 
-- **모든 키는 소문자를 사용한다**
-  - home, button, description
+## 🛠 Tech Stack
 
-- **두 단어 이상은 snake_case를 사용한다**
-  - page_description (O)
-  - pageDescription (X)
+### Frontend
 
-- **camelCase는 사용하지 않는다**
-  - 코드 변수·함수와의 혼동 방지 목적
+- Vue 3 (Composition API)
+- TypeScript
+- Quasar Framework
+- Vue Router
+- Pinia
 
-- **의미는 계층 구조로 표현한다**
-  - home.description (O)
-  - home_description 단일 키 남용 (X)
+### Styling
 
-i18n 키는 짧음보다 읽힘을 우선한다.
+- SCSS
+- Design Token 기반 스타일 구조
+- Component-level style isolation
 
-## 그 외
+### Data & Utilities
 
-- Google Tag 추가
+- Axios (API Layer 분리)
+- Modular utils 구조
+
+### Analytics
+
+- Google Tag Manager
+- GA4 이벤트 트래킹
+
+---
+
+## ✨ Core Features
+
+- 반응형 UI 설계
+- 역할 기반 디렉터리 구조
+- i18n 다국어 구조 설계
+- Design Token 기반 스타일 시스템
+- 레이어 분리 아키텍처 적용
+
+---
+
+# 📁 Project Structure
+
+본 프로젝트는 **역할 기반(Role-Based Architecture)** 으로 설계하였다.  
+UI, 상태, 로직, 스타일을 명확히 분리하여 유지보수성과 확장성을 확보하였다.
+
+```txt
+src/
+├─ assets/            # 이미지, 폰트 등 정적 리소스
+├─ components/        # 공용 UI 컴포넌트
+│  ├─ base/           # 버튼, 인풋 등 기본 UI 컴포넌트
+│  ├─ layout/         # Header, Sidebar 등 레이아웃 컴포넌트
+│  └─ editor/         # TipTap 관련 컴포넌트
+├─ composables/       # 재사용 가능한 로직 (UI 독립 로직)
+├─ pages/             # 라우트 단위 페이지
+├─ router/            # vue-router 설정
+├─ stores/            # Pinia 상태 관리 (전역 상태)
+├─ styles/            # 전역 스타일 및 디자인 시스템
+│  ├─ tokens/         # color, spacing, typography 등 디자인 토큰
+│  ├─ editor/         # TipTap 스타일 오버라이드
+│  └─ globals.scss    # 전역 스타일 정의
+├─ utils/             # 순수 유틸 함수
+├─ api/               # Axios 인스턴스 및 API 모듈
+└─ main.ts
+```
