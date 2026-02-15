@@ -6,7 +6,6 @@ import JLoading from './components/global/JLoading.vue'
 
 import { i18n, setLocale } from './i18n'
 
-import './styles/variable.scss'
 import './styles/main.scss'
 
 const app = createApp(App)
