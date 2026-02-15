@@ -1,18 +1,18 @@
 import type { RouteRecordRaw } from 'vue-router'
 
-import HomeLayout from '../layouts/HomeLayout.vue'
-import HomePages from '../pages/HomePage.vue'
+import PortfolioLayout from '../layouts/PortfolioLayout.vue'
+import PortfolioPages from '../pages/PortfolioPage.vue'
 import TestLayout from '../layouts/TestLayout.vue'
 import TestPage from '../pages/TestPage.vue'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: HomeLayout,
+    component: PortfolioLayout,
     children: [
       {
         path: '',
-        component: HomePages,
+        component: PortfolioPages,
         meta: { title: '홈' },
       },
     ],
@@ -23,6 +23,7 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
+        name: 'test',
         component: TestPage,
         meta: { title: '테스트' },
       },
