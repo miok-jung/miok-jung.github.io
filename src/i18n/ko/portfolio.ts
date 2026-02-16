@@ -1,6 +1,8 @@
 export default {
   portfolio: {
-    title: '홈',
-    description: '클릭하면 해당 페이지로 이동합니다',
+    home: {
+      title: '홈',
+      description: '클릭하면 해당 페이지로 이동합니다',
+    },
   },
 }

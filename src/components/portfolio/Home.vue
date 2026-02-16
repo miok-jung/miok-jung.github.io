@@ -12,9 +12,9 @@ const onClickTo = (src: string) => {
 </script>
 <template>
   <section id="home">
-    <h2>{{ i18n.t('portfolio.title') }}</h2>
+    <h2>{{ i18n.t('portfolio.home.title') }}</h2>
     <div>
-      <p>{{ i18n.t('portfolio.description') }}</p>
+      <p>{{ i18n.t('portfolio.home.description') }}</p>
       <div class="button-wrap">
         <button @click="onClickTo('test')">Test Page</button>
       </div>
