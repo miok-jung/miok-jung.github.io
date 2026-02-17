@@ -1,36 +1,32 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { ref } from 'vue'
 import { Icon } from '@iconify/vue'
 
-const scrollY = ref<number>(0)
-
-const onScroll = () => {
-  scrollY.value = window.scrollY
-}
+const headerRef = ref<HTMLElement | null>(null)
 
 const scrollToSection = (id: string) => {
   const el = document.getElementById(id)
   if (!el) return
-  el.scrollIntoView({ behavior: 'smooth' })
-}
 
-onMounted(() => {
-  window.addEventListener('scroll', onScroll)
-})
-onUnmounted(() => {
-  window.removeEventListener('scroll', onScroll)
-})
+  const headerH = headerRef.value?.offsetHeight ?? 0
+  const extra = 0
+  const top = el.getBoundingClientRect().top + window.scrollY - headerH + extra
+
+  window.scrollTo({ top, behavior: 'smooth' })
+}
 </script>
+
 <template>
-  <header>
+  <header ref="headerRef">
     <div class="header left">
       <Icon icon="solar:home-bold" width="24" height="24" />
       <h1>Mi Ok, Jung</h1>
     </div>
+
     <nav class="header right">
-      <a @click.prevent="scrollToSection('home')">Home</a>
-      <a @click.prevent="scrollToSection('about')">About</a>
-      <a @click.prevent="scrollToSection('contact')">Contact</a>
+      <button type="button" @click="scrollToSection('home')">Home</button>
+      <button type="button" @click="scrollToSection('about')">About</button>
+      <button type="button" @click="scrollToSection('contact')">Contact</button>
     </nav>
   </header>
 </template>
@@ -38,30 +34,32 @@ onUnmounted(() => {
 <style scoped lang="scss">
 header {
   position: sticky;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 16px;
   top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
   background: white;
+
   .header {
     display: flex;
     align-items: center;
+
     &.left {
-      display: flex;
-      flex-direction: row;
       gap: 8px;
     }
+
     &.right {
-      display: flex;
       gap: 8px;
-      a {
+
+      button {
         padding: 4px 8px;
         cursor: pointer;
+        background: transparent;
         &:hover {
           background: var(--grey-3);
           color: var(--grey-7);
         }
+
         &:active {
           background: var(--grey-5);
           color: white;
