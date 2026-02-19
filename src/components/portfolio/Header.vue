@@ -50,20 +50,8 @@ header {
 
     &.right {
       gap: 8px;
-
       button {
-        padding: 4px 8px;
-        cursor: pointer;
         background: transparent;
-        &:hover {
-          background: var(--grey-3);
-          color: var(--grey-7);
-        }
-
-        &:active {
-          background: var(--grey-5);
-          color: white;
-        }
       }
     }
   }
