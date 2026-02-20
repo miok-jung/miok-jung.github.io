@@ -22,6 +22,9 @@ watch(toggleTheme, (isDark) => {
 </template>
 
 <style scoped lang="scss">
+header {
+  border: 1px solid red;
+}
 input[type='checkbox'] {
   outline: 3px solid red;
 }
