@@ -33,13 +33,16 @@ const scrollToSection = (id: string) => {
 
 <style scoped lang="scss">
 header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
   z-index: 10;
   display: flex;
   justify-content: space-between;
-  background: white;
-
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   .header {
     display: flex;
     align-items: center;
