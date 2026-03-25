@@ -120,10 +120,7 @@ article.out-wrap {
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 160px;
-
-  border: 1px solid red;
-  gap: 20px;
+  gap: var(--space-5);
   p {
     white-space: pre-line;
   }

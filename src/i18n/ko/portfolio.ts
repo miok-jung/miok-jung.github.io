@@ -1,8 +1,9 @@
 export default {
   portfolio: {
     home: {
-      title: '홈',
-      description: '클릭하면 해당 페이지로 이동합니다',
+      title: '보이는 것 이상의 것을 만듭니다',
+      description:
+        '사용자 경험을 해치지 않는 퍼블리싱,\n유지보수 가능한 UI 구조, 그리고 "왜 이렇게 만들었는지..." 설명 가능한 코드를 좋아합니다.',
       pages: {
         test: '테스트 페이지',
         hanacard: '하나카드 페이지',
