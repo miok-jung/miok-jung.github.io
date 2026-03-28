@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
-import character from 'src/assets/images/portfolio/character.svg'
 import { onMounted, onUnmounted, ref } from 'vue'
 
-const router = useRouter()
-const i18n = useI18n({ useScope: 'global' })
+import character from 'src/assets/images/portfolio/character.svg'
+import Badge from '../common/Badge.vue'
 
-const onClickTo = (src: string) => {
-  router.push({ name: src })
-}
+const i18n = useI18n({ useScope: 'global' })
 
 const titles = ['Web Publisher', 'Front-end Developer']
 const currentIndex = ref(0)
@@ -30,52 +26,33 @@ onUnmounted(() => {
   <section id="home">
     <h2>{{ i18n.t('portfolio.home.title') }}</h2>
 
-    <!--
-    <div>
-      <h3>Mini Project</h3>
-      <p>{{ i18n.t('portfolio.home.description') }}</p>
-      <div class="button-wrap">
-        <button @click="onClickTo('test')">
-          {{ i18n.t('portfolio.home.pages.test') }}
-        </button>
-        <a
-          href="https://miok-jung.github.io/hanacard"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn">
-          {{ i18n.t('portfolio.home.pages.hanacard') }}
-        </a>
-        <a
-          href="https://miok-jung.github.io/cjone_clone"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn">
-          {{ i18n.t('portfolio.home.pages.cj_one') }}
-        </a>
-      </div>
-    </div>
-    -->
-
     <article class="out-wrap">
       <div class="left">
         <div class="badge-wrap">
-          <div class="badge">Front-end</div>
-          <div class="badge">Web Publisher</div>
-          <div class="badge">Vue &middot; Quasar</div>
+          <Badge text="Front-end" />
+          <Badge text="Web Publisher" />
+          <Badge text="Vue · Quasar" />
         </div>
 
         <div class="text-wrap">
           <div class="title-stage">
-            <transition name="title-slide">
+            <transition name="title-slide" mode="out-in">
               <h3 :key="titles[currentIndex]" class="title-item">
                 {{ titles[currentIndex] }}
               </h3>
             </transition>
           </div>
+
           <p>{{ i18n.t('portfolio.home.description') }}</p>
         </div>
 
-        <div class="skill-wrap"></div>
+        <div class="skill-wrap">
+          <Badge text="HTML/CSS" size="sm" />
+          <Badge text="SCSS" size="sm" />
+          <Badge text="TypeScript" size="sm" />
+          <Badge text="Vue3" size="sm" />
+          <Badge text="Git" size="sm" />
+        </div>
       </div>
 
       <div class="right">
@@ -91,7 +68,10 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  gap: 32px;
+  min-height: 100svh;
+  padding: 40px 80px;
+  box-sizing: border-box;
 }
 
 article.out-wrap {
@@ -104,24 +84,28 @@ article.out-wrap {
 
 .left {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
   flex: 1 1 auto;
+  flex-direction: column;
   min-width: 0;
+  gap: var(--space-3);
 }
 
-.left .badge-wrap {
+.left .badge-wrap,
+.left .skill-wrap {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
   gap: var(--space-2);
 }
 
 .left .text-wrap {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
+  position: relative;
+
   p {
+    margin: 0;
     white-space: pre-line;
   }
 }
@@ -129,7 +113,7 @@ article.out-wrap {
 .title-stage {
   position: relative;
   width: 100%;
-  height: 86px;
+  min-height: 86px;
   overflow: hidden;
 }
 
@@ -137,10 +121,11 @@ article.out-wrap {
   position: absolute;
   top: 0;
   left: 0;
-  margin: 0;
   width: 100%;
-  font-size: 72px;
+  margin: 0;
+  font-size: clamp(32px, 6vw, 72px);
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 .title-slide-enter-active,
@@ -171,21 +156,55 @@ article.out-wrap {
 }
 
 .right {
-  flex: 0 0 300px;
-  width: 300px;
+  flex: 0 0 clamp(220px, 24vw, 300px);
+  width: clamp(220px, 24vw, 300px);
+  background: white;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .right img {
   display: block;
   width: 100%;
-  max-width: 300px;
   height: auto;
 }
 
+/* tablet */
+@media (max-width: $bp-tablet) {
+  section {
+    padding: 40px 48px;
+  }
+
+  article.out-wrap {
+    gap: 24px;
+  }
+
+  .title-stage {
+    min-height: 72px;
+  }
+
+  .title-item {
+    font-size: clamp(28px, 5vw, 52px);
+  }
+
+  .right {
+    flex: 0 0 clamp(200px, 28vw, 260px);
+    width: clamp(200px, 28vw, 260px);
+  }
+}
+
+/* mobile */
 @media (max-width: $bp-mobile) {
+  section {
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+  }
+
   article.out-wrap {
     flex-direction: column;
     align-items: stretch;
+    gap: var(--space-4);
   }
 
   .left,
@@ -195,12 +214,25 @@ article.out-wrap {
 
   .right {
     flex: none;
+    width: min(220px, 58vw);
+    margin: 0 auto;
+    aspect-ratio: 1 / 1;
   }
 
   .right img {
     width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .title-stage {
+    min-height: 56px;
+  }
+
+  .title-item {
+    font-size: clamp(26px, 8vw, 42px);
+    line-height: 1.2;
+    white-space: nowrap;
   }
 }
 </style>
