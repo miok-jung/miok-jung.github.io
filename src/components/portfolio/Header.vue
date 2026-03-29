@@ -25,8 +25,8 @@ const scrollToSection = (id: string) => {
 
     <nav class="header right">
       <button type="button" @click="scrollToSection('home')">Home</button>
-      <button type="button" @click="scrollToSection('about')">About</button>
-      <button type="button" @click="scrollToSection('contact')">Contact</button>
+      <!-- <button type="button" @click="scrollToSection('about')">About</button> -->
+      <!-- <button type="button" @click="scrollToSection('contact')">Contact</button> -->
     </nav>
   </header>
 </template>
@@ -39,24 +39,30 @@ header {
   z-index: 10;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
+  padding: 16px 24px;
+  box-sizing: border-box;
+
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  .header {
-    display: flex;
-    align-items: center;
+}
+.header {
+  display: flex;
+  align-items: center;
 
-    &.left {
-      gap: 8px;
-    }
+  &.left {
+    gap: 8px;
+  }
 
-    &.right {
-      gap: 8px;
-      button {
-        background: transparent;
-      }
-    }
+  &.right {
+    gap: 8px;
+  }
+}
+@media (max-width: $bp-tablet) {
+  header {
+    padding: 8px 16px;
   }
 }
 </style>
