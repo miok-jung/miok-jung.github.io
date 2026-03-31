@@ -28,7 +28,7 @@
 ## 사용 예시
 
 ```vue
-<Badge text="NEW" />
-<Badge text="완료" size="sm" color="green" />
-<Badge text="오류" size="lg" color="red" text-color="var(--grey-2)" />
+<BaseBadge text="NEW" />
+<BaseBadge text="완료" size="sm" color="green" />
+<BaseBadge text="오류" size="lg" color="red" text-color="var(--grey-2)" />
 ```

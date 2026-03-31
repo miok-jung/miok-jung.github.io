@@ -3,7 +3,7 @@ import { useI18n } from 'vue-i18n'
 import { onMounted, onUnmounted, ref } from 'vue'
 
 import character from 'src/assets/images/portfolio/character.svg'
-import Badge from '../common/Badge.vue'
+import BaseBadge from '../common/BaseBadge.vue'
 
 const i18n = useI18n({ useScope: 'global' })
 
@@ -29,9 +29,9 @@ onUnmounted(() => {
     <article class="out-wrap">
       <div class="left">
         <div class="badge-wrap">
-          <Badge text="Front-end" />
-          <Badge text="Web Publisher" />
-          <Badge text="Vue · Quasar" />
+          <BaseBadge text="Front-end" />
+          <BaseBadge text="Web Publisher" />
+          <BaseBadge text="Vue · Quasar" />
         </div>
 
         <div class="text-wrap">
@@ -47,11 +47,11 @@ onUnmounted(() => {
         </div>
 
         <div class="skill-wrap">
-          <Badge text="HTML/CSS" size="sm" />
-          <Badge text="SCSS" size="sm" />
-          <Badge text="TypeScript" size="sm" />
-          <Badge text="Vue3" size="sm" />
-          <Badge text="Git" size="sm" />
+          <BaseBadge text="HTML/CSS" size="sm" />
+          <BaseBadge text="SCSS" size="sm" />
+          <BaseBadge text="TypeScript" size="sm" />
+          <BaseBadge text="Vue3" size="sm" />
+          <BaseBadge text="Git" size="sm" />
         </div>
       </div>
 
