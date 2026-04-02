@@ -3,29 +3,29 @@
 ## 역할
 
 사용자가 여러 옵션 중 하나를 선택할 수 있는 공통 UI 컴포넌트
-
----
+<br /><br />
 
 ## Props
 
-| name        | type                            | required | description           |
-| ----------- | ------------------------------- | -------- | --------------------- |
-| modelValue  | string \| number \| null        | ✔        | 선택된 값 (v-model)   |
-| options     | { label: string; value: any }[] | ✔        | 선택 가능한 옵션 목록 |
-| placeholder | string                          | ✖        | 기본 안내 텍스트      |
+| name        | type                     | required | description           |
+| ----------- | ------------------------ | -------- | --------------------- |
+| modelValue  | string \| number \| null | ✔        | 선택된 값 (v-model)   |
+| options     | Option[]                 | ✔        | 선택 가능한 옵션 목록 |
+| placeholder | string                   | ✖        | 기본 안내 텍스트      |
 
----
+<br />
 
-## 설계 기준
+### Option 타입
 
-- BaseSelect는 단일 선택을 위한 UI 컴포넌트이다.
-- 값 제어는 v-model을 통해 이루어진다.
-- options는 label / value 구조를 따른다.
-- placeholder는 선택되지 않은 초기 상태를 표현한다.
-- 컴포넌트는 특정 데이터 구조에 의존하지 않는다.
-- modelValue가 없을 경우, options 중 default가 true인 항목이 초기값으로 사용된다.
+```ts
+interface Option {
+  label: string
+  value: string | number
+  default?: boolean
+}
+```
 
----
+<br /><br />
 
 ## 사용 예시
 

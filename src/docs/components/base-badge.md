@@ -3,8 +3,7 @@
 ## 역할
 
 텍스트 기반 상태 정보를 표시하는 공통 UI 컴포넌트
-
----
+<br /><br />
 
 ## Props
 
@@ -15,7 +14,7 @@
 | color     | string         | ✖        | 배경색        |
 | textColor | string         | ✖        | 텍스트 색상   |
 
----
+<br /><br />
 
 ## 설계 기준
 
@@ -23,12 +22,19 @@
 - size와 padding을 통해 시각적 단계 구분
 - 레이아웃에 영향을 받지 않도록 독립적으로 동작
 
----
+<br /><br />
 
 ## 사용 예시
 
 ```vue
-<BaseBadge text="NEW" />
-<BaseBadge text="완료" size="sm" color="green" />
-<BaseBadge text="오류" size="lg" color="red" text-color="var(--grey-2)" />
+<script setup lang="ts">
+import { ref } from 'vue'
+import BaseBadge from 'src/common/BaseBadge.vue'
+</script>
+
+<template>
+  <BaseBadge text="NEW" />
+  <BaseBadge text="완료" size="sm" color="green" />
+  <BaseBadge text="오류" size="lg" color="red" text-color="var(--grey-2)" />
+</template>
 ```
