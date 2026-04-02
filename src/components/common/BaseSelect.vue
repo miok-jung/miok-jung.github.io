@@ -17,6 +17,7 @@ import { Icon } from '@iconify/vue'
  * - 크기 ( 크기를 기준해야할 지점을 어떻게 할지 고민이 필요 )
  * - 드롭다운 이벤트 (options에 대한 애니메이션 등)
  * - 피그마 업데이트가 필요할 듯
+ * - .select에 관련되어서 min-width를 0 -> 80px로 넣은 상태로 이거에 대한 고민이 필요
  */
 
 interface Option {
@@ -99,7 +100,7 @@ const selectOption = (opt: Option) => {
   position: relative;
   padding: 8px;
   width: 100%;
-  min-width: 0;
+  min-width: 80px;
   border-radius: 4px;
   border: 1px solid var(--grey-3);
   background-color: white;

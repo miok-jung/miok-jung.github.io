@@ -1,9 +1,31 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { Icon } from '@iconify/vue'
+import BaseSelect from '../common/BaseSelect.vue'
+import { setLocale } from '../../i18n'
+
+const { locale } = useI18n()
 
 const headerRef = ref<HTMLElement | null>(null)
 const isMenuOpen = ref(false)
+
+const selectLanguage = computed({
+  get: () => locale.value,
+  set: async (val) => setLocale(val),
+})
+
+const optionsLanguage = computed(() => [
+  {
+    label: '한국어',
+    value: 'ko',
+    default: true,
+  },
+  {
+    label: 'English',
+    value: 'en',
+  },
+])
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
@@ -38,6 +60,7 @@ const scrollToSection = (id: string) => {
       <button type="button" @click="scrollToSection('home')">Home</button>
       <!-- <button type="button" @click="scrollToSection('about')">About</button> -->
       <!-- <button type="button" @click="scrollToSection('contact')">Contact</button> -->
+      <BaseSelect v-model="selectLanguage" :options="optionsLanguage" />
     </nav>
 
     <!-- Mobile 햄버거 버튼 -->
@@ -73,6 +96,8 @@ const scrollToSection = (id: string) => {
       <button type="button" @click="scrollToSection('home')">Home</button>
       <!-- <button type="button" @click="scrollToSection('about')">About</button> -->
       <!-- <button type="button" @click="scrollToSection('contact')">Contact</button> -->
+
+      <BaseSelect v-model="selectLanguage" :options="optionsLanguage" />
     </nav>
   </Transition>
 </template>
@@ -107,10 +132,15 @@ header {
   }
 
   &.right {
+    display: flex;
+    align-items: center;
     gap: 8px;
+
+    button {
+      flex-shrink: 0;
+    }
   }
 }
-
 /* PC nav: 모바일에서 숨김 */
 .pc-nav {
   @media (max-width: $bp-mobile) {
