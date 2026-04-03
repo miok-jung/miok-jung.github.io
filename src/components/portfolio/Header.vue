@@ -6,6 +6,7 @@ import BaseSelect from '../common/BaseSelect.vue'
 import { setLocale } from '../../i18n'
 
 const { locale } = useI18n()
+const i18n = useI18n({ useScope: 'global' })
 
 const headerRef = ref<HTMLElement | null>(null)
 const isMenuOpen = ref(false)
@@ -40,8 +41,7 @@ const scrollToSection = (id: string) => {
   if (!el) return
 
   const headerH = headerRef.value?.offsetHeight ?? 0
-  const extra = 0
-  const top = el.getBoundingClientRect().top + window.scrollY - headerH + extra
+  const top = el.getBoundingClientRect().top + window.scrollY - headerH
 
   window.scrollTo({ top, behavior: 'smooth' })
   closeMenu()
@@ -50,25 +50,34 @@ const scrollToSection = (id: string) => {
 
 <template>
   <header ref="headerRef">
-    <div class="header left">
+    <!-- 좌측: 로고 -->
+    <a class="header-left" href="/">
       <Icon icon="ph:house-line" width="24" height="24" />
-      <h1>Mi Ok, Jung</h1>
-    </div>
+      <h1>{{ i18n.t('portfolio.header.title') }}</h1>
+    </a>
 
     <!-- PC nav -->
-    <nav class="header right pc-nav">
-      <button type="button" @click="scrollToSection('home')">Home</button>
+    <nav class="pc-nav">
+      <button type="button" @click="scrollToSection('home')">
+        {{ i18n.t('portfolio.header.navigation.home') }}
+      </button>
       <!-- <button type="button" @click="scrollToSection('about')">About</button> -->
       <!-- <button type="button" @click="scrollToSection('contact')">Contact</button> -->
       <BaseSelect v-model="selectLanguage" :options="optionsLanguage" />
     </nav>
 
-    <!-- Mobile 햄버거 버튼 -->
+    <!-- 모바일 -->
     <button
       class="hamburger"
       type="button"
+      :class="{ 'is-open': isMenuOpen }"
       @click="toggleMenu"
-      aria-label="메뉴 열기">
+      :aria-label="
+        isMenuOpen
+          ? i18n.t('portfolio.aria.menu.close')
+          : i18n.t('portfolio.aria.menu.open')
+      "
+      :aria-expanded="isMenuOpen">
       <Icon
         :icon="isMenuOpen ? 'ph:x-circle-bold' : 'ph:list-bold'"
         width="24"
@@ -76,24 +85,34 @@ const scrollToSection = (id: string) => {
     </button>
   </header>
 
-  <!-- Mobile 오버레이 -->
+  <!-- 모바일 오버레이 -->
   <Transition name="fade">
-    <div v-if="isMenuOpen" class="drawer-overlay" @click="closeMenu" />
+    <div
+      v-if="isMenuOpen"
+      class="drawer-overlay"
+      @click="closeMenu"
+      aria-hidden="true" />
   </Transition>
 
-  <!-- Mobile 드로어 -->
+  <!-- 모바일 드로어 -->
   <Transition name="slide">
-    <nav v-if="isMenuOpen" class="drawer">
+    <nav
+      v-if="isMenuOpen"
+      class="drawer"
+      :aria-label="i18n.t('portfolio.aria.menu.mobile')">
       <div class="drawer-header">
         <button
           type="button"
           class="drawer-close"
           @click="closeMenu"
-          aria-label="메뉴 닫기">
+          :aria-label="i18n.t('portfolio.aria.menu.close')">
           <Icon icon="ph:x-circle-bold" width="24" height="24" />
         </button>
       </div>
-      <button type="button" @click="scrollToSection('home')">Home</button>
+
+      <button type="button" @click="scrollToSection('home')">
+        {{ i18n.t('portfolio.header.navigation.home') }}
+      </button>
       <!-- <button type="button" @click="scrollToSection('about')">About</button> -->
       <!-- <button type="button" @click="scrollToSection('contact')">Contact</button> -->
 
@@ -123,32 +142,36 @@ header {
   }
 }
 
-.header {
+.header-left {
   display: flex;
   align-items: center;
+  gap: 8px;
+}
 
-  &.left {
-    gap: 8px;
-  }
+.pc-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
-  &.right {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  button {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--grey-10);
+    font-size: 0.95rem;
+    padding: 4px 8px;
 
-    button {
-      flex-shrink: 0;
+    &:hover {
+      color: var(--grey-7);
     }
   }
-}
-/* PC nav: 모바일에서 숨김 */
-.pc-nav {
+
   @media (max-width: $bp-mobile) {
     display: none;
   }
 }
 
-/* 햄버거 버튼: PC에서 숨김 */
 .hamburger {
   display: none;
   padding: 4px;
@@ -156,6 +179,10 @@ header {
   border: none;
   color: var(--grey-10);
   cursor: pointer;
+
+  &:hover {
+    color: var(--grey-7);
+  }
 
   @media (max-width: $bp-mobile) {
     display: flex;
@@ -171,7 +198,7 @@ header {
   background: rgba(0, 0, 0, 0.4);
 }
 
-/* 드로어 */
+/* 모바일 드로어 */
 .drawer {
   position: fixed;
   top: 0;
@@ -200,12 +227,10 @@ header {
     display: flex;
     align-items: center;
     background: none;
-    border: none !important;
-    border-bottom: none !important;
+    border: none;
     padding: 4px;
     color: var(--grey-10);
     cursor: pointer;
-    font-size: 1rem;
 
     &:hover {
       color: var(--grey-7);
@@ -228,7 +253,7 @@ header {
   }
 }
 
-/* 슬라이드 트랜지션 */
+/* 트랜지션 */
 .slide-enter-active,
 .slide-leave-active {
   transition: transform 0.3s ease;
@@ -238,7 +263,6 @@ header {
   transform: translateX(100%);
 }
 
-/* 페이드 트랜지션 */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease;

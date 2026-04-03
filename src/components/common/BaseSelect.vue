@@ -100,7 +100,8 @@ const selectOption = (opt: Option) => {
   position: relative;
   padding: 8px;
   width: 100%;
-  min-width: 80px;
+  min-width: 0;
+  box-sizing: border-box;
   border-radius: 4px;
   border: 1px solid var(--grey-3);
   background-color: white;

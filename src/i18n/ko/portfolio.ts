@@ -1,5 +1,11 @@
 export default {
   portfolio: {
+    header: {
+      title: 'Mi Ok, Jung',
+      navigation: {
+        home: '홈',
+      },
+    },
     home: {
       title: '보이는 것 이상의 것을 만듭니다',
       description:
@@ -47,6 +53,13 @@ export default {
           ],
         },
       ],
+    },
+    aria: {
+      menu: {
+        open: '메뉴 열기',
+        close: '메뉴 닫기',
+        mobile: '모바일 메뉴',
+      },
     },
   },
 }
