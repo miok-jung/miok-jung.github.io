@@ -8,7 +8,6 @@ import { setLocale } from '../../i18n'
 const { locale } = useI18n()
 const i18n = useI18n({ useScope: 'global' })
 
-const headerRef = ref<HTMLElement | null>(null)
 const isMenuOpen = ref(false)
 
 const selectLanguage = computed({
@@ -40,8 +39,7 @@ const scrollToSection = (id: string) => {
   const el = document.getElementById(id)
   if (!el) return
 
-  const headerH = headerRef.value?.offsetHeight ?? 0
-  const top = el.getBoundingClientRect().top + window.scrollY - headerH
+  const top = el.getBoundingClientRect().top + window.scrollY
 
   window.scrollTo({ top, behavior: 'smooth' })
   closeMenu()
@@ -49,7 +47,7 @@ const scrollToSection = (id: string) => {
 </script>
 
 <template>
-  <header ref="headerRef">
+  <header>
     <!-- 좌측: 로고 -->
     <a class="header-left" href="/">
       <Icon icon="ph:house-line" width="24" height="24" />
