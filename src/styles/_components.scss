@@ -1,39 +1,3 @@
-h1 {
-  font-size: 32px;
-  line-height: 1.3;
-  font-weight: 700;
-}
-
-h2 {
-  font-size: 24px;
-  line-height: 1.35;
-  font-weight: 600;
-}
-
-h3 {
-  font-size: 20px;
-  line-height: 1.4;
-  font-weight: 600;
-}
-
-h4 {
-  font-size: 18px;
-  line-height: 1.45;
-  font-weight: 500;
-}
-
-h5 {
-  font-size: 16px;
-  line-height: 1.5;
-  font-weight: 500;
-}
-
-h6 {
-  font-size: 14px;
-  line-height: 1.5;
-  font-weight: 500;
-}
-
 button {
   margin: 0;
   padding: 4px 8px;
@@ -48,11 +12,14 @@ button {
   user-select: none;
   -webkit-user-select: none;
   &:hover {
-    background: var(--grey-3);
-    color: var(--grey-7);
+    border: 1px solid var(--grey-3);
+    font-weight: bold;
   }
-  &:active {
-    background: var(--grey-5);
-    color: white;
+}
+a {
+  box-sizing: border-box;
+  &:hover {
+    border: 1px solid var(--grey-3);
+    font-weight: bold;
   }
 }
