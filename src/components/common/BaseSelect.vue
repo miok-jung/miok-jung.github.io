@@ -80,7 +80,7 @@ const selectOption = (opt: Option) => {
       <Icon
         class="select__arrow"
         :class="{ 'is-open': isOpen }"
-        icon="ph:caret-down" />
+        icon="lucide:chevron-down" />
     </div>
     <!-- 드롭다운 -->
     <div v-if="isOpen" class="select__dropdown">

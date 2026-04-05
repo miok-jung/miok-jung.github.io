@@ -50,7 +50,7 @@ const scrollToSection = (id: string) => {
   <header>
     <!-- 좌측: 로고 -->
     <a class="header-left" href="/">
-      <Icon icon="ph:house-line" width="24" height="24" />
+      <Icon icon="lucide:layout-dashboard" width="24" height="24" />
       <h1>{{ i18n.t('portfolio.header.title') }}</h1>
     </a>
 
@@ -79,7 +79,7 @@ const scrollToSection = (id: string) => {
       "
       :aria-expanded="isMenuOpen">
       <Icon
-        :icon="isMenuOpen ? 'ph:x-circle-bold' : 'ph:list-bold'"
+        :icon="isMenuOpen ? 'lucide:x' : 'lucide:text-align-justify'"
         width="24"
         height="24" />
     </button>
@@ -106,7 +106,7 @@ const scrollToSection = (id: string) => {
           class="drawer-close"
           @click="closeMenu"
           :aria-label="i18n.t('portfolio.aria.menu.close')">
-          <Icon icon="ph:x-circle-bold" width="24" height="24" />
+          <Icon icon="lucide:x" width="24" height="24" />
         </button>
       </div>
 
