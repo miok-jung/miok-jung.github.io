@@ -1,52 +1,32 @@
 export default {
   portfolio: {
-    home: {
-      title: 'Building more than what meets the eye',
-      description:
-        'I focus on publishing that preserves user experience,\nmaintainable UI structures, and code that clearly explains the reasoning behind it.',
-      pages: {
-        test: 'Test Page',
-        hanacard: 'Hana Card Page',
-        cj_one: 'CJ ONE Page',
+    header: {
+      title: 'Mi Ok, Jung',
+      navigation: {
+        home: 'Home',
+        contact: 'Contact',
       },
     },
-    about: {
-      labels: {
-        company: 'Company',
-        career: 'Career',
-        period: 'Period',
-        duration: 'Duration',
-        role: 'Responsibilities',
-        projects: 'Projects',
+    home: {
+      title: 'I create more than what you see',
+      description:
+        'I focus on user-friendly publishing, maintainable UI structures,\nand code that clearly explains the reasoning behind its implementation.',
+    },
+    contact: {
+      title: 'Let’s Work Together',
+      subtitle:
+        'If you’d like to learn more about my capabilities, feel free to reach out anytime.',
+      mail: {
+        send: 'Send Email',
+        copy: 'Copy Email',
       },
-      careers: [
-        {
-          company_name: 'iFactory Co., Ltd.',
-          period: {
-            from: '2022-07-17T15:00:00Z',
-            to: '',
-          },
-          projects: [
-            {
-              id: 'draft',
-              name: 'Draft',
-            },
-          ],
-        },
-        {
-          company_name: 'Newest Art Co., Ltd.',
-          period: {
-            from: '',
-            to: '',
-          },
-          projects: [
-            {
-              id: 'draft',
-              name: 'Draft',
-            },
-          ],
-        },
-      ],
+    },
+    aria: {
+      menu: {
+        open: 'Open menu',
+        close: 'Close menu',
+        mobile: 'Mobile menu',
+      },
     },
   },
 }

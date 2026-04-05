@@ -60,7 +60,9 @@ const scrollToSection = (id: string) => {
         {{ i18n.t('portfolio.header.navigation.home') }}
       </button>
       <!-- <button type="button" @click="scrollToSection('about')">About</button> -->
-      <!-- <button type="button" @click="scrollToSection('contact')">Contact</button> -->
+      <button type="button" @click="scrollToSection('contact')">
+        {{ i18n.t('portfolio.header.navigation.contact') }}
+      </button>
       <BaseSelect v-model="selectLanguage" :options="optionsLanguage" />
     </nav>
 
@@ -112,7 +114,9 @@ const scrollToSection = (id: string) => {
         {{ i18n.t('portfolio.header.navigation.home') }}
       </button>
       <!-- <button type="button" @click="scrollToSection('about')">About</button> -->
-      <!-- <button type="button" @click="scrollToSection('contact')">Contact</button> -->
+      <button type="button" @click="scrollToSection('contact')">
+        {{ i18n.t('portfolio.header.navigation.contact') }}
+      </button>
 
       <BaseSelect v-model="selectLanguage" :options="optionsLanguage" />
     </nav>
