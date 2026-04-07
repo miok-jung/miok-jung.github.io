@@ -20,6 +20,11 @@ export default {
         send: '메일 보내기',
         copy: '이메일 복사',
       },
+      design: {
+        description:
+          '포트폴리오의 디자인 구성과 UI 흐름은 피그마에서 확인하실 수 있습니다.',
+        view_link: '디자인 보기 링크',
+      },
     },
     aria: {
       menu: {

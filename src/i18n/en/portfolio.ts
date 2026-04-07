@@ -8,17 +8,22 @@ export default {
       },
     },
     home: {
-      title: 'I create more than what you see',
+      title: 'Creating more than what meets the eye',
       description:
-        'I focus on user-friendly publishing, maintainable UI structures,\nand code that clearly explains the reasoning behind its implementation.',
+        'I focus on publishing that preserves user experience,\nmaintainable UI structures, and code that clearly explains the "why" behind it.',
     },
     contact: {
       title: 'Let’s Work Together',
       subtitle:
-        'If you’d like to learn more about my capabilities, feel free to reach out anytime.',
+        'If you’d like to learn more about my skills, feel free to reach out.',
       mail: {
         send: 'Send Email',
         copy: 'Copy Email',
+      },
+      design: {
+        description:
+          'You can review the portfolio design structure and UI flow on Figma.',
+        view_link: 'View Design',
       },
     },
     aria: {

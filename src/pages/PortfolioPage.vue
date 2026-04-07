@@ -1,13 +1,13 @@
 <script setup lang="ts">
 // import About from '../components/portfolio/About.vue'
-// import Contact from '../components/portfolio/Contact.vue'
 import Home from '../components/portfolio/Home.vue'
+import Contact from '../components/portfolio/Contact.vue'
 </script>
 <template>
   <div class="out-wrap">
     <Home class="wrap" />
     <!-- <About class="wrap" /> -->
-    <!-- <Contact class="wrap" /> -->
+    <Contact class="wrap" />
   </div>
 </template>
 
