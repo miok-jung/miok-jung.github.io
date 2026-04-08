@@ -4,16 +4,16 @@ import Home from '../components/portfolio/Home.vue'
 import Contact from '../components/portfolio/Contact.vue'
 </script>
 <template>
-  <div class="out-wrap">
-    <Home class="wrap" />
-    <!-- <About class="wrap" /> -->
-    <Contact class="wrap" />
-  </div>
+  <main class="portfolio">
+    <Home class="portfolio__section" />
+    <!-- <About class="portfolio__section" /> -->
+    <Contact class="portfolio__section" />
+  </main>
 </template>
 
 <style scoped lang="scss">
-.out-wrap {
-  .wrap {
+.portfolio {
+  &__section {
     display: flex;
     &:nth-of-type(1) {
       background: MistyRose;

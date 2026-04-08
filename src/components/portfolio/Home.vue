@@ -23,30 +23,32 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section id="home">
-    <h2>{{ i18n.t('portfolio.home.title') }}</h2>
+  <section id="home" class="home">
+    <h2 class="home__heading">{{ i18n.t('portfolio.home.title') }}</h2>
 
-    <article class="out-wrap">
-      <div class="left">
-        <div class="badge-wrap">
+    <article class="home__inner">
+      <div class="home__content">
+        <div class="home__badges">
           <BaseBadge text="Front-end" />
           <BaseBadge text="Web Publisher" />
           <BaseBadge text="Vue · Quasar" />
         </div>
 
-        <div class="text-wrap">
-          <div class="title-stage">
+        <div class="home__text">
+          <div class="home__title-stage">
             <transition name="title-slide" mode="out-in">
-              <h3 :key="titles[currentIndex]" class="title-item">
+              <h3 :key="titles[currentIndex]" class="home__title">
                 {{ titles[currentIndex] }}
               </h3>
             </transition>
           </div>
 
-          <p>{{ i18n.t('portfolio.home.description') }}</p>
+          <p class="home__description">
+            {{ i18n.t('portfolio.home.description') }}
+          </p>
         </div>
 
-        <div class="skill-wrap">
+        <div class="home__skills">
           <BaseBadge text="HTML/CSS" size="sm" />
           <BaseBadge text="SCSS" size="sm" />
           <BaseBadge text="TypeScript" size="sm" />
@@ -55,15 +57,15 @@ onUnmounted(() => {
         </div>
       </div>
 
-      <div class="right">
-        <img :src="character" alt="character image" />
+      <div class="home__visual">
+        <img :src="character" alt="character image" class="home__image" />
       </div>
     </article>
   </section>
 </template>
 
 <style scoped lang="scss">
-section {
+.home {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,60 +74,78 @@ section {
   min-height: 100svh;
   padding: 40px 80px;
   box-sizing: border-box;
-}
 
-article.out-wrap {
-  display: flex;
-  align-items: center;
-  gap: var(--space-6);
-  width: 100%;
-  max-width: 1200px;
-}
+  &__heading {
+    margin: 0;
+  }
 
-.left {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  min-width: 0;
-  gap: var(--space-3);
-}
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    width: 100%;
+    max-width: 1200px;
+  }
 
-.left .badge-wrap,
-.left .skill-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-2);
-}
+  &__content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-width: 0;
+    gap: var(--space-3);
+  }
 
-.left .text-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
-  position: relative;
+  &__badges,
+  &__skills {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+  }
 
-  p {
+  &__text {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  &__title-stage {
+    position: relative;
+    width: 100%;
+    min-height: 86px;
+    overflow: hidden;
+  }
+
+  &__title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    font-size: clamp(32px, 6vw, 72px);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  &__description {
     margin: 0;
     white-space: pre-line;
   }
-}
 
-.title-stage {
-  position: relative;
-  width: 100%;
-  min-height: 86px;
-  overflow: hidden;
-}
+  &__visual {
+    flex: 0 0 clamp(220px, 24vw, 300px);
+    width: clamp(220px, 24vw, 300px);
+    background: white;
+    border-radius: 50%;
+    overflow: hidden;
+  }
 
-.title-item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  margin: 0;
-  font-size: clamp(32px, 6vw, 72px);
-  line-height: 1.2;
-  white-space: nowrap;
+  &__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 }
 
 .title-slide-enter-active,
@@ -155,84 +175,70 @@ article.out-wrap {
   transform: translateY(-100%);
 }
 
-.right {
-  flex: 0 0 clamp(220px, 24vw, 300px);
-  width: clamp(220px, 24vw, 300px);
-  background: white;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.right img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
 /* tablet */
 @media (max-width: $bp-tablet) {
-  section {
+  .home {
     padding: 40px 48px;
-  }
 
-  article.out-wrap {
-    gap: 24px;
-  }
+    &__inner {
+      gap: 24px;
+    }
 
-  .title-stage {
-    min-height: 72px;
-  }
+    &__title-stage {
+      min-height: 72px;
+    }
 
-  .title-item {
-    font-size: clamp(28px, 5vw, 52px);
-  }
+    &__title {
+      font-size: clamp(28px, 5vw, 52px);
+    }
 
-  .right {
-    flex: 0 0 clamp(200px, 28vw, 260px);
-    width: clamp(200px, 28vw, 260px);
+    &__visual {
+      flex: 0 0 clamp(200px, 28vw, 260px);
+      width: clamp(200px, 28vw, 260px);
+    }
   }
 }
 
 /* mobile */
 @media (max-width: $bp-mobile) {
-  section {
+  .home {
     justify-content: center;
     align-items: center;
     padding: 24px;
-  }
 
-  article.out-wrap {
-    flex-direction: column;
-    align-items: stretch;
-    gap: var(--space-4);
-  }
+    &__inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-4);
+    }
 
-  .left,
-  .right {
-    width: 100%;
-  }
+    &__content,
+    &__visual {
+      width: 100%;
+    }
 
-  .right {
-    flex: none;
-    width: min(220px, 58vw);
-    margin: 0 auto;
-    aspect-ratio: 1 / 1;
-  }
+    &__visual {
+      flex: none;
+      width: min(220px, 58vw);
+      margin: 0 auto;
+      aspect-ratio: 1 / 1;
+    }
 
-  .right img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
+    &__image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
 
-  .title-stage {
-    min-height: 56px;
-  }
+    &__title-stage {
+      min-height: 56px;
+    }
 
-  .title-item {
-    font-size: clamp(26px, 8vw, 42px);
-    line-height: 1.2;
-    white-space: nowrap;
+    &__title {
+      font-size: clamp(26px, 8vw, 42px);
+      line-height: 1.2;
+      white-space: nowrap;
+    }
   }
 }
 </style>
