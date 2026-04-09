@@ -56,6 +56,19 @@ h6 {
   line-height: 20px;
   font-weight: 500;
 }
+.text-lg {
+  font-size: 18px;
+  line-height: 28px;
+}
+.text-sm {
+  font-size: 14px;
+  line-height: 20px;
+}
+.text-caption {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--grey-6);
+}
 
 a {
   text-decoration: none;
