@@ -28,6 +28,23 @@
 - Component 단위 스타일 분리
 - BEM 네이밍 규칙
 
+#### CSS Naming Convention (BEM)
+
+This project follows BEM methodology for scalable and maintainable UI structure.
+
+- Block: 독립적인 컴포넌트
+- Element: Block 내부 요소 (`__`)
+- Modifier: 상태/변형 (`--`)
+
+##### Example
+
+```html
+<div class="card">
+  <h2 class="card__title"></h2>
+  <button class="card__button card__button--primary"></button>
+</div>
+```
+
 ### Analytics
 
 - Google Tag 기반의 실시간 방문자 트래픽 및 사용자 행동 데이터 수집
@@ -51,7 +68,7 @@
 ```txt
 src/
 ├─ assets/            # 이미지 정적 리소스
-├─ components/        #
+├─ components/
 │  ├─ common/           # 공용 UI 컴포넌트 (현재: Badge)
 │  ├─ global/           # 전역 UI 컴포넌트 (현재: JLoading 예정)
 ├─ pages/             # 라우트 단위 페이지
@@ -68,8 +85,17 @@ src/
 - 공통 UI 컴포넌트를 props 기반으로 설계하여
 - 스타일과 로직을 분리하고 재사용성과 일관성을 확보
 
-### Badge Component
+### BaseBadge Component
 
-- 상태 및 텍스트를 표현하는 공통 UI 컴포넌트
+- 상태 및 강조 표현을 위한 UI 컴포넌트
 - `size`, `color` props 기반 스타일 제어
-- 레이아웃에 독립적으로 동작하여 다양한 위치에서 재사용 가능
+- color와 textColor는 디자인 토큰 사용을 권장한다.
+- 👉 자세한 내용 : [BaseBadge](./docs/components/base-badge.md)
+
+---
+
+### BaseSelect Component
+
+- 커스텀 드롭다운 선택 UI 컴포넌트
+- `modelValue`, `options`, `placeholder` 기반 상태 관리
+- 👉 자세한 내용 : [BaseSelect](./docs/components/base-select.md)
