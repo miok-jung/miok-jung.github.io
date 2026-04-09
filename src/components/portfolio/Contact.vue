@@ -118,6 +118,9 @@ section {
   gap: 16px 32px;
   width: 100%;
   max-width: 1200px;
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: repeat((1, 1fr));
+  }
 }
 .contact {
   padding: 20px;
