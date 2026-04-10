@@ -20,6 +20,7 @@
 - Vue 3 (Composition API)
 - TypeScript
 - Vue Router
+- Pinia
 
 ### Styling
 
@@ -30,7 +31,7 @@
 
 #### CSS Naming Convention (BEM)
 
-This project follows BEM methodology for scalable and maintainable UI structure.
+이 프로젝트는 확장 가능하고 유지 가능한 UI 구조를 위한 BEM 방법론을 따릅니다.
 
 - Block: 독립적인 컴포넌트
 - Element: Block 내부 요소 (`__`)
@@ -44,6 +45,11 @@ This project follows BEM methodology for scalable and maintainable UI structure.
   <button class="card__button card__button--primary"></button>
 </div>
 ```
+
+### Data & Utilities
+
+- Axios (API Layer 분리)
+- Modular utils 구조
 
 ### Analytics
 
