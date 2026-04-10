@@ -1,12 +1,12 @@
 <script setup lang="ts">
-// import About from '../components/portfolio/About.vue'
-import Home from '../components/portfolio/Home.vue'
-import Contact from '../components/portfolio/Contact.vue'
+import Home from '../../components/portfolio/Home.vue'
+import Projects from '../../components/portfolio/Projects.vue'
+import Contact from '../../components/portfolio/Contact.vue'
 </script>
 <template>
   <main class="portfolio">
     <Home class="portfolio__section" />
-    <!-- <About class="portfolio__section" /> -->
+    <Projects class="portfolio__section" />
     <Contact class="portfolio__section" />
   </main>
 </template>

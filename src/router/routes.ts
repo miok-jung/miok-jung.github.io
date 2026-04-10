@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 
 import PortfolioLayout from '../layouts/PortfolioLayout.vue'
-import PortfolioPages from '../pages/PortfolioPage.vue'
+import PortfolioPages from '../pages/portfolio/IndexPage.vue'
 import TestLayout from '../layouts/TestLayout.vue'
 import TestPage from '../pages/TestPage.vue'
 

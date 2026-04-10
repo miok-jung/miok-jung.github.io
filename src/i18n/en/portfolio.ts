@@ -4,25 +4,55 @@ export default {
       title: 'Mi Ok, Jung',
       navigation: {
         home: 'Home',
+        projects: 'Projects',
         contact: 'Contact',
       },
     },
     home: {
       title: 'Creating more than what meets the eye',
       description:
-        'I focus on publishing that preserves user experience,\nmaintainable UI structures, and code that clearly explains the "why" behind it.',
+        'I focus on user-friendly publishing, maintainable UI structures, and writing code that clearly explains the reasoning behind it.',
+    },
+    project: {
+      title: 'Projects',
+      subtitle: 'Clone coding projects I have worked on.',
+      back: 'Back to list',
+      items: [
+        {
+          id: 'hanacard',
+          title: 'Hana Card',
+          description:
+            'Publishing based on analyzing layout and UI structure of a corporate website',
+          detail:
+            'Built by analyzing an existing website, breaking down the UI, and reconstructing it into component-based structures. Focused on semantic markup and CSS architecture while studying static layouts and interactions.',
+          tags: ['XHTML', 'CSS2', 'jQuery'],
+          github: 'https://github.com/miok-jung/hanacard_clone',
+          link: 'https://jnarin.com/hanacard_clone',
+        },
+        {
+          id: 'cj-one',
+          title: 'CJ ONE',
+          description:
+            'Responsive web structure analysis and publishing implementation',
+          detail:
+            'Created a responsive layout based on design references, considering UI flow across different devices. Structured components for better reusability and maintainability.',
+          tags: ['HTML5', 'CSS3', 'JavaScript'],
+          github: 'https://github.com/miok-jung/cjone_clone',
+          link: 'https://jnarin.com/cjone_clone/',
+        },
+      ],
     },
     contact: {
-      title: 'Let’s Work Together',
+      title: "Let's work together",
       subtitle:
-        'If you’d like to learn more about my skills, feel free to reach out.',
+        'If you have any questions about my skills, feel free to reach out.',
       mail: {
         send: 'Send Email',
         copy: 'Copy Email',
       },
       design: {
         description:
-          'You can review the portfolio design structure and UI flow on Figma.',
+          'You can check the design structure and UI flow of this portfolio in Figma.',
         view_link: 'View Design',
       },
     },

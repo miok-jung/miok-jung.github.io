@@ -59,7 +59,9 @@ const scrollToSection = (id: string) => {
       <button type="button" @click="scrollToSection('home')">
         {{ i18n.t('portfolio.header.navigation.home') }}
       </button>
-      <!-- <button type="button" @click="scrollToSection('about')">About</button> -->
+      <button type="button" @click="scrollToSection('projects')">
+        {{ i18n.t('portfolio.header.navigation.projects') }}
+      </button>
       <button type="button" @click="scrollToSection('contact')">
         {{ i18n.t('portfolio.header.navigation.contact') }}
       </button>
@@ -112,6 +114,9 @@ const scrollToSection = (id: string) => {
 
       <button type="button" @click="scrollToSection('home')">
         {{ i18n.t('portfolio.header.navigation.home') }}
+      </button>
+      <button type="button" @click="scrollToSection('projects')">
+        {{ i18n.t('portfolio.header.navigation.projects') }}
       </button>
       <!-- <button type="button" @click="scrollToSection('about')">About</button> -->
       <button type="button" @click="scrollToSection('contact')">
