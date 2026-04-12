@@ -215,8 +215,8 @@ header {
   width: 200px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  padding: var(--space-4) var(--space-5) var(--space-5);
+  gap: 8px;
+  padding: 16px 24px 24px;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
@@ -225,9 +225,9 @@ header {
   .drawer-header {
     display: flex;
     justify-content: flex-end;
-    padding-bottom: var(--space-4);
+    padding-bottom: 16px;
     border-bottom: 1px solid var(--grey-2);
-    margin-bottom: var(--space-2);
+    margin-bottom: 8px;
   }
 
   .drawer-close {
@@ -250,7 +250,7 @@ header {
     cursor: pointer;
     font-size: 1.2rem;
     text-align: left;
-    padding: var(--space-3) var(--space-2);
+    padding: 12px 8px;
     color: var(--grey-10);
     border-bottom: 1px solid var(--grey-2);
 

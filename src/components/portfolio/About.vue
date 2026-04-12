@@ -48,7 +48,7 @@ section {
   display: flex;
   flex-direction: column;
   padding: 3rem;
-  min-height: 100vh;
+  min-height: 100svh;
 }
 h2 {
   margin-bottom: 32px;

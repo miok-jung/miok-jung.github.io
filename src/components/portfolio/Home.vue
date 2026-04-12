@@ -82,7 +82,7 @@ onUnmounted(() => {
   &__inner {
     display: flex;
     align-items: center;
-    gap: var(--space-6);
+    gap: 32px;
     width: 100%;
     max-width: 1200px;
   }
@@ -92,7 +92,7 @@ onUnmounted(() => {
     flex: 1 1 auto;
     flex-direction: column;
     min-width: 0;
-    gap: var(--space-3);
+    gap: 12px;
   }
 
   &__badges,
@@ -100,14 +100,14 @@ onUnmounted(() => {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-2);
+    gap: 8px;
   }
 
   &__text {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: var(--space-5);
+    gap: 24px;
   }
 
   &__title-stage {
@@ -209,7 +209,7 @@ onUnmounted(() => {
     &__inner {
       flex-direction: column;
       align-items: stretch;
-      gap: var(--space-4);
+      gap: 16px;
     }
 
     &__content,
