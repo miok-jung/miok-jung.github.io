@@ -4,6 +4,7 @@ export default {
       title: 'Mi Ok, Jung',
       navigation: {
         home: 'Home',
+        career: 'Career',
         projects: 'Projects',
         contact: 'Contact',
       },
@@ -12,6 +13,89 @@ export default {
       title: 'Creating more than what meets the eye',
       description:
         'I focus on user-friendly publishing, maintainable UI structures, and writing code that clearly explains the reasoning behind it.',
+    },
+    // en/portfolio.ts 의 portfolio 객체 안에 추가 (기존 career 블록 교체)
+
+    career: {
+      title: 'Career',
+      subtitle: 'My experience as a web publisher.',
+      present: '2026-03-16',
+      items: [
+        {
+          company: 'IPACTORY Inc.',
+          role: 'Publisher Development Team',
+          from: '2022-07-01',
+          to: '',
+          tags: ['Vue3', 'Quasar Framework', 'HTML5', 'SCSS', 'TypeScript'],
+          projects: [
+            {
+              name: 'IPACTORY HOME',
+              link: 'https://www.ipactory.com/',
+              tasks: [
+                'Full publishing of responsive corporate website based on Quasar Framework (100% contribution)',
+                'Layout structure design and UI implementation considering multilingual scalability',
+                'UI component customization reflecting corporate identity and cross-browser support',
+              ],
+            },
+            {
+              name: 'IPEDIT',
+              link: 'https://ipedit.co',
+              tasks: [
+                'Component-driven UI structure design and full publishing for service renewal',
+                'Structured repetitive UI elements as shared components to improve efficiency and maintainability',
+                'Intuitive layout and navigation UI implementation with UX in mind',
+              ],
+            },
+            {
+              name: 'AIT HOME',
+              link: 'https://ait.ipedit.co/',
+              tasks: [
+                'UI publishing and layout design aligned with the intent of the newly launched service',
+                'Interactive UI publishing based on design mockups with web accessibility consideration',
+                'Component-based UI structure design and development for reusability',
+              ],
+            },
+            {
+              name: 'Draft / Translate',
+              link: 'https://draft.ipedit.co/',
+              subLink: 'https://translate.ipedit.co/',
+              tasks: [
+                'Dashboard UI publishing and frontend collaborative development based on Vue3 + Quasar',
+                'Dynamic UI component design and implementation considering data binding',
+                'Page structure design and UI development with API integration in mind',
+              ],
+            },
+          ],
+        },
+        {
+          company: 'Meum Inc.',
+          role: 'Staff',
+          from: '2021-05-01',
+          to: '2022-01-01',
+          tags: ['HTML', 'CSS', 'JavaScript'],
+          projects: [
+            {
+              name: 'Meum Service Renewal',
+              link: 'https://meum.me/',
+              tasks: [
+                'Front-end renewal of service homepage using pure HTML, CSS, JavaScript',
+                'Main pages handled: Main, Guide, Store, Customer Center, My Page',
+                'Integrated overall site layout with variables and implemented responsive design',
+                'Collaborated with 2 frontend developers, dividing work by page',
+              ],
+            },
+            {
+              name: 'Meum & PCN Gallery En',
+              link: 'https://www.galleryen.co.kr/',
+              tasks: [
+                'Affiliated companies: Meum Inc., PCN',
+                'Primary role in responsive page development and publishing',
+                'Designed one-page structure with smooth interactions for beta service release',
+              ],
+            },
+          ],
+        },
+      ],
     },
     project: {
       title: 'Projects',
