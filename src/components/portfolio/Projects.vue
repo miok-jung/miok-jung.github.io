@@ -89,7 +89,7 @@ const projects = computed(() => tm('portfolio.project.items'))
   justify-content: space-between;
   gap: 16px;
   padding: 24px;
-  border: 1px solid var(--grey-2);
+  border: 1px solid var(--grey-200);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(6px);
@@ -99,7 +99,7 @@ const projects = computed(() => tm('portfolio.project.items'))
     transform 0.2s ease;
 
   &:hover {
-    border-color: var(--grey-5);
+    border-color: var(--grey-500);
     transform: translateY(-2px);
   }
 
@@ -118,7 +118,7 @@ const projects = computed(() => tm('portfolio.project.items'))
   &__desc {
     font-size: 14px;
     line-height: 20px;
-    color: var(--grey-7);
+    color: var(--grey-700);
   }
 
   &__tags {
@@ -136,7 +136,7 @@ const projects = computed(() => tm('portfolio.project.items'))
       display: flex;
       align-items: center;
       padding: 4px;
-      color: var(--grey-7);
+      color: var(--grey-700);
 
       &:hover {
         color: var(--grey-10);

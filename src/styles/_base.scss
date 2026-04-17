@@ -5,8 +5,7 @@ html {
 body {
   box-sizing: border-box;
   margin: 0;
-  background: var(--grey-1);
-  color: var(--grey-10);
+  color: black;
   font-size: 14px;
   line-height: 24px;
 }
@@ -67,7 +66,7 @@ h6 {
 .text-caption {
   font-size: 12px;
   line-height: 16px;
-  color: var(--grey-6);
+  color: var(--grey-600);
 }
 
 a {

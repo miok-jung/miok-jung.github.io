@@ -28,7 +28,7 @@
         // padding: 0 12px;
         width: 100%;
         height: 30px;
-        border: 1px solid var(--grey-8);
+        border: 1px solid var(--grey-800);
         outline: 0;
         box-sizing: border-box;
         border-top: none;
@@ -44,7 +44,7 @@
         bottom: 0px;
         width: 0px;
         height: 1px;
-        background: var(--grey-3);
+        background: var(--grey-300);
         transform: translateX(-50%);
         transform-origin: center;
         transition: width 0.25s linear;

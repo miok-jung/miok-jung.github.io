@@ -103,14 +103,14 @@ const selectOption = (opt: Option) => {
   min-width: 0;
   box-sizing: border-box;
   border-radius: 4px;
-  border: 1px solid var(--grey-3);
+  border: 1px solid var(--grey-300);
   background-color: white;
   color: var(--grey-10);
   cursor: pointer;
 
   &:focus {
     outline: none;
-    border-color: var(--grey-9);
+    border-color: var(--grey-900);
   }
   &__trigger {
     display: flex;
@@ -138,7 +138,7 @@ const selectOption = (opt: Option) => {
     padding: 8px 0;
     width: 100%;
     user-select: none;
-    border: 1px solid var(--grey-3);
+    border: 1px solid var(--grey-300);
     border-radius: 4px;
     background: white;
   }

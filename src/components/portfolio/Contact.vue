@@ -125,7 +125,7 @@ const copyEmail = async () => {
 
 .contact-card {
   padding: 20px;
-  border: 1px solid var(--grey-5);
+  border: 1px solid var(--grey-500);
   border-radius: 20px;
   background: white;
   text-align: center;

@@ -138,7 +138,7 @@ const calcDuration = (from: string, to: string | null) => {
 
 .career-card {
   padding: 32px;
-  border: 1px solid var(--grey-3);
+  border: 1px solid var(--grey-300);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(6px);
@@ -150,7 +150,7 @@ const calcDuration = (from: string, to: string | null) => {
     gap: 16px;
     padding-bottom: 24px;
     margin-bottom: 24px;
-    border-bottom: 1px solid var(--grey-2);
+    border-bottom: 1px solid var(--grey-200);
   }
 
   &__info {
@@ -167,7 +167,7 @@ const calcDuration = (from: string, to: string | null) => {
 
   &__role {
     font-size: 14px;
-    color: var(--grey-6);
+    color: var(--grey-600);
   }
 
   &__tags {
@@ -184,13 +184,13 @@ const calcDuration = (from: string, to: string | null) => {
     gap: 4px;
     flex-shrink: 0;
     font-size: 14px;
-    color: var(--grey-7);
+    color: var(--grey-700);
     white-space: nowrap;
   }
 
   &__duration {
     font-size: 12px;
-    color: var(--grey-5);
+    color: var(--grey-500);
   }
 
   &__projects {
@@ -206,7 +206,7 @@ const calcDuration = (from: string, to: string | null) => {
 .career-project {
   & + & {
     padding-top: 24px;
-    border-top: 1px dashed var(--grey-2);
+    border-top: 1px dashed var(--grey-200);
   }
 
   &__header {
@@ -232,13 +232,13 @@ const calcDuration = (from: string, to: string | null) => {
 
   &__link {
     font-size: 12px;
-    color: var(--grey-5);
+    color: var(--grey-500);
     text-decoration: none;
     padding: 0;
     word-break: break-all;
 
     &:hover {
-      color: var(--grey-8);
+      color: var(--grey-800);
       background: transparent;
       border: none;
       text-decoration: underline;
@@ -260,12 +260,12 @@ const calcDuration = (from: string, to: string | null) => {
     gap: 8px;
     font-size: 14px;
     line-height: 22px;
-    color: var(--grey-8);
+    color: var(--grey-800);
 
     &::before {
       content: '·';
       flex-shrink: 0;
-      color: var(--grey-5);
+      color: var(--grey-500);
       margin-top: 1px;
     }
   }

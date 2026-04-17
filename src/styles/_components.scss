@@ -12,14 +12,14 @@ button {
   user-select: none;
   -webkit-user-select: none;
   &:hover {
-    border: 1px solid var(--grey-3);
+    border: 1px solid var(--grey-300);
     font-weight: bold;
   }
 }
 a {
   box-sizing: border-box;
   &:hover {
-    border: 1px solid var(--grey-3);
+    border: 1px solid var(--grey-300);
     font-weight: bold;
   }
 }

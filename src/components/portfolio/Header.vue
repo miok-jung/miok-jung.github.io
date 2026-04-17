@@ -176,7 +176,7 @@ header {
     padding: 4px 8px;
 
     &:hover {
-      color: var(--grey-7);
+      color: var(--grey-700);
     }
   }
 
@@ -194,7 +194,7 @@ header {
   cursor: pointer;
 
   &:hover {
-    color: var(--grey-7);
+    color: var(--grey-700);
   }
 
   @media (max-width: $bp-mobile) {
@@ -232,7 +232,7 @@ header {
     display: flex;
     justify-content: flex-end;
     padding-bottom: 16px;
-    border-bottom: 1px solid var(--grey-2);
+    border-bottom: 1px solid var(--grey-200);
     margin-bottom: 8px;
   }
 
@@ -246,7 +246,7 @@ header {
     cursor: pointer;
 
     &:hover {
-      color: var(--grey-7);
+      color: var(--grey-700);
     }
   }
 
@@ -258,10 +258,10 @@ header {
     text-align: left;
     padding: 12px 8px;
     color: var(--grey-10);
-    border-bottom: 1px solid var(--grey-2);
+    border-bottom: 1px solid var(--grey-200);
 
     &:hover {
-      color: var(--grey-7);
+      color: var(--grey-700);
     }
   }
 }
