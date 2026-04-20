@@ -35,6 +35,6 @@ import BaseBadge from 'src/common/BaseBadge.vue'
 <template>
   <BaseBadge text="NEW" />
   <BaseBadge text="완료" size="sm" color="green" />
-  <BaseBadge text="오류" size="lg" color="red" text-color="var(--grey-2)" />
+  <BaseBadge text="오류" size="lg" color="red" text-color="var(--grey-200)" />
 </template>
 ```
