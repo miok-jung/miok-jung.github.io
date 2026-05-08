@@ -2,6 +2,7 @@ import type { RouteRecordRaw } from 'vue-router'
 
 import PortfolioLayout from '../layouts/PortfolioLayout.vue'
 import PortfolioPages from '../pages/portfolio/IndexPage.vue'
+import DetailPage from '../pages/portfolio/DetailPage.vue'
 import TestLayout from '../layouts/TestLayout.vue'
 import TestPage from '../pages/TestPage.vue'
 
@@ -14,6 +15,12 @@ const routes: RouteRecordRaw[] = [
         path: '',
         component: PortfolioPages,
         meta: { title: '홈' },
+      },
+      {
+        path: 'project/:id',
+        name: 'project-detail',
+        component: DetailPage,
+        meta: { title: '프로젝트 상세' },
       },
     ],
   },

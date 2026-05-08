@@ -157,18 +157,18 @@ onBeforeMount(() => editor.value?.destroy())
     display: flex;
     gap: 4px 8px;
     padding: 4px;
-    background: var(--grey-2);
+    background: var(--grey-200);
     button {
       &.on {
-        background: var(--grey-6);
-        color: var(--grey-1);
+        background: var(--grey-600);
+        color: var(--grey-900);
       }
     }
     .separation {
       margin: 0 4px;
       height: inherit;
       width: 1px;
-      background: var(--grey-4);
+      background: var(--grey-400);
     }
     .header-wrap {
       position: relative;

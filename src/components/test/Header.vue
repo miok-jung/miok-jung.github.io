@@ -23,6 +23,7 @@ watch(toggleTheme, (isDark) => {
 
 <style scoped lang="scss">
 header {
+  width: 100%;
   border: 1px solid red;
 }
 input[type='checkbox'] {

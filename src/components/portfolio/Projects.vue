@@ -1,12 +1,30 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import BaseBadge from '../common/BaseBadge.vue'
 
-const { t, tm } = useI18n({ useScope: 'global' })
+// 썸네일 이미지 import
+// 이미지 추가 시 여기에 같이 추가해주세요
+import hanacardThumb from '../../assets/images/portfolio/projects/hanacard/thumb.png'
+import cjoneThumb from '../../assets/images/portfolio/projects/cj-one/thumb.png'
 
-const projects = computed(() => tm('portfolio.project.items'))
+const thumbMap: Record<string, string> = {
+  hanacard: hanacardThumb,
+  'cj-one': cjoneThumb,
+}
+
+const { t, tm } = useI18n({ useScope: 'global' })
+const router = useRouter()
+
+const projects = computed(() =>
+  Array.from(tm('portfolio.project.items') as any[]),
+)
+
+const goToDetail = (id: string) => {
+  router.push({ name: 'project-detail', params: { id } })
+}
 </script>
 
 <template>
@@ -17,36 +35,43 @@ const projects = computed(() => tm('portfolio.project.items'))
     </div>
 
     <ul class="project-section__list">
-      <li v-for="project in projects" :key="project.id" class="project-card">
-        <div class="project-card__body">
-          <h3 class="project-card__name">{{ project.title }}</h3>
-          <p class="project-card__desc">{{ project.description }}</p>
-          <div class="project-card__tags">
-            <BaseBadge
-              v-for="tag in project.tags"
-              :key="tag"
-              :text="tag"
-              size="sm" />
-          </div>
+      <li
+        v-for="project in projects"
+        :key="project.id"
+        class="project-card"
+        @click="goToDetail(project.id)">
+        <!-- 썸네일 -->
+        <div class="project-card__thumb">
+          <img
+            :src="thumbMap[project.id]"
+            :alt="project.title + ' 썸네일'"
+            loading="lazy" />
         </div>
 
-        <div class="project-card__links" @click.stop>
-          <a
-            v-if="project.github"
-            :href="project.github"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub">
-            <Icon icon="ph:github-logo" width="20" height="20" />
-          </a>
-          <a
-            v-if="project.link"
-            :href="project.link"
-            target="_blank"
-            rel="noopener noreferrer"
-            :aria-label="t('portfolio.aria.go_to_link')">
-            <Icon icon="ph:arrow-square-out" width="20" height="20" />
-          </a>
+        <div class="project-card__body">
+          <div class="project-card__info">
+            <h3 class="project-card__name">{{ project.title }}</h3>
+            <p class="project-card__desc">{{ project.description }}</p>
+            <div class="project-card__tags">
+              <BaseBadge
+                v-for="tag in project.tags"
+                :key="tag"
+                :text="tag"
+                size="sm" />
+            </div>
+          </div>
+
+          <!-- 바로가기 링크 -->
+          <div class="project-card__links" @click.stop>
+            <a
+              v-if="project.link"
+              :href="project.link"
+              target="_blank"
+              rel="noopener noreferrer"
+              :aria-label="t('portfolio.aria.go_to_link')">
+              <Icon icon="ph:arrow-square-out" width="20" height="20" />
+            </a>
+          </div>
         </div>
       </li>
     </ul>
@@ -76,7 +101,7 @@ const projects = computed(() => tm('portfolio.project.items'))
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 24px;
     width: 100%;
     max-width: 1200px;
@@ -86,13 +111,11 @@ const projects = computed(() => tm('portfolio.project.items'))
 .project-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 24px;
   border: 1px solid var(--grey-200);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(6px);
+  overflow: hidden;
   cursor: pointer;
   transition:
     border-color 0.2s ease,
@@ -103,7 +126,34 @@ const projects = computed(() => tm('portfolio.project.items'))
     transform: translateY(-2px);
   }
 
+  &__thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--grey-100);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.03);
+    }
+  }
+
   &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px;
+    flex: 1;
+  }
+
+  &__info {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -118,7 +168,7 @@ const projects = computed(() => tm('portfolio.project.items'))
   &__desc {
     font-size: 14px;
     line-height: 20px;
-    color: var(--grey-700);
+    color: var(--grey-600);
   }
 
   &__tags {
@@ -130,16 +180,17 @@ const projects = computed(() => tm('portfolio.project.items'))
 
   &__links {
     display: flex;
+    justify-content: flex-end;
     gap: 8px;
 
     a {
       display: flex;
       align-items: center;
       padding: 4px;
-      color: var(--grey-700);
+      color: var(--grey-600);
 
       &:hover {
-        color: var(--grey-10);
+        color: var(--grey-900);
         border: none;
         background: transparent;
       }
