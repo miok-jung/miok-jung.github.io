@@ -64,6 +64,14 @@ const goToDetail = (id: string) => {
           <!-- 바로가기 링크 -->
           <div class="project-card__links" @click.stop>
             <a
+              v-if="project.github"
+              :href="project.github"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub">
+              <Icon icon="ph:github-logo" width="20" height="20" />
+            </a>
+            <a
               v-if="project.link"
               :href="project.link"
               target="_blank"
