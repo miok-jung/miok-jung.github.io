@@ -16,7 +16,7 @@ export default {
     },
     career: {
       title: 'Career',
-      subtitle: '웹 퍼블리셔로서 쌓아온 경력입니다.',
+      subtitle: '웹 퍼블리셔 혹은 웹 개발자로서 쌓아온 경력입니다.',
       present: '2026-03-16',
       items: [
         {
@@ -27,21 +27,23 @@ export default {
           tags: ['Vue3', 'Quasar Framework', 'HTML5', 'SCSS', 'TypeScript'],
           projects: [
             {
-              name: 'IPACTORY HOME',
-              link: 'https://www.ipactory.com/',
+              name: 'Draft / Translate',
+              link: 'https://draft.ipedit.co/',
+              subLink: 'https://translate.ipedit.co/',
               tasks: [
-                'Quasar Framework 기반 반응형 기업 웹사이트 전체 퍼블리싱 (기여도 100%)',
-                '다국어 확장성을 고려한 레이아웃 구조 설계 및 UI 구현',
-                '기업 아이덴티티를 반영한 UI 컴포넌트 커스터마이징 및 크로스 브라우징 대응',
+                'Vue3 + Quasar 기반 대시보드 UI 퍼블리싱 및 프론트엔드 협업 개발',
+                '데이터 바인딩을 고려한 동적 UI 컴포넌트 설계 및 구현',
+                'API 연동을 고려한 페이지 구조 설계 및 UI 개발 참여',
               ],
             },
             {
-              name: 'IPEDIT',
-              link: 'https://ipedit.co',
+              name: '삼성 계열사 내부 운영 프로그램',
               tasks: [
-                '서비스 리뉴얼에 따른 컴포넌트 중심 UI 구조 설계 및 전체 퍼블리싱',
-                '반복되는 UI 요소를 공통 컴포넌트로 구조화하여 작업 효율 및 유지보수성 향상',
-                '사용자 경험(UX)을 고려한 직관적인 레이아웃 및 내비게이션 UI 구현',
+                'Vue3 + Quasar 기반 내부 운영 시스템 UI 퍼블리싱',
+                '대시보드 형태의 화면 구조 및 반응형 UI 구현',
+                '컴포넌트 기반 구조 설계 및 공통 UI 관리',
+                '상태 변화에 따른 동적 UI 대응 및 프런트엔드 협업 진행',
+                '유지보수를 고려한 화면 구조 개선 작업 수행',
               ],
             },
             {
@@ -54,13 +56,21 @@ export default {
               ],
             },
             {
-              name: 'Draft / Translate',
-              link: 'https://draft.ipedit.co/',
-              subLink: 'https://translate.ipedit.co/',
+              name: 'IPEDIT',
+              link: 'https://ipedit.co',
               tasks: [
-                'Vue3 + Quasar 기반 대시보드 UI 퍼블리싱 및 프론트엔드 협업 개발',
-                '데이터 바인딩을 고려한 동적 UI 컴포넌트 설계 및 구현',
-                'API 연동을 고려한 페이지 구조 설계 및 UI 개발 참여',
+                '서비스 리뉴얼에 따른 컴포넌트 중심 UI 구조 설계 및 전체 퍼블리싱',
+                '반복되는 UI 요소를 공통 컴포넌트로 구조화하여 작업 효율 및 유지보수성 향상',
+                '사용자 경험(UX)을 고려한 직관적인 레이아웃 및 내비게이션 UI 구현',
+              ],
+            },
+            {
+              name: 'IPACTORY HOME',
+              link: 'https://www.ipactory.com/',
+              tasks: [
+                'Quasar Framework 기반 반응형 기업 웹사이트 전체 퍼블리싱 (기여도 100%)',
+                '다국어 확장성을 고려한 레이아웃 구조 설계 및 UI 구현',
+                '기업 아이덴티티를 반영한 UI 컴포넌트 커스터마이징 및 크로스 브라우징 대응',
               ],
             },
           ],
@@ -101,6 +111,16 @@ export default {
       back: '목록으로',
       items: [
         {
+          id: 'cj-one',
+          title: 'CJ ONE',
+          description: '반응형 웹사이트 구조 분석 및 퍼블리싱 구현',
+          detail:
+            '디자인 시안을 기반으로 반응형 레이아웃을 구성하고, 디바이스별 UI 흐름을 고려하여 미디어쿼리를 설계했습니다. 컴포넌트 단위로 분리하여 재사용성과 유지보수성을 고려했습니다.',
+          tags: ['HTML5', 'CSS3', 'JavaScript'],
+          github: 'https://github.com/miok-jung/cjone_clone',
+          link: 'https://jnarin.com/cjone_clone/',
+        },
+        {
           id: 'hanacard',
           title: '하나카드',
           description:
@@ -110,16 +130,6 @@ export default {
           tags: ['XHTML', 'CSS2', 'jQuery'],
           github: 'https://github.com/miok-jung/hanacard_clone',
           link: 'https://jnarin.com/hanacard_clone',
-        },
-        {
-          id: 'cj-one',
-          title: 'CJ ONE',
-          description: '반응형 웹사이트 구조 분석 및 퍼블리싱 구현',
-          detail:
-            '디자인 시안을 기반으로 반응형 레이아웃을 구성하고, 디바이스별 UI 흐름을 고려하여 미디어쿼리를 설계했습니다. 컴포넌트 단위로 분리하여 재사용성과 유지보수성을 고려했습니다.',
-          tags: ['HTML5', 'CSS3', 'JavaScript'],
-          github: 'https://github.com/miok-jung/cjone_clone',
-          link: 'https://jnarin.com/cjone_clone/',
         },
       ],
     },

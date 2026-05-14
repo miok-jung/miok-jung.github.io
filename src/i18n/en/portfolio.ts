@@ -10,87 +10,95 @@ export default {
       },
     },
     home: {
-      title: 'Creating more than what meets the eye',
+      title: 'Creating More Than What Meets the Eye',
       description:
-        'I focus on user-friendly publishing, maintainable UI structures, and writing code that clearly explains the reasoning behind it.',
+        'I value publishing that preserves the user experience,\nmaintainable UI structures, and code that clearly explains "why it was built this way."',
     },
-    // en/portfolio.ts 의 portfolio 객체 안에 추가 (기존 career 블록 교체)
-
     career: {
       title: 'Career',
-      subtitle: 'My experience as a web publisher.',
+      subtitle: 'My career journey as a web publisher and web developer.',
       present: '2026-03-16',
       items: [
         {
-          company: 'IPACTORY Inc.',
-          role: 'Publisher Development Team',
+          company: 'IPACTORY Co., Ltd.',
+          role: 'Web Publisher',
           from: '2022-07-01',
           to: '',
           tags: ['Vue3', 'Quasar Framework', 'HTML5', 'SCSS', 'TypeScript'],
           projects: [
             {
-              name: 'IPACTORY HOME',
-              link: 'https://www.ipactory.com/',
+              name: 'Draft / Translate',
+              link: 'https://draft.ipedit.co/',
+              subLink: 'https://translate.ipedit.co/',
               tasks: [
-                'Full publishing of responsive corporate website based on Quasar Framework (100% contribution)',
-                'Layout structure design and UI implementation considering multilingual scalability',
-                'UI component customization reflecting corporate identity and cross-browser support',
+                'UI publishing and collaborative frontend development for a Vue3 + Quasar-based dashboard',
+                'Designed and implemented dynamic UI components with data binding in mind',
+                'Participated in page structure planning and UI development considering API integration',
               ],
             },
             {
-              name: 'IPEDIT',
-              link: 'https://ipedit.co',
+              name: 'Samsung Affiliate Internal Operation Program',
               tasks: [
-                'Component-driven UI structure design and full publishing for service renewal',
-                'Structured repetitive UI elements as shared components to improve efficiency and maintainability',
-                'Intuitive layout and navigation UI implementation with UX in mind',
+                'UI publishing for an internal operation system based on Vue3 + Quasar',
+                'Implemented dashboard-style layouts and responsive UI',
+                'Designed component-based structures and managed shared UI elements',
+                'Handled dynamic UI changes according to application states and collaborated with frontend developers',
+                'Improved screen structures with maintainability in mind',
               ],
             },
             {
               name: 'AIT HOME',
               link: 'https://ait.ipedit.co/',
               tasks: [
-                'UI publishing and layout design aligned with the intent of the newly launched service',
-                'Interactive UI publishing based on design mockups with web accessibility consideration',
-                'Component-based UI structure design and development for reusability',
+                'Designed layouts and published UI aligned with the planning direction of a newly launched service',
+                'Built interactive UI based on design mockups while considering web accessibility',
+                'Designed and developed reusable component-based UI structures',
               ],
             },
             {
-              name: 'Draft / Translate',
-              link: 'https://draft.ipedit.co/',
-              subLink: 'https://translate.ipedit.co/',
+              name: 'IPEDIT',
+              link: 'https://ipedit.co',
               tasks: [
-                'Dashboard UI publishing and frontend collaborative development based on Vue3 + Quasar',
-                'Dynamic UI component design and implementation considering data binding',
-                'Page structure design and UI development with API integration in mind',
+                'Designed a component-oriented UI structure and handled full publishing for the service renewal',
+                'Improved work efficiency and maintainability by structuring repetitive UI elements into shared components',
+                'Implemented intuitive layouts and navigation UI with user experience (UX) in mind',
+              ],
+            },
+            {
+              name: 'IPACTORY HOME',
+              link: 'https://www.ipactory.com/',
+              tasks: [
+                'Handled full publishing of a responsive corporate website using Quasar Framework (100% contribution)',
+                'Designed layout structures and UI with multilingual scalability in mind',
+                'Customized UI components reflecting corporate identity and ensured cross-browser compatibility',
               ],
             },
           ],
         },
         {
-          company: 'Meum Inc.',
-          role: 'Staff',
+          company: 'MEUM Co., Ltd.',
+          role: 'Employee',
           from: '2021-05-01',
           to: '2022-01-01',
           tags: ['HTML', 'CSS', 'JavaScript'],
           projects: [
             {
-              name: 'Meum Service Renewal',
+              name: 'MEUM Service Renewal',
               link: 'https://meum.me/',
               tasks: [
-                'Front-end renewal of service homepage using pure HTML, CSS, JavaScript',
-                'Main pages handled: Main, Guide, Store, Customer Center, My Page',
-                'Integrated overall site layout with variables and implemented responsive design',
-                'Collaborated with 2 frontend developers, dividing work by page',
+                'Frontend renewal of the service homepage using pure HTML, CSS, and JavaScript',
+                'Mainly responsible for the main page, guide page, store, customer center, and my page',
+                'Integrated overall site layouts with variables and implemented responsive design',
+                'Collaborated with two frontend developers while dividing tasks by page',
               ],
             },
             {
-              name: 'Meum & PCN Gallery En',
+              name: 'MEUM & PCN Galleryen',
               link: 'https://www.galleryen.co.kr/',
               tasks: [
-                'Affiliated companies: Meum Inc., PCN',
-                'Primary role in responsive page development and publishing',
-                'Designed one-page structure with smooth interactions for beta service release',
+                'Affiliated companies: MEUM Co., Ltd. and PCN',
+                'Mainly responsible for responsive page development and publishing',
+                'Designed a one-page structure and implemented smooth interactions for beta service deployment',
               ],
             },
           ],
@@ -99,53 +107,54 @@ export default {
     },
     project: {
       title: 'Projects',
-      subtitle: 'Clone coding projects I have worked on.',
-      back: 'Back to list',
+      subtitle: 'These are clone coding projects I worked on previously.',
+      back: 'Back to List',
       items: [
-        {
-          id: 'hanacard',
-          title: 'Hana Card',
-          description:
-            'Publishing based on analyzing layout and UI structure of a corporate website',
-          detail:
-            'Built by analyzing an existing website, breaking down the UI, and reconstructing it into component-based structures. Focused on semantic markup and CSS architecture while studying static layouts and interactions.',
-          tags: ['XHTML', 'CSS2', 'jQuery'],
-          github: 'https://github.com/miok-jung/hanacard_clone',
-          link: 'https://jnarin.com/hanacard_clone',
-        },
         {
           id: 'cj-one',
           title: 'CJ ONE',
           description:
-            'Responsive web structure analysis and publishing implementation',
+            'Analyzed and implemented a responsive website structure and publishing',
           detail:
-            'Created a responsive layout based on design references, considering UI flow across different devices. Structured components for better reusability and maintainability.',
+            'Built responsive layouts based on design mockups and designed media queries considering UI flow across devices. The project was separated into reusable components with maintainability in mind.',
           tags: ['HTML5', 'CSS3', 'JavaScript'],
           github: 'https://github.com/miok-jung/cjone_clone',
           link: 'https://jnarin.com/cjone_clone/',
         },
+        {
+          id: 'hanacard',
+          title: 'Hana Card',
+          description:
+            'Published layouts and UI structures based on a corporate website analysis',
+          detail:
+            'Implemented the project by breaking down the actual website UI and reconstructing it into component units. Focused on semantic markup and CSS structure design while analyzing static layouts and interactions.',
+          tags: ['XHTML', 'CSS2', 'jQuery'],
+          github: 'https://github.com/miok-jung/hanacard_clone',
+          link: 'https://jnarin.com/hanacard_clone',
+        },
       ],
     },
     contact: {
-      title: "Let's work together",
+      title: 'Let’s Work Together',
       subtitle:
-        'If you have any questions about my skills, feel free to reach out.',
+        'If you would like to know more about my skills and experience, feel free to contact me.',
       mail: {
         send: 'Send Email',
         copy: 'Copy Email',
       },
       design: {
         description:
-          'You can check the design structure and UI flow of this portfolio in Figma.',
-        view_link: 'View Design',
+          'You can check the portfolio design structure and UI flow on Figma.',
+        view_link: 'View Design Link',
       },
     },
     aria: {
       menu: {
-        open: 'Open menu',
-        close: 'Close menu',
-        mobile: 'Mobile menu',
+        open: 'Open Menu',
+        close: 'Close Menu',
+        mobile: 'Mobile Menu',
       },
+      go_to_link: 'Go to Link',
     },
   },
 }
