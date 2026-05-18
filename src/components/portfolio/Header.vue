@@ -59,15 +59,6 @@ const scrollToSection = (id: string) => {
       <button type="button" @click="scrollToSection('home')">
         {{ i18n.t('portfolio.header.navigation.home') }}
       </button>
-      <button type="button" @click="scrollToSection('career')">
-        {{ i18n.t('portfolio.header.navigation.career') }}
-      </button>
-      <button type="button" @click="scrollToSection('projects')">
-        {{ i18n.t('portfolio.header.navigation.projects') }}
-      </button>
-      <button type="button" @click="scrollToSection('contact')">
-        {{ i18n.t('portfolio.header.navigation.contact') }}
-      </button>
       <BaseSelect v-model="selectLanguage" :options="optionsLanguage" />
     </nav>
 
@@ -136,10 +127,6 @@ const scrollToSection = (id: string) => {
 
 <style scoped lang="scss">
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
