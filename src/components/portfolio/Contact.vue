@@ -98,7 +98,7 @@ const copyEmail = async () => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 40px 80px;
+  padding: 40px 48px;
   min-height: 100svh;
 
   &__title {
@@ -163,6 +163,13 @@ const copyEmail = async () => {
       display: block;
       text-align: center;
     }
+  }
+}
+
+/* mobile */
+@media (max-width: $bp-mobile) {
+  .contact-section {
+    padding: 80px 24px 24px;
   }
 }
 </style>
