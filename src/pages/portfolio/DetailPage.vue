@@ -98,7 +98,7 @@ const goBack = () => {
           class="detail__slider-btn detail__slider-btn--prev"
           @click="prev"
           aria-label="이전 이미지">
-          <Icon icon="ph:caret-left-bold" width="20" height="20" />
+          <Icon icon="ph:caret-left-bold" width="15" height="15" />
         </button>
         <button
           v-if="slides.length > 1"
@@ -106,7 +106,7 @@ const goBack = () => {
           class="detail__slider-btn detail__slider-btn--next"
           @click="next"
           aria-label="다음 이미지">
-          <Icon icon="ph:caret-right-bold" width="20" height="20" />
+          <Icon icon="ph:caret-right-bold" width="15" height="15" />
         </button>
 
         <!-- 도트 인디케이터 -->
@@ -129,19 +129,16 @@ const goBack = () => {
 
     <!-- 잘못된 id 접근 -->
     <div v-else class="detail__not-found">
-      <p>프로젝트를 찾을 수 없습니다.</p>
-      <button type="button" @click="goBack">돌아가기</button>
+      <p>{{ t('error.found_project') }}</p>
+      <button type="button" @click="goBack">{{ t('button.go_back') }}</button>
     </div>
   </main>
 </template>
 
 <style scoped lang="scss">
 .detail {
-  min-height: 100svh;
   padding: 80px;
   box-sizing: border-box;
-  background: var(--grey-100);
-
   &__inner {
     display: flex;
     flex-direction: column;
@@ -257,8 +254,8 @@ const goBack = () => {
   &__dots {
     display: flex;
     justify-content: center;
-    gap: 6px;
-    padding: 12px 0 8px;
+    gap: 16px;
+    padding: 16px 0;
   }
 
   &__dot {
@@ -295,8 +292,8 @@ const goBack = () => {
     align-items: center;
     justify-content: center;
     gap: 16px;
-    min-height: 60vh;
-    color: var(--grey-500);
+    min-height: 100%;
+    color: red;
   }
 }
 
@@ -320,7 +317,7 @@ const goBack = () => {
 /* mobile */
 @media (max-width: $bp-mobile) {
   .detail {
-    padding: 80px 24px 24px;
+    padding: 24px;
   }
 
   .detail__title {
@@ -331,6 +328,8 @@ const goBack = () => {
   .detail__slider-btn {
     width: 32px;
     height: 32px;
+  }
+  .detail__not-found {
   }
 }
 </style>

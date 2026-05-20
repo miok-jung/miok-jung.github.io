@@ -98,7 +98,6 @@ const copyEmail = async () => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 40px 48px;
   min-height: 100svh;
 
   &__title {
@@ -165,7 +164,12 @@ const copyEmail = async () => {
     }
   }
 }
-
+/* tablet */
+@media (max-width: $bp-tablet) {
+  .contact-section {
+    padding: 40px 48px;
+  }
+}
 /* mobile */
 @media (max-width: $bp-mobile) {
   .contact-section {
