@@ -1,7 +1,9 @@
 {
   "singleQuote": true,
   "semi": false,
-  "bracketSameLine": true,
-  "htmlWhitespaceSensitivity": "ignore",
-  "endOfLine": "auto"
+  "bracketSameLine": false,
+  "htmlWhitespaceSensitivity": "css",
+  "endOfLine": "lf",
+  "printWidth": 100,
+  "tabWidth": 2
 }
