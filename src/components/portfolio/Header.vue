@@ -21,10 +21,10 @@ const optionsLanguage = computed(() => [
     value: 'ko',
     default: true,
   },
-  {
-    label: 'English',
-    value: 'en',
-  },
+  // {
+  //   label: 'English',
+  //   value: 'en',
+  // },
 ])
 
 const toggleMenu = () => {
@@ -49,10 +49,12 @@ const scrollToSection = (id: string) => {
 <template>
   <header>
     <!-- 좌측: 로고 -->
-    <a class="header-left" href="/">
-      <Icon icon="lucide:layout-dashboard" width="24" height="24" />
+    <div class="header-left">
+      <a href="/">
+        <Icon icon="lucide:layout-dashboard" width="24" height="24" />
+      </a>
       <h1>{{ i18n.t('portfolio.header.title') }}</h1>
-    </a>
+    </div>
 
     <!-- PC nav -->
     <nav class="pc-nav">
@@ -69,39 +71,29 @@ const scrollToSection = (id: string) => {
       :class="{ 'is-open': isMenuOpen }"
       @click="toggleMenu"
       :aria-label="
-        isMenuOpen
-          ? i18n.t('portfolio.aria.menu.close')
-          : i18n.t('portfolio.aria.menu.open')
+        isMenuOpen ? i18n.t('portfolio.aria.menu.close') : i18n.t('portfolio.aria.menu.open')
       "
-      :aria-expanded="isMenuOpen">
-      <Icon
-        :icon="isMenuOpen ? 'lucide:x' : 'lucide:text-align-justify'"
-        width="24"
-        height="24" />
+      :aria-expanded="isMenuOpen"
+    >
+      <Icon :icon="isMenuOpen ? 'lucide:x' : 'lucide:text-align-justify'" width="24" height="24" />
     </button>
   </header>
 
   <!-- 모바일 오버레이 -->
   <Transition name="fade">
-    <div
-      v-if="isMenuOpen"
-      class="drawer-overlay"
-      @click="closeMenu"
-      aria-hidden="true" />
+    <div v-if="isMenuOpen" class="drawer-overlay" @click="closeMenu" aria-hidden="true" />
   </Transition>
 
   <!-- 모바일 드로어 -->
   <Transition name="slide">
-    <nav
-      v-if="isMenuOpen"
-      class="drawer"
-      :aria-label="i18n.t('portfolio.aria.menu.mobile')">
+    <nav v-if="isMenuOpen" class="drawer" :aria-label="i18n.t('portfolio.aria.menu.mobile')">
       <div class="drawer-header">
         <button
           type="button"
           class="drawer-close"
           @click="closeMenu"
-          :aria-label="i18n.t('portfolio.aria.menu.close')">
+          :aria-label="i18n.t('portfolio.aria.menu.close')"
+        >
           <Icon icon="lucide:x" width="24" height="24" />
         </button>
       </div>
@@ -152,20 +144,6 @@ header {
   display: flex;
   align-items: center;
   gap: 8px;
-
-  button {
-    flex-shrink: 0;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--grey-10);
-    font-size: 0.95rem;
-    padding: 4px 8px;
-
-    &:hover {
-      color: var(--grey-700);
-    }
-  }
 
   @media (max-width: $bp-mobile) {
     display: none;
