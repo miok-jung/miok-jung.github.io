@@ -1,6 +1,14 @@
 html.theme-light {
   color-scheme: light;
 
+  --surface: white;
+
+  --primary-100: #ede9fe;
+  --primary-300: #c4b5fd;
+  --primary-500: #8b5cf6;
+  --primary-700: #6d3fea;
+  --primary-900: #5b21b6;
+
   --grey-100: #f5f5f5;
   --grey-200: #d6d6d6;
   --grey-300: #bfbfbf;
@@ -14,6 +22,14 @@ html.theme-light {
 
 html.theme-dark {
   color-scheme: dark;
+
+  --surface: black;
+
+  --primary-100: #5b21b6;
+  --primary-300: #6d3fea;
+  --primary-500: #8b5cf6;
+  --primary-700: #c4b5fd;
+  --primary-900: #ede9fe;
 
   --grey-100: #1a1a1a;
   --grey-200: #2f2f2f;

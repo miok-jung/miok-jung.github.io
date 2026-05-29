@@ -61,6 +61,7 @@ const scrollToSection = (id: string) => {
       <button type="button" @click="scrollToSection('home')">
         {{ i18n.t('portfolio.header.navigation.home') }}
       </button>
+       <a href="/test">Test Page</a>
       <BaseSelect v-model="selectLanguage" :options="optionsLanguage" />
     </nav>
 
