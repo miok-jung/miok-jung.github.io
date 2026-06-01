@@ -8,32 +8,25 @@ import BaseBadge from '../../components/common/BaseBadge.vue'
 // 슬라이드 이미지 import
 // 이미지 추가 시 여기에 같이 추가해주세요
 import hanacard01 from '../../assets/images/portfolio/projects/hanacard/thumb.png'
-import hanacard02 from '../../assets/images/portfolio/projects/hanacard/thumb.png'
 import cjone01 from '../../assets/images/portfolio/projects/cj-one/thumb.png'
-import cjone02 from '../../assets/images/portfolio/projects/cj-one/thumb.png'
 
 const slideMap: Record<string, string[]> = {
-  hanacard: [hanacard01, hanacard02],
-  'cj-one': [cjone01, cjone02],
+  hanacard: [hanacard01],
+  'cj-one': [cjone01],
 }
 
 const { t, tm } = useI18n({ useScope: 'global' })
 const route = useRoute()
 const router = useRouter()
 
-const projects = computed(() =>
-  Array.from(tm('portfolio.project.items') as any[]),
-)
-const project = computed(() =>
-  projects.value.find((p: any) => p.id === route.params.id),
-)
+const projects = computed(() => Array.from(tm('portfolio.project.items') as any[]))
+const project = computed(() => projects.value.find((p: any) => p.id === route.params.id))
 const slides = computed(() => slideMap[route.params.id as string] ?? [])
 
 // 슬라이드
 const currentIndex = ref(0)
 const prev = () => {
-  currentIndex.value =
-    (currentIndex.value - 1 + slides.value.length) % slides.value.length
+  currentIndex.value = (currentIndex.value - 1 + slides.value.length) % slides.value.length
 }
 const next = () => {
   currentIndex.value = (currentIndex.value + 1) % slides.value.length
@@ -61,7 +54,8 @@ const goBack = () => {
           :href="project.link"
           target="_blank"
           rel="noopener noreferrer"
-          class="detail__link">
+          class="detail__link"
+        >
           <Icon icon="ph:arrow-square-out" width="18" height="18" />
           {{ t('portfolio.aria.go_to_link') }}
         </a>
@@ -71,11 +65,7 @@ const goBack = () => {
       <div class="detail__header">
         <h2 class="detail__title">{{ project.title }}</h2>
         <div class="detail__tags">
-          <BaseBadge
-            v-for="tag in project.tags"
-            :key="tag"
-            :text="tag"
-            size="sm" />
+          <BaseBadge v-for="tag in project.tags" :key="tag" :text="tag" size="sm" />
         </div>
       </div>
 
@@ -83,11 +73,14 @@ const goBack = () => {
       <div v-if="slides.length" class="detail__slider">
         <div class="detail__slider-view">
           <Transition name="slide-fade" mode="out-in">
-            <img
-              :key="currentIndex"
-              :src="slides[currentIndex]"
-              :alt="project.title + ' 이미지 ' + (currentIndex + 1)"
-              class="detail__slider-img" />
+            <div :key="currentIndex" class="detail__slider-image-wrap">
+              <img
+                :key="'img-' + currentIndex"
+                :src="slides[currentIndex]"
+                :alt="project.title + ' 이미지 ' + (currentIndex + 1)"
+                class="detail__slider-img"
+              />
+            </div>
           </Transition>
         </div>
 
@@ -97,7 +90,8 @@ const goBack = () => {
           type="button"
           class="detail__slider-btn detail__slider-btn--prev"
           @click="prev"
-          aria-label="이전 이미지">
+          aria-label="이전 이미지"
+        >
           <Icon icon="ph:caret-left-bold" width="15" height="15" />
         </button>
         <button
@@ -105,7 +99,8 @@ const goBack = () => {
           type="button"
           class="detail__slider-btn detail__slider-btn--next"
           @click="next"
-          aria-label="다음 이미지">
+          aria-label="다음 이미지"
+        >
           <Icon icon="ph:caret-right-bold" width="15" height="15" />
         </button>
 
@@ -118,7 +113,8 @@ const goBack = () => {
             class="detail__dot"
             :class="{ 'detail__dot--active': i === currentIndex }"
             @click="goTo(i)"
-            :aria-label="'이미지 ' + (i + 1)" />
+            :aria-label="'이미지 ' + (i + 1)"
+          />
         </div>
       </div>
 
@@ -139,6 +135,7 @@ const goBack = () => {
 .detail {
   padding: 80px;
   box-sizing: border-box;
+
   &__inner {
     display: flex;
     flex-direction: column;
@@ -147,66 +144,10 @@ const goBack = () => {
     margin: 0 auto;
   }
 
-  &__nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  &__back {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 14px;
-    color: var(--grey-600);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px 8px;
-
-    &:hover {
-      color: var(--grey-900);
-    }
-  }
-
-  &__link {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 14px;
-    color: var(--grey-600);
-    text-decoration: none;
-
-    &:hover {
-      color: var(--grey-900);
-      background: transparent;
-      border: none;
-    }
-  }
-
-  &__header {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  &__title {
-    font-size: 32px;
-    line-height: 40px;
-    font-weight: 700;
-  }
-
-  &__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  /* 슬라이더 */
   &__slider {
     position: relative;
-    border-radius: 12px;
     overflow: hidden;
+    border-radius: 12px;
     background: var(--grey-200);
   }
 
@@ -214,13 +155,22 @@ const goBack = () => {
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
+    position: relative;
   }
 
-  &__slider-img {
+  &__slider-image-wrap {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+  }
+
+  /* ✅ animation은 img에만, image-wrap에서 제거 */
+  &__slider-img {
+    width: 100%;
+    height: auto;
+    min-height: 120%;
     display: block;
+    object-fit: cover;
+    animation: image-pan 12s linear infinite;
   }
 
   &__slider-btn {
@@ -238,6 +188,7 @@ const goBack = () => {
     cursor: pointer;
     color: var(--grey-800);
     transition: background 0.2s ease;
+    z-index: 2;
 
     &:hover {
       background: white;
@@ -272,39 +223,21 @@ const goBack = () => {
       background: var(--grey-800);
     }
   }
-
-  &__desc {
-    font-size: 16px;
-    line-height: 26px;
-    color: var(--grey-600);
-  }
-
-  &__content {
-    font-size: 15px;
-    line-height: 26px;
-    color: var(--grey-800);
-    white-space: pre-line;
-  }
-
-  &__not-found {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    min-height: 100%;
-    color: red;
-  }
 }
 
-/* 슬라이드 트랜지션 */
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-  transition: opacity 0.25s ease;
-}
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  opacity: 0;
+@keyframes image-pan {
+  0% {
+    transform: translateY(0%);
+  }
+  85% {
+    transform: translateY(-15%);
+  }
+  95% {
+    transform: translateY(-15%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
 }
 
 /* tablet */
@@ -328,8 +261,6 @@ const goBack = () => {
   .detail__slider-btn {
     width: 32px;
     height: 32px;
-  }
-  .detail__not-found {
   }
 }
 </style>
