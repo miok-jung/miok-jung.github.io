@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Icon } from '@iconify/vue'
+import BaseButton from '../common/BaseButton.vue'
 import BaseSelect from '../common/BaseSelect.vue'
 import { setLocale } from '../../i18n'
 
@@ -58,10 +59,11 @@ const scrollToSection = (id: string) => {
 
     <!-- PC nav -->
     <nav class="pc-nav">
-      <button type="button" @click="scrollToSection('home')">
+      <BaseButton @click="scrollToSection('home')" color="primary">
         {{ i18n.t('portfolio.header.navigation.home') }}
-      </button>
-       <a href="/test">Test Page</a>
+      </BaseButton>
+      <BaseButton href="/test">Test page</BaseButton>
+
       <BaseSelect v-model="selectLanguage" :options="optionsLanguage" />
     </nav>
 
