@@ -52,6 +52,8 @@ a {
   line-height: 24px;
   border-radius: 4px;
 
+  white-space: nowrap;
+
   transition:
     background-color 0.2s,
     border-color 0.2s,

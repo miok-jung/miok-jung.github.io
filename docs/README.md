@@ -7,3 +7,5 @@
 - Component Guidelines
 - UI Components
   - Badge
+  - Button
+  - Select
