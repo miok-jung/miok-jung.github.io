@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { useI18n } from 'vue-i18n'
+import BaseButton from '../common/BaseButton.vue'
 
 const { t } = useI18n({ useScope: 'global' })
 
@@ -61,12 +62,12 @@ const copyEmail = async () => {
         </div>
         <p class="contact-card__desc">{{ EMAIL }}</p>
         <div class="contact-card__actions">
-          <button @click="copyEmail">
+          <BaseButton @click="copyEmail">
             {{ t('portfolio.contact.mail.copy') }}
-          </button>
-          <a :href="`mailto:${EMAIL}`">
+          </BaseButton>
+          <BaseButton :href="`mailto:${EMAIL}`">
             {{ t('portfolio.contact.mail.send') }}
-          </a>
+          </BaseButton>
         </div>
       </article>
 
@@ -80,12 +81,11 @@ const copyEmail = async () => {
           {{ t('portfolio.contact.design.description') }}
         </p>
         <div class="contact-card__actions">
-          <a
-            target="_blank"
+          <BaseButton
             href="https://www.figma.com/design/imiEE5YYowBdWvWdZdD79S/Project?node-id=22-2&t=dySbF0Oiy36mfMaN-1"
-            rel="noopener noreferrer">
-            {{ t('portfolio.contact.design.view_link') }}
-          </a>
+          >
+            {{ t('portfolio.contact.design.view_link') }}</BaseButton
+          >
         </div>
       </article>
     </div>

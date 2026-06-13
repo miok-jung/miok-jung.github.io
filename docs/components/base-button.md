@@ -7,11 +7,12 @@
 
 ## Props
 
-| name  | type                | required | description                    |
-| ----- | ------------------- | -------- | ------------------------------ |
-| href  | string              | ✖        | 이동할 링크 주소               |
-| color | 'grey'\| 'primary'  | ✖        | 버튼 테마 색상, 테마 변수 필요 |
-| type  | 'flat' \| 'outline' | ✖        |                                |
+| name   | type                  | required | description                          |
+| ------ | --------------------- | -------- | ------------------------------------ |
+| href   | string                | ✖        | 링크 주소를 지정하면 a 태그로 렌더링 |
+| color  | 'grey'\| 'primary'    | ✖        | 버튼 테마 색상                       |
+| type   | 'flat' \| 'outline'   | ✖        | 버튼 스타일 타입                     |
+| target | '\_self' \| '\_blank' | ✖        | 링크 열기 방식                       |
 
 <br /><br />
 

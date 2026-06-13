@@ -3,11 +3,13 @@ interface Props {
   href?: string
   color?: 'grey' | 'primary'
   type?: 'flat' | 'outline'
+  target?: '_self' | '_blank'
 }
 
 const props = withDefaults(defineProps<Props>(), {
   color: 'grey',
   type: 'flat',
+  target: '_blank',
 })
 </script>
 <template>
@@ -35,6 +37,8 @@ const props = withDefaults(defineProps<Props>(), {
       '--button-700': `var(--${props.color}-700)`,
       '--button-900': `var(--${props.color}-900)`,
     }"
+    :target="props.target"
+    :rel="props.target === '_blank' ? 'noopener noreferrer' : undefined"
   >
     <slot />
   </a>
