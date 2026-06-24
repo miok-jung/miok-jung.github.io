@@ -10,6 +10,18 @@ import BaseButton from '../common/BaseButton.vue'
         <BaseButton href="/test">커스텀 default 링크</BaseButton>
         <BaseButton href="/test" color="primary">커스텀 flat 링크</BaseButton>
         <BaseButton href="/test" type="outline" color="primary">커스텀 outline 링크</BaseButton>
+        <BaseButton href="/test" type="outline" color="primary" icon="lucide:figma" icon-size="24px"
+          >Custom Button</BaseButton
+        >
+        <BaseButton
+          href="/test"
+          type="outline"
+          color="primary"
+          icon="lucide:figma"
+          icon-position="right"
+          icon-size="48px"
+          >커스텀 Button</BaseButton
+        >
       </div>
     </div>
     <div class="component__content-wrap">
@@ -19,6 +31,17 @@ import BaseButton from '../common/BaseButton.vue'
         <BaseButton>커스텀 default 버튼</BaseButton>
         <BaseButton color="primary">커스텀 flat 버튼</BaseButton>
         <BaseButton type="outline" color="primary">커스텀 outline 버튼</BaseButton>
+        <BaseButton type="outline" color="primary" icon="lucide:figma" icon-size="48px"
+          >Custom Button</BaseButton
+        >
+        <BaseButton
+          type="outline"
+          color="primary"
+          icon="lucide:figma"
+          icon-position="right"
+          icon-size="24px"
+          >커스텀 Button</BaseButton
+        >
       </div>
     </div>
   </div>

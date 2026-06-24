@@ -1,15 +1,24 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
+
 interface Props {
-  href?: string
   color?: 'grey' | 'primary'
   type?: 'flat' | 'outline'
+
+  href?: string
   target?: '_self' | '_blank'
+
+  icon?: string
+  iconPosition?: 'left' | 'right'
+  iconSize?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   color: 'grey',
   type: 'flat',
   target: '_blank',
+  iconPosition: 'left',
+  iconSize: '16px',
 })
 </script>
 <template>
@@ -24,7 +33,24 @@ const props = withDefaults(defineProps<Props>(), {
       '--button-900': `var(--${props.color}-900)`,
     }"
   >
-    <slot />
+    <Icon
+      v-if="props.icon && props.iconPosition === 'left'"
+      class="left"
+      :icon="props.icon"
+      :width="props.iconSize"
+      :height="props.iconSize"
+    />
+
+    <p>
+      <slot />
+    </p>
+    <Icon
+      v-if="props.icon && props.iconPosition === 'right'"
+      class="right"
+      :icon="props.icon"
+      :width="props.iconSize"
+      :height="props.iconSize"
+    />
   </button>
   <a
     v-else
@@ -40,13 +66,33 @@ const props = withDefaults(defineProps<Props>(), {
     :target="props.target"
     :rel="props.target === '_blank' ? 'noopener noreferrer' : undefined"
   >
-    <slot />
+    <Icon
+      v-if="props.icon && props.iconPosition === 'left'"
+      class="left"
+      :icon="props.icon"
+      :width="props.iconSize"
+      :height="props.iconSize"
+    />
+
+    <p>
+      <slot />
+    </p>
+    <Icon
+      v-if="props.icon && props.iconPosition === 'right'"
+      class="right"
+      :icon="props.icon"
+      :width="props.iconSize"
+      :height="props.iconSize"
+    />
   </a>
 </template>
 
 <style scoped lang="scss">
 button,
 a {
+  display: flex;
+  align-items: center;
+
   padding: 4px 8px;
   background: var(--surface);
 
@@ -62,8 +108,15 @@ a {
     background-color 0.2s,
     border-color 0.2s,
     color 0.2s;
-
   cursor: pointer;
+
+  & .iconify.left {
+    margin-right: 4px;
+  }
+  & .iconify.right {
+    margin-left: 4px;
+  }
+
   &:hover {
     background: var(--button-100);
     color: var(--button-700);
