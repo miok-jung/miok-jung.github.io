@@ -1,47 +1,82 @@
 <script setup lang="ts">
 import BaseButton from '../common/BaseButton.vue'
 </script>
+
 <template>
   <div class="component__wrap">
     <div class="component__content-wrap">
-      <h3>A Tag</h3>
+      <h3>Default</h3>
       <div class="component__content">
         <a href="/test">기본 링크</a>
+        <button>기본 버튼</button>
         <BaseButton href="/test">커스텀 default 링크</BaseButton>
-        <BaseButton href="/test" color="primary">커스텀 flat 링크</BaseButton>
-        <BaseButton href="/test" type="outline" color="primary">커스텀 outline 링크</BaseButton>
-        <BaseButton href="/test" type="outline" color="primary" icon="lucide:figma" icon-size="24px"
-          >Custom Button</BaseButton
-        >
-        <BaseButton
-          href="/test"
-          type="outline"
-          color="primary"
-          icon="lucide:figma"
-          icon-position="right"
-          icon-size="48px"
-          >커스텀 Button</BaseButton
-        >
+        <BaseButton>커스텀 default 버튼</BaseButton>
       </div>
     </div>
+
     <div class="component__content-wrap">
-      <h3>Button Tag</h3>
+      <h3>Color</h3>
       <div class="component__content">
-        <button>기본 버튼</button>
-        <BaseButton>커스텀 default 버튼</BaseButton>
-        <BaseButton color="primary">커스텀 flat 버튼</BaseButton>
-        <BaseButton type="outline" color="primary">커스텀 outline 버튼</BaseButton>
-        <BaseButton type="outline" color="primary" icon="lucide:figma" icon-size="48px"
-          >Custom Button</BaseButton
-        >
+        <BaseButton color="grey">grey 버튼</BaseButton>
+        <BaseButton color="primary">primary 버튼</BaseButton>
+      </div>
+    </div>
+
+    <div class="component__content-wrap">
+      <h3>Type</h3>
+      <div class="component__content">
+        <BaseButton type="flat" color="primary">flat 버튼</BaseButton>
+        <BaseButton type="outline" color="primary">outline 버튼</BaseButton>
+      </div>
+    </div>
+
+    <div class="component__content-wrap">
+      <h3>With Icon</h3>
+      <div class="component__content">
+        <BaseButton type="outline" color="primary" icon="lucide:figma" icon-size="24px">
+          Custom Button
+        </BaseButton>
         <BaseButton
           type="outline"
           color="primary"
           icon="lucide:figma"
           icon-position="right"
           icon-size="24px"
-          >커스텀 Button</BaseButton
         >
+          커스텀 Button
+        </BaseButton>
+      </div>
+    </div>
+
+    <div class="component__content-wrap">
+      <h3>Icon Size</h3>
+      <div class="component__content">
+        <BaseButton type="outline" color="primary" icon="lucide:figma" icon-size="16px">
+          16px
+        </BaseButton>
+        <BaseButton type="outline" color="primary" icon="lucide:figma" icon-size="24px">
+          24px
+        </BaseButton>
+        <BaseButton type="outline" color="primary" icon="lucide:figma" icon-size="48px">
+          48px
+        </BaseButton>
+      </div>
+    </div>
+
+    <div class="component__content-wrap">
+      <h3>As Link (href)</h3>
+      <div class="component__content">
+        <BaseButton href="/test" color="primary">flat 링크</BaseButton>
+        <BaseButton href="/test" type="outline" color="primary">outline 링크</BaseButton>
+        <BaseButton
+          href="/test"
+          type="outline"
+          color="primary"
+          icon="lucide:figma"
+          icon-size="24px"
+        >
+          Custom Button
+        </BaseButton>
       </div>
     </div>
   </div>
@@ -61,6 +96,7 @@ import BaseButton from '../common/BaseButton.vue'
   }
   &__content {
     display: flex;
+    align-items: center;
     /* display: grid;
     grid-template-columns: repeat(5, auto); */
     gap: 24px;
