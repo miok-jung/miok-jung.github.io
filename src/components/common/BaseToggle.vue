@@ -28,34 +28,40 @@ function toggle() {
 </script>
 
 <template>
-  <button
-    type="button"
-    role="switch"
-    :aria-checked="props.modelValue"
-    :disabled="props.disabled"
-    class="toggle"
-    :class="[props.size, { on: props.modelValue, disabled: props.disabled }]"
-    :style="{
-      '--toggle-100': `var(--${props.color}-100)`,
-      '--toggle-300': `var(--${props.color}-300)`,
-      '--toggle-500': `var(--${props.color}-500)`,
-      '--toggle-700': `var(--${props.color}-700)`,
-      '--toggle-900': `var(--${props.color}-900)`,
-    }"
-    @click="toggle"
-  >
-    <span class="thumb">
-      <Icon v-if="props.icon && props.modelValue" class="thumb-icon" :icon="props.icon" />
-      <Icon
-        v-else-if="props.iconOff && !props.modelValue"
-        class="thumb-icon"
-        :icon="props.iconOff"
-      />
-    </span>
-  </button>
+  <div class="toggle-wrap">
+    <button
+      type="button"
+      role="switch"
+      :aria-checked="props.modelValue"
+      :disabled="props.disabled"
+      class="toggle"
+      :class="[props.size, { on: props.modelValue, disabled: props.disabled }]"
+      :style="{
+        '--toggle-100': `var(--${props.color}-100)`,
+        '--toggle-300': `var(--${props.color}-300)`,
+        '--toggle-500': `var(--${props.color}-500)`,
+        '--toggle-700': `var(--${props.color}-700)`,
+        '--toggle-900': `var(--${props.color}-900)`,
+      }"
+      @click="toggle"
+    >
+      <span class="thumb">
+        <Icon v-if="props.icon && props.modelValue" class="thumb-icon" :icon="props.icon" />
+        <Icon
+          v-else-if="props.iconOff && !props.modelValue"
+          class="thumb-icon"
+          :icon="props.iconOff"
+        />
+      </span>
+    </button>
+  </div>
 </template>
 
 <style scoped lang="scss">
+.toggle-wrap {
+  display: flex;
+  justify-content: center;
+}
 .toggle {
   --track-w: 44px;
   --track-h: 24px;
