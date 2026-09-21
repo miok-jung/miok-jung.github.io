@@ -65,8 +65,8 @@ function toggle() {
 .toggle {
   --track-w: 44px;
   --track-h: 24px;
-  --thumb-size: 18px;
-  --thumb-gap: 3px;
+  --thumb-size: 20px;
+  --thumb-gap: 2px;
 
   position: relative;
   display: inline-flex;
@@ -103,9 +103,9 @@ function toggle() {
   }
 
   &.sm {
-    --track-w: 36px;
+    --track-w: 32px;
     --track-h: 20px;
-    --thumb-size: 14px;
+    --thumb-size: 16px;
   }
 
   & .thumb {
