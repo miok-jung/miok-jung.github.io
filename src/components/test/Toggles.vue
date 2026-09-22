@@ -39,7 +39,7 @@ const disabledOff = ref(false)
     <div class="component__content-wrap">
       <h3>Size</h3>
       <div class="component__content">
-        <BaseToggle v-model="smallOff" color="primary" size="sm" />
+        <BaseToggle v-model="smallOff" color="primary" size="md" />
         <BaseToggle v-model="smallOn" color="primary" size="sm" />
       </div>
     </div>
