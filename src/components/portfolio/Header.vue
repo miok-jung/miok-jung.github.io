@@ -5,9 +5,13 @@ import { Icon } from '@iconify/vue'
 import BaseButton from '../common/BaseButton.vue'
 import BaseSelect from '../common/BaseSelect.vue'
 import { setLocale } from '../../i18n'
+import BaseToggle from '../common/BaseToggle.vue'
+import { useThemeStore } from '../../stores/theme.ts'
 
 const { locale } = useI18n()
 const i18n = useI18n({ useScope: 'global' })
+
+const themeStore = useThemeStore()
 
 const isMenuOpen = ref(false)
 
@@ -45,6 +49,11 @@ const scrollToSection = (id: string) => {
   window.scrollTo({ top, behavior: 'smooth' })
   closeMenu()
 }
+
+const changeMode = computed({
+  get: () => themeStore.isDark,
+  set: (value) => themeStore.setTheme(value),
+})
 </script>
 
 <template>
@@ -65,6 +74,7 @@ const scrollToSection = (id: string) => {
       <BaseButton href="/test">Test page</BaseButton>
 
       <BaseSelect v-model="selectLanguage" :options="optionsLanguage" />
+      <BaseToggle v-model="changeMode" icon="lucide:sun" icon-off="lucide:moon" />
     </nav>
 
     <!-- 모바일 -->
@@ -116,6 +126,7 @@ const scrollToSection = (id: string) => {
       </button>
 
       <BaseSelect v-model="selectLanguage" :options="optionsLanguage" />
+      <BaseToggle v-model="changeMode" icon="lucide:sun" icon-off="lucide:moon" />
     </nav>
   </Transition>
 </template>

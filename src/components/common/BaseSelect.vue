@@ -49,6 +49,7 @@ const selectedValue = computed({
     }
 
     const defaultOption = props.options.find((opt) => opt.default)
+
     return defaultOption ? defaultOption.value : null
   },
   set: (value: string | number) => {
@@ -57,14 +58,17 @@ const selectedValue = computed({
 })
 
 const isOpen = ref(false)
+
 const toggle = () => {
   isOpen.value = !isOpen.value
 }
 
 const selectedLabel = computed(() => {
   const found = props.options.find((opt) => opt.value === selectedValue.value)
+
   return found ? found.label : props.placeholder
 })
+
 const selectOption = (opt: Option) => {
   selectedValue.value = opt.value
   isOpen.value = false
@@ -74,21 +78,23 @@ const selectOption = (opt: Option) => {
 <template>
   <div class="select">
     <!-- 트리거 -->
-    <div class="select__trigger" @click="toggle">
-      <span class="select__label">{{ selectedLabel }}</span>
-      <!-- 화살표 -->
-      <Icon
-        class="select__arrow"
-        :class="{ 'is-open': isOpen }"
-        icon="lucide:chevron-down" />
+    <div class="select__trigger" :class="{ 'is-open': isOpen }" @click="toggle">
+      <span class="select__label">
+        {{ selectedLabel }}
+      </span>
+
+      <Icon class="select__arrow" :class="{ 'is-open': isOpen }" icon="lucide:chevron-down" />
     </div>
+
     <!-- 드롭다운 -->
     <div v-if="isOpen" class="select__dropdown">
       <div
-        class="select__option"
         v-for="opt in options"
         :key="opt.value"
-        @click="selectOption(opt)">
+        class="select__option"
+        :class="{ 'is-selected': opt.value === selectedValue }"
+        @click="selectOption(opt)"
+      >
         {{ opt.label }}
       </div>
     </div>
@@ -98,34 +104,59 @@ const selectOption = (opt: Option) => {
 <style scoped lang="scss">
 .select {
   position: relative;
-  padding: 8px;
+
   width: 100%;
   min-width: 0;
+  padding: 8px;
+
   box-sizing: border-box;
-  border-radius: 4px;
+
   border: 1px solid var(--grey-300);
-  background-color: white;
-  color: var(--grey-10);
+  border-radius: 4px;
+
+  background-color: var(--surface);
+  color: var(--surface-text);
+
   cursor: pointer;
 
-  &:focus {
-    outline: none;
-    border-color: var(--grey-900);
+  transition:
+    border-color 0.2s,
+    background-color 0.2s,
+    color 0.2s;
+
+  &:hover {
+    border-color: var(--grey-500);
   }
+
+  &:focus-within {
+    border-color: var(--grey-700);
+  }
+
   &__trigger {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
     user-select: none;
   }
+
   &__label {
     min-width: 0;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
+
   &__arrow {
-    flex-shrink: 0; // 아이콘 고정
+    flex-shrink: 0;
+
     margin-left: 4px;
+
     transition: transform 0.2s ease;
+
     &.is-open {
       transform: rotate(180deg);
     }
@@ -133,21 +164,42 @@ const selectOption = (opt: Option) => {
 
   &__dropdown {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 4px);
     left: 0;
-    padding: 8px 0;
+    z-index: 10;
+
     width: 100%;
-    user-select: none;
+    padding: 8px 0;
+
+    box-sizing: border-box;
+
     border: 1px solid var(--grey-300);
     border-radius: 4px;
-    background: white;
+
+    background-color: var(--surface);
+    color: var(--surface-text);
+
+    box-shadow: var(--shadow-md);
   }
+
   &__option {
     padding: 0 8px;
+
     height: 32px;
+
     line-height: 32px;
+
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+
     &:hover {
-      background: rgba($color: #000, $alpha: 0.1);
+      background-color: var(--grey-100);
+    }
+
+    &.is-selected {
+      color: var(--primary-500);
+      background-color: var(--primary-100);
     }
   }
 }
