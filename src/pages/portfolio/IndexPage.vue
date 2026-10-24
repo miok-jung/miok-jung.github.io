@@ -17,6 +17,7 @@ import Contact from '../../components/portfolio/Contact.vue'
 .portfolio {
   &__section {
     display: flex;
+    transition: background 0.2s;
     &:nth-of-type(1) {
       background: MistyRose;
     }
@@ -28,6 +29,20 @@ import Contact from '../../components/portfolio/Contact.vue'
     }
     &:nth-of-type(4) {
       background: FloralWhite;
+    }
+    html.theme-dark & {
+      &:nth-of-type(1) {
+        background: #3d2429; // 다크 로즈/와인 톤
+      }
+      &:nth-of-type(2) {
+        background: #2b2738; // 다크 퍼플/네이비 톤
+      }
+      &:nth-of-type(3) {
+        background: #2c2c28; // 다크웜 그레이/차콜 톤
+      }
+      &:nth-of-type(4) {
+        background: #25282a; // 다크 슬레이트 톤
+      }
     }
   }
 }

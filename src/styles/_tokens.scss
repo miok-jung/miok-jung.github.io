@@ -1,6 +1,6 @@
 html.theme-light {
   color-scheme: light;
-
+  --text-color: black;
   --surface: white;
 
   --primary-100: #ede9fe;
@@ -22,7 +22,7 @@ html.theme-light {
 
 html.theme-dark {
   color-scheme: dark;
-
+  --text-color: white;
   --surface: black;
 
   --primary-100: #5b21b6;
