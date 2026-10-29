@@ -126,13 +126,19 @@ const copyEmail = async () => {
   padding: 20px;
   border: 1px solid var(--grey-500);
   border-radius: 20px;
-  background: white;
+  background: var(--surface);
   text-align: center;
   transition: all 0.25s ease;
 
   &:hover {
     transform: translateY(-6px);
-    box-shadow: 0 10px 25px rgba($color: #000, $alpha: 0.12);
+    box-shadow: 0 10px 25px rgba($color: black, $alpha: 0.12);
+  }
+  html.theme-dark & {
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba($color: white, $alpha: 0.12);
+    }
   }
 
   &__header {
