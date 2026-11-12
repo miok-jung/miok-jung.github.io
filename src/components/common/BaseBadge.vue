@@ -19,10 +19,21 @@ const props = withDefaults(defineProps<Props>(), {
 
 const badgeClass = computed(() => ['badge', `badge--${props.size}`])
 
-const badgeStyle = computed(() => ({
-  backgroundColor: props.color || 'white',
-  color: props.textColor || 'black',
-}))
+const badgeStyle = computed(() => {
+  const isDark = document.documentElement.classList.contains('dark-theme')
+
+  if (isDark) {
+    return {
+      backgroundColor: props.color || 'white',
+      color: props.textColor || 'black',
+    }
+  }
+
+  return {
+    backgroundColor: props.color || 'black',
+    color: props.textColor || 'white',
+  }
+})
 </script>
 
 <template>
